@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Parametrlər · Alzoni ERP</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="../css/app.css">
+</head>
+<body>
+<div class="app">
+    <aside class="sidebar">
+        <a class="brand" href="../">
+            <strong>Alzoni ERP</strong>
+            <span>Alzoni MMC</span>
+        </a>
+        <nav>
+            <div class="nav-title">Proses</div>
+            <a href="../">İş axını</a>
+            <a href="../orders/">
+    <span>Sifarişlər</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../design/">
+    <span>Dizayn</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../costing/">
+    <span>Kalkulyasiya</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../approval/">
+    <span>Təsdiq</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../supply/">
+    <span>Xammal təminatı</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../purchasing/">
+    <span>Satınalma</span>
+    
+</a>
+            <a href="../warehouse/">
+    <span>Anbar</span>
+    <span class="nav-count">2</span>
+</a>
+            <a href="../production/">
+    <span>İstehsal</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../completion/">
+    <span>Tamamlanma</span>
+    
+</a>
+            <div class="nav-title">Məlumatlar</div>
+            <a href="../recipes/">
+    <span>Reseptlər</span>
+    
+</a>
+            <a href="../materials/">
+    <span>Material kartları</span>
+    
+</a>
+            <a href="../warehouses/">
+    <span>Anbarlar</span>
+    
+</a>
+            <a href="../workshops/">
+    <span>Sexlər və proseslər</span>
+    
+</a>
+            <div class="nav-title">Sistem</div>
+            <a href="../users/">
+    <span>İstifadəçilər</span>
+    
+</a>
+            <a href="./" class="active">
+    <span>Parametrlər</span>
+    
+</a>
+        </nav>
+        <div class="sidebar-note">Dizayn nümunəsi. Məlumatlar uydurmadır.</div>
+        <a class="user-chip" href="../profile/">
+            <span class="avatar">KƏ</span>
+            <span class="user-chip-text">
+                <strong>Kamran Əliyev</strong>
+                <small>Administrator</small>
+            </span>
+        </a>
+    </aside>
+    <div class="shell">
+        
+        
+        <main class="content narrow">
+    <div class="page-head">
+    <div>
+        
+        <h1>Parametrlər</h1>
+        <p>Yeni sifarişlər bu dəyərlərlə başlayır. Kalkulyasiyada hər sifariş üçün dəyişmək olar.</p>
+    </div>
+</div>
+    <form class="stack" action="#" method="post">
+        <section class="card card-pad">
+            <h2>Şirkət</h2>
+            <label>Şirkətin adı <input name="companyName" value="Alzoni MMC" required></label>
+        </section>
+        <section class="card card-pad">
+            <h2>Kalkulyasiya</h2>
+            <div class="form-grid">
+                <label>Əlavə xərc, % <input name="expensePct" type="number" min="0" step="0.01" value="25" required></label>
+                <label>Gəlir, % <input name="profitPct" type="number" min="0" step="0.01" value="50" required></label>
+                <label>İstehsal müddəti, gün <input name="productionDays" type="number" min="1" value="10" required></label>
+            </div>
+            <p class="note">Gəlir faizi cəmi xərcin üzərinə hesablanır: maya dəyəri → +xərc → +gəlir.</p>
+        </section>
+        <div class="form-actions"><button class="btn btn-primary" type="submit">Yadda saxla</button></div>
+    </form>
+</main>
+    </div>
+</div>
+
+<div id="static-notice" role="status" hidden style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);
+max-width:calc(100% - 32px);padding:10px 16px;border-radius:9px;background:#1f2421;color:#fff;font-size:13.5px;z-index:10">
+Bu, dizayn nümunəsidir. Dəyişikliklər yadda saxlanılmır.</div>
+<script>
+document.addEventListener('submit', event => {
+    event.preventDefault();
+    const notice = document.getElementById('static-notice');
+    notice.hidden = false;
+    clearTimeout(notice.timer);
+    notice.timer = setTimeout(() => notice.hidden = true, 3000);
+});
+</script>
+</body>
+</html>

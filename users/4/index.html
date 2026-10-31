@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rauf Quliyev · Alzoni ERP</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="../../css/app.css">
+</head>
+<body>
+<div class="app">
+    <aside class="sidebar">
+        <a class="brand" href="../../">
+            <strong>Alzoni ERP</strong>
+            <span>Alzoni MMC</span>
+        </a>
+        <nav>
+            <div class="nav-title">Proses</div>
+            <a href="../../">İş axını</a>
+            <a href="../../orders/">
+    <span>Sifarişlər</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../../design/">
+    <span>Dizayn</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../../costing/">
+    <span>Kalkulyasiya</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../../approval/">
+    <span>Təsdiq</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../../supply/">
+    <span>Xammal təminatı</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../../purchasing/">
+    <span>Satınalma</span>
+    
+</a>
+            <a href="../../warehouse/">
+    <span>Anbar</span>
+    <span class="nav-count">2</span>
+</a>
+            <a href="../../production/">
+    <span>İstehsal</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../../completion/">
+    <span>Tamamlanma</span>
+    
+</a>
+            <div class="nav-title">Məlumatlar</div>
+            <a href="../../recipes/">
+    <span>Reseptlər</span>
+    
+</a>
+            <a href="../../materials/">
+    <span>Material kartları</span>
+    
+</a>
+            <a href="../../warehouses/">
+    <span>Anbarlar</span>
+    
+</a>
+            <a href="../../workshops/">
+    <span>Sexlər və proseslər</span>
+    
+</a>
+            <div class="nav-title">Sistem</div>
+            <a href="../" class="active">
+    <span>İstifadəçilər</span>
+    
+</a>
+            <a href="../../settings/">
+    <span>Parametrlər</span>
+    
+</a>
+        </nav>
+        <div class="sidebar-note">Dizayn nümunəsi. Məlumatlar uydurmadır.</div>
+        <a class="user-chip" href="../../profile/">
+            <span class="avatar">KƏ</span>
+            <span class="user-chip-text">
+                <strong>Kamran Əliyev</strong>
+                <small>Administrator</small>
+            </span>
+        </a>
+    </aside>
+    <div class="shell">
+        
+        
+        <main class="content narrow">
+    <div class="page-head">
+    <div>
+        
+        <h1>Rauf Quliyev</h1>
+        
+    </div>
+</div>
+    <form class="card card-pad" action="#" method="post">
+        <label>Ad, soyad <input name="name" value="Rauf Quliyev" required></label>
+        <label>Rol
+            <select name="role" required>
+                <option value="ADMIN">Administrator</option>
+                <option value="DIREKTOR">Direktor</option>
+                <option value="SATIS" selected="selected">Satış meneceri</option>
+                <option value="DIZAYNER">Dizayner</option>
+                <option value="PLANLAMA">Planlama / Kalkulyasiya</option>
+                <option value="SATINALMA">Satınalma meneceri</option>
+                <option value="ANBAR">Anbardar</option>
+                <option value="ISTEHSAL">İstehsalçı</option>
+            </select>
+        </label>
+        <div class="form-grid">
+            <label>Əlaqə nömrəsi <input name="phone" type="tel" value="+994 50 000 00 02"></label>
+            <label>E-poçt <input name="email" type="email" value="rauf@alzoni.example"></label>
+        </div>
+        <label class="check"><input type="checkbox" name="active" value="true" checked="checked"> Aktiv istifadəçi</label>
+        <div class="form-actions">
+            <a class="btn btn-ghost" href="../">Ləğv et</a>
+            <button class="btn btn-primary" type="submit">Yadda saxla</button>
+        </div>
+    </form>
+</main>
+    </div>
+</div>
+
+<div id="static-notice" role="status" hidden style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);
+max-width:calc(100% - 32px);padding:10px 16px;border-radius:9px;background:#1f2421;color:#fff;font-size:13.5px;z-index:10">
+Bu, dizayn nümunəsidir. Dəyişikliklər yadda saxlanılmır.</div>
+<script>
+document.addEventListener('submit', event => {
+    event.preventDefault();
+    const notice = document.getElementById('static-notice');
+    notice.hidden = false;
+    clearTimeout(notice.timer);
+    notice.timer = setTimeout(() => notice.hidden = true, 3000);
+});
+</script>
+</body>
+</html>

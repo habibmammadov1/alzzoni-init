@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dizayn · Alzoni ERP</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="../../css/app.css">
+</head>
+<body>
+<div class="app">
+    <aside class="sidebar">
+        <a class="brand" href="../../">
+            <strong>Alzoni ERP</strong>
+            <span>Alzoni MMC</span>
+        </a>
+        <nav>
+            <div class="nav-title">Proses</div>
+            <a href="../../">İş axını</a>
+            <a href="../../orders/">
+    <span>Sifarişlər</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../" class="active">
+    <span>Dizayn</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../../costing/">
+    <span>Kalkulyasiya</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../../approval/">
+    <span>Təsdiq</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../../supply/">
+    <span>Xammal təminatı</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../../purchasing/">
+    <span>Satınalma</span>
+    
+</a>
+            <a href="../../warehouse/">
+    <span>Anbar</span>
+    <span class="nav-count">2</span>
+</a>
+            <a href="../../production/">
+    <span>İstehsal</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../../completion/">
+    <span>Tamamlanma</span>
+    
+</a>
+            <div class="nav-title">Məlumatlar</div>
+            <a href="../../recipes/">
+    <span>Reseptlər</span>
+    
+</a>
+            <a href="../../materials/">
+    <span>Material kartları</span>
+    
+</a>
+            <a href="../../warehouses/">
+    <span>Anbarlar</span>
+    
+</a>
+            <a href="../../workshops/">
+    <span>Sexlər və proseslər</span>
+    
+</a>
+            <div class="nav-title">Sistem</div>
+            <a href="../../users/">
+    <span>İstifadəçilər</span>
+    
+</a>
+            <a href="../../settings/">
+    <span>Parametrlər</span>
+    
+</a>
+        </nav>
+        <div class="sidebar-note">Dizayn nümunəsi. Məlumatlar uydurmadır.</div>
+        <a class="user-chip" href="../../profile/">
+            <span class="avatar">KƏ</span>
+            <span class="user-chip-text">
+                <strong>Kamran Əliyev</strong>
+                <small>Administrator</small>
+            </span>
+        </a>
+    </aside>
+    <div class="shell">
+        
+        
+        <main class="content">
+    <div class="page-head">
+    <div>
+        <div class="eyebrow">Mərhələ 3</div>
+        <h1>Dizayn və texniki hazırlıq</h1>
+        <p>SF-2026-0006 · Güzgülü qarderob</p>
+    </div>
+</div>
+    <section class="card card-pad"><dl class="facts">
+    <div><dt>Müştəri</dt><dd>
+        <span>Leyla Rzayeva</span>
+        
+    </dd></div>
+    <div><dt>Sifariş növü</dt><dd>Özəl sifariş</dd></div>
+    <div><dt>Məhsul</dt><dd>Güzgülü qarderob</dd></div>
+    <div><dt>Miqdar</dt><dd>1 ədəd</dd></div>
+    <div><dt>Menecer</dt><dd>Rauf Quliyev</dd></div>
+    <div><dt>İstənilən tarix</dt><dd>30.11.2026</dd></div>
+</dl></section>
+
+    <form class="stack" action="#" method="post">
+        <section class="card card-pad">
+            <h2>Dizayn</h2>
+            <div class="form-grid">
+                <label>Dizayner <input name="designer" value=""></label>
+                <label>AutoCAD faylı <input name="cadFile" placeholder="məs. SF-2026-0006.dwg" required></label>
+                <label>Ölçülər <input name="dimensions" placeholder="məs. 240 × 90 × 60 sm"></label>
+            </div>
+            <label>Texniki məlumatlar <textarea name="technicalNotes" rows="2"></textarea></label>
+        </section>
+
+        <section class="card card-pad">
+            <div class="card-title-row">
+                <h2>Lazım olan yarımfabrikat və xammallar</h2>
+                <button class="btn btn-small" type="button" id="add-line">Sətir əlavə et</button>
+            </div>
+            <p class="note">Miqdar 1 ədəd məhsul üçün yazılır.</p>
+            <div id="lines" class="lines">
+                <div class="line" data-line>
+                    <select name="materialCode" required aria-label="Material">
+                        <option value="">Material seçin</option>
+                        <option value="XM-001">XM-001 · Laminat lövhə 18 mm (ədəd)</option>
+                        <option value="XM-002">XM-002 · MDF lövhə 16 mm (ədəd)</option>
+                        <option value="XM-003">XM-003 · Menteşə (ədəd)</option>
+                        <option value="XM-004">XM-004 · Güzgü şüşə 4 mm (m²)</option>
+                        <option value="XM-005">XM-005 · Sünger 40 dns (m²)</option>
+                        <option value="XM-006">XM-006 · Mebel parçası (m)</option>
+                        <option value="XM-007">XM-007 · Metal profil (m)</option>
+                        <option value="XM-008">XM-008 · Boya (poliuretan) (kq)</option>
+                        <option value="XM-009">XM-009 · Dekorativ aksesuar (xüsusi) (ədəd)</option>
+                        <option value="YF-001">YF-001 · Korpus paneli (ədəd)</option>
+                        <option value="YF-002">YF-002 · Divan karkası (ədəd)</option>
+                        <option value="YF-003">YF-003 · Metal ayaq dəsti (dəst)</option>
+                    </select>
+                    <input name="materialQty" type="number" min="0.001" step="0.001" placeholder="Miqdar" required aria-label="Miqdar">
+                    <button class="btn btn-small btn-ghost" type="button" data-remove aria-label="Sətri sil">Sil</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="card card-pad">
+            <h2>İstehsal sexləri və prosesləri</h2>
+            <div class="route-grid">
+                <fieldset>
+                    <legend>Sex 1 – Laminasiya (korpus)</legend>
+                    <label class="check">
+                        <input type="checkbox" name="route" value="1-1"> <span>Laminasiya</span>
+                    </label><label class="check">
+                        <input type="checkbox" name="route" value="1-2"> <span>Aksesuar</span>
+                    </label><label class="check">
+                        <input type="checkbox" name="route" value="1-3"> <span>Güzgü şüşə</span>
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend>Sex 2 – Yumşaq</legend>
+                    <label class="check">
+                        <input type="checkbox" name="route" value="2-1"> <span>Karkas</span>
+                    </label><label class="check">
+                        <input type="checkbox" name="route" value="2-2"> <span>Yumşaq</span>
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend>Sex 3 – Çilingər sexi</legend>
+                    <label class="check">
+                        <input type="checkbox" name="route" value="3-1"> <span>Çilingər</span>
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend>Sex 4 – Boya sexi</legend>
+                    <label class="check">
+                        <input type="checkbox" name="route" value="4-1"> <span>Boya</span>
+                    </label>
+                </fieldset>
+            </div>
+        </section>
+
+        <div class="form-actions"><button class="btn btn-primary" type="submit">Planlamaya ötür</button></div>
+    </form>
+    <script>
+        const lines = document.getElementById('lines');
+        const blank = lines.querySelector('[data-line]').cloneNode(true);
+        document.getElementById('add-line').addEventListener('click', () => lines.append(blank.cloneNode(true)));
+        lines.addEventListener('click', event => {
+            if (event.target.matches('[data-remove]') && lines.children.length > 1) {
+                event.target.closest('[data-line]').remove();
+            }
+        });
+    </script>
+</main>
+    </div>
+</div>
+
+<div id="static-notice" role="status" hidden style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);
+max-width:calc(100% - 32px);padding:10px 16px;border-radius:9px;background:#1f2421;color:#fff;font-size:13.5px;z-index:10">
+Bu, dizayn nümunəsidir. Dəyişikliklər yadda saxlanılmır.</div>
+<script>
+document.addEventListener('submit', event => {
+    event.preventDefault();
+    const notice = document.getElementById('static-notice');
+    notice.hidden = false;
+    clearTimeout(notice.timer);
+    notice.timer = setTimeout(() => notice.hidden = true, 3000);
+});
+</script>
+</body>
+</html>

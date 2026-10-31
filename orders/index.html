@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sifarişlər · Alzoni ERP</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="../css/app.css">
+</head>
+<body>
+<div class="app">
+    <aside class="sidebar">
+        <a class="brand" href="../">
+            <strong>Alzoni ERP</strong>
+            <span>Alzoni MMC</span>
+        </a>
+        <nav>
+            <div class="nav-title">Proses</div>
+            <a href="../">İş axını</a>
+            <a href="./" class="active">
+    <span>Sifarişlər</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../design/">
+    <span>Dizayn</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../costing/">
+    <span>Kalkulyasiya</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../approval/">
+    <span>Təsdiq</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../supply/">
+    <span>Xammal təminatı</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../purchasing/">
+    <span>Satınalma</span>
+    
+</a>
+            <a href="../warehouse/">
+    <span>Anbar</span>
+    <span class="nav-count">2</span>
+</a>
+            <a href="../production/">
+    <span>İstehsal</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../completion/">
+    <span>Tamamlanma</span>
+    
+</a>
+            <div class="nav-title">Məlumatlar</div>
+            <a href="../recipes/">
+    <span>Reseptlər</span>
+    
+</a>
+            <a href="../materials/">
+    <span>Material kartları</span>
+    
+</a>
+            <a href="../warehouses/">
+    <span>Anbarlar</span>
+    
+</a>
+            <a href="../workshops/">
+    <span>Sexlər və proseslər</span>
+    
+</a>
+            <div class="nav-title">Sistem</div>
+            <a href="../users/">
+    <span>İstifadəçilər</span>
+    
+</a>
+            <a href="../settings/">
+    <span>Parametrlər</span>
+    
+</a>
+        </nav>
+        <div class="sidebar-note">Dizayn nümunəsi. Məlumatlar uydurmadır.</div>
+        <a class="user-chip" href="../profile/">
+            <span class="avatar">KƏ</span>
+            <span class="user-chip-text">
+                <strong>Kamran Əliyev</strong>
+                <small>Administrator</small>
+            </span>
+        </a>
+    </aside>
+    <div class="shell">
+        
+        
+        <main class="content">
+    <div class="page-head">
+        <div><h1>Sifarişlər</h1><p>Bütün satış sifarişləri və cari statusları.</p></div>
+        <a class="btn btn-primary" href="new/">Yeni sifariş</a>
+    </div>
+    <div class="filters">
+        <a href="./" class="active">Hamısı</a>
+        <a href="status-YENI/">Yeni</a><a href="status-DIZAYN/">Dizayn mərhələsində</a><a href="status-KALKULYASIYA/">Kalkulyasiya / Gözləyir</a><a href="status-TESDIQLENDI/">Müştəri təsdiqlədi</a><a href="status-XAMMAL/">Xammal təminatı</a><a href="status-ISTEHSALDA/">İstehsalda</a><a href="status-TAMAMLANDI/">Tamamlandı</a><a href="status-DAYANDIRILDI/">Proses dayandırıldı</a>
+    </div>
+    <section class="card">
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Sifariş</th><th>Tarix</th><th>Müştəri</th><th>Məhsul</th><th>Növ</th><th class="num">Miqdar</th><th>Menecer</th><th>Status</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td><a href="SF-2026-0009/">SF-2026-0009</a></td>
+                    <td>31.10.2026</td>
+                    <td>Gənclik Kafe</td>
+                    <td>Metal ayaqlı stol</td>
+                    <td>Seri sifariş</td>
+                    <td class="num">4</td>
+                    <td>Rauf Quliyev</td>
+                    <td><span class="badge badge-yellow">Kalkulyasiya / Gözləyir</span></td>
+                </tr>
+                <tr>
+                    <td><a href="SF-2026-0008/">SF-2026-0008</a></td>
+                    <td>31.10.2026</td>
+                    <td>Tural Əhmədov</td>
+                    <td>Kitab rəfi</td>
+                    <td>Yeni sifariş</td>
+                    <td class="num">1</td>
+                    <td>Rauf Quliyev</td>
+                    <td><span class="badge badge-red">Proses dayandırıldı</span></td>
+                </tr>
+                <tr>
+                    <td><a href="SF-2026-0007/">SF-2026-0007</a></td>
+                    <td>31.10.2026</td>
+                    <td>Mənzil Plus MMC</td>
+                    <td>Dolab 3 qapılı</td>
+                    <td>Seri sifariş</td>
+                    <td class="num">1</td>
+                    <td>Nigar Həsənova</td>
+                    <td><span class="badge badge-blue">Yeni</span></td>
+                </tr>
+                <tr>
+                    <td><a href="SF-2026-0006/">SF-2026-0006</a></td>
+                    <td>31.10.2026</td>
+                    <td>Leyla Rzayeva</td>
+                    <td>Güzgülü qarderob</td>
+                    <td>Özəl sifariş</td>
+                    <td class="num">1</td>
+                    <td>Rauf Quliyev</td>
+                    <td><span class="badge badge-purple">Dizayn mərhələsində</span></td>
+                </tr>
+                <tr>
+                    <td><a href="SF-2026-0005/">SF-2026-0005</a></td>
+                    <td>31.10.2026</td>
+                    <td>Atrium Dizayn MMC</td>
+                    <td>Resepşn masası</td>
+                    <td>Yeni sifariş</td>
+                    <td class="num">1</td>
+                    <td>Nigar Həsənova</td>
+                    <td><span class="badge badge-yellow">Kalkulyasiya / Gözləyir</span></td>
+                </tr>
+                <tr>
+                    <td><a href="SF-2026-0004/">SF-2026-0004</a></td>
+                    <td>31.10.2026</td>
+                    <td>Ramil Məmmədov</td>
+                    <td>Fərdi qonaq otağı dəsti</td>
+                    <td>Özəl sifariş</td>
+                    <td class="num">1</td>
+                    <td>Rauf Quliyev</td>
+                    <td><span class="badge badge-green">Müştəri təsdiqlədi</span></td>
+                </tr>
+                <tr>
+                    <td><a href="SF-2026-0003/">SF-2026-0003</a></td>
+                    <td>31.10.2026</td>
+                    <td>Ofis Evi MMC</td>
+                    <td>Metal ayaqlı stol</td>
+                    <td>Seri sifariş</td>
+                    <td class="num">30</td>
+                    <td>Rauf Quliyev</td>
+                    <td><span class="badge badge-blue">Xammal təminatı</span></td>
+                </tr>
+                <tr>
+                    <td><a href="SF-2026-0002/">SF-2026-0002</a></td>
+                    <td>31.10.2026</td>
+                    <td>Xəzər Otel</td>
+                    <td>Yumşaq divan</td>
+                    <td>Seri sifariş</td>
+                    <td class="num">2</td>
+                    <td>Nigar Həsənova</td>
+                    <td><span class="badge badge-purple">İstehsalda</span></td>
+                </tr>
+                <tr>
+                    <td><a href="SF-2026-0001/">SF-2026-0001</a></td>
+                    <td>31.10.2026</td>
+                    <td>Bakı Mebel MMC</td>
+                    <td>Dolab 3 qapılı</td>
+                    <td>Seri sifariş</td>
+                    <td class="num">2</td>
+                    <td>Nigar Həsənova</td>
+                    <td><span class="badge badge-green">Tamamlandı</span></td>
+                </tr>
+                
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+    </div>
+</div>
+
+<div id="static-notice" role="status" hidden style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);
+max-width:calc(100% - 32px);padding:10px 16px;border-radius:9px;background:#1f2421;color:#fff;font-size:13.5px;z-index:10">
+Bu, dizayn nümunəsidir. Dəyişikliklər yadda saxlanılmır.</div>
+<script>
+document.addEventListener('submit', event => {
+    event.preventDefault();
+    const notice = document.getElementById('static-notice');
+    notice.hidden = false;
+    clearTimeout(notice.timer);
+    notice.timer = setTimeout(() => notice.hidden = true, 3000);
+});
+</script>
+</body>
+</html>

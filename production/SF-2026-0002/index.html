@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>İstehsal · Alzoni ERP</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="../../css/app.css">
+</head>
+<body>
+<div class="app">
+    <aside class="sidebar">
+        <a class="brand" href="../../">
+            <strong>Alzoni ERP</strong>
+            <span>Alzoni MMC</span>
+        </a>
+        <nav>
+            <div class="nav-title">Proses</div>
+            <a href="../../">İş axını</a>
+            <a href="../../orders/">
+    <span>Sifarişlər</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../../design/">
+    <span>Dizayn</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../../costing/">
+    <span>Kalkulyasiya</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../../approval/">
+    <span>Təsdiq</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../../supply/">
+    <span>Xammal təminatı</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../../purchasing/">
+    <span>Satınalma</span>
+    
+</a>
+            <a href="../../warehouse/">
+    <span>Anbar</span>
+    <span class="nav-count">2</span>
+</a>
+            <a href="../" class="active">
+    <span>İstehsal</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../../completion/">
+    <span>Tamamlanma</span>
+    
+</a>
+            <div class="nav-title">Məlumatlar</div>
+            <a href="../../recipes/">
+    <span>Reseptlər</span>
+    
+</a>
+            <a href="../../materials/">
+    <span>Material kartları</span>
+    
+</a>
+            <a href="../../warehouses/">
+    <span>Anbarlar</span>
+    
+</a>
+            <a href="../../workshops/">
+    <span>Sexlər və proseslər</span>
+    
+</a>
+            <div class="nav-title">Sistem</div>
+            <a href="../../users/">
+    <span>İstifadəçilər</span>
+    
+</a>
+            <a href="../../settings/">
+    <span>Parametrlər</span>
+    
+</a>
+        </nav>
+        <div class="sidebar-note">Dizayn nümunəsi. Məlumatlar uydurmadır.</div>
+        <a class="user-chip" href="../../profile/">
+            <span class="avatar">KƏ</span>
+            <span class="user-chip-text">
+                <strong>Kamran Əliyev</strong>
+                <small>Administrator</small>
+            </span>
+        </a>
+    </aside>
+    <div class="shell">
+        
+        
+        <main class="content">
+    <div class="page-head">
+    <div>
+        <div class="eyebrow">Mərhələ 9</div>
+        <h1>İstehsal</h1>
+        <p>SF-2026-0002 · Yumşaq divan</p>
+    </div>
+</div>
+    <section class="card card-pad"><dl class="facts">
+    <div><dt>Müştəri</dt><dd>
+        <span>Xəzər Otel</span>
+        
+    </dd></div>
+    <div><dt>Sifariş növü</dt><dd>Seri sifariş</dd></div>
+    <div><dt>Məhsul</dt><dd>Yumşaq divan</dd></div>
+    <div><dt>Miqdar</dt><dd>2 ədəd</dd></div>
+    <div><dt>Menecer</dt><dd>Nigar Həsənova</dd></div>
+    <div><dt>İstənilən tarix</dt><dd>21.11.2026</dd></div>
+</dl></section>
+
+    <section class="card">
+        <div class="card-head"><h2>Proseslər</h2></div>
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Sex</th><th>Proses</th><th>Başlanğıc</th><th>Bitmə</th><th></th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>Sex 2 – Yumşaq</td>
+                    <td>Karkas</td>
+                    <td>31.10.2026</td>
+                    <td>31.10.2026</td>
+                    <td class="actions">
+                        
+                        
+                        <span class="badge badge-green">Bitib</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Sex 2 – Yumşaq</td>
+                    <td>Yumşaq</td>
+                    <td>31.10.2026</td>
+                    <td>—</td>
+                    <td class="actions">
+                        
+                        <form action="#" method="post"><button class="btn btn-small btn-primary">Bitir</button></form>
+                        
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    
+</main>
+    </div>
+</div>
+
+<div id="static-notice" role="status" hidden style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);
+max-width:calc(100% - 32px);padding:10px 16px;border-radius:9px;background:#1f2421;color:#fff;font-size:13.5px;z-index:10">
+Bu, dizayn nümunəsidir. Dəyişikliklər yadda saxlanılmır.</div>
+<script>
+document.addEventListener('submit', event => {
+    event.preventDefault();
+    const notice = document.getElementById('static-notice');
+    notice.hidden = false;
+    clearTimeout(notice.timer);
+    notice.timer = setTimeout(() => notice.hidden = true, 3000);
+});
+</script>
+</body>
+</html>

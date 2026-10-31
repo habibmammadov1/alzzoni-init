@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>İş axını · Alzoni ERP</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div class="app">
+    <aside class="sidebar">
+        <a class="brand" href="./">
+            <strong>Alzoni ERP</strong>
+            <span>Alzoni MMC</span>
+        </a>
+        <nav>
+            <div class="nav-title">Proses</div>
+            <a href="./" class="active">İş axını</a>
+            <a href="orders/">
+    <span>Sifarişlər</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="design/">
+    <span>Dizayn</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="costing/">
+    <span>Kalkulyasiya</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="approval/">
+    <span>Təsdiq</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="supply/">
+    <span>Xammal təminatı</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="purchasing/">
+    <span>Satınalma</span>
+    
+</a>
+            <a href="warehouse/">
+    <span>Anbar</span>
+    <span class="nav-count">2</span>
+</a>
+            <a href="production/">
+    <span>İstehsal</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="completion/">
+    <span>Tamamlanma</span>
+    
+</a>
+            <div class="nav-title">Məlumatlar</div>
+            <a href="recipes/">
+    <span>Reseptlər</span>
+    
+</a>
+            <a href="materials/">
+    <span>Material kartları</span>
+    
+</a>
+            <a href="warehouses/">
+    <span>Anbarlar</span>
+    
+</a>
+            <a href="workshops/">
+    <span>Sexlər və proseslər</span>
+    
+</a>
+            <div class="nav-title">Sistem</div>
+            <a href="users/">
+    <span>İstifadəçilər</span>
+    
+</a>
+            <a href="settings/">
+    <span>Parametrlər</span>
+    
+</a>
+        </nav>
+        <div class="sidebar-note">Dizayn nümunəsi. Məlumatlar uydurmadır.</div>
+        <a class="user-chip" href="profile/">
+            <span class="avatar">KƏ</span>
+            <span class="user-chip-text">
+                <strong>Kamran Əliyev</strong>
+                <small>Administrator</small>
+            </span>
+        </a>
+    </aside>
+    <div class="shell">
+        
+        
+        <main class="content">
+    <div class="page-head">
+        <div>
+            <h1>İstehsal sifarişi iş axını</h1>
+            <p>Sifarişdən hazır məhsula qədər bütün proses bir sistemdə.</p>
+        </div>
+        <a class="btn btn-primary" href="orders/new/">Yeni sifariş</a>
+    </div>
+
+    <section class="status-strip" aria-label="Sifariş statusları">
+        <a href="orders/status-YENI/" class="status-tile tile-blue">
+            <strong>1</strong>
+            <span>Yeni</span>
+        </a><a href="orders/status-DIZAYN/" class="status-tile tile-purple">
+            <strong>1</strong>
+            <span>Dizayn mərhələsində</span>
+        </a><a href="orders/status-KALKULYASIYA/" class="status-tile tile-yellow">
+            <strong>2</strong>
+            <span>Kalkulyasiya / Gözləyir</span>
+        </a><a href="orders/status-TESDIQLENDI/" class="status-tile tile-green">
+            <strong>1</strong>
+            <span>Müştəri təsdiqlədi</span>
+        </a><a href="orders/status-XAMMAL/" class="status-tile tile-blue">
+            <strong>1</strong>
+            <span>Xammal təminatı</span>
+        </a><a href="orders/status-ISTEHSALDA/" class="status-tile tile-purple">
+            <strong>1</strong>
+            <span>İstehsalda</span>
+        </a><a href="orders/status-TAMAMLANDI/" class="status-tile tile-green">
+            <strong>1</strong>
+            <span>Tamamlandı</span>
+        </a>
+    </section>
+
+    <section class="flow" aria-label="Proses mərhələləri">
+        <a class="flow-card" href="orders/new/">
+            <span class="flow-no">1</span><h2>Sifarişin qəbulu</h2><p>Satış meneceri müştəri məlumatlarını daxil edir, sifarişi qeyd edir.</p>
+        </a>
+        <a class="flow-card" href="orders/status-YENI/">
+            <span class="flow-no">2</span><h2>Sifarişin növü</h2><p>Yeni, özəl və ya seri. Növ sifarişin yolunu müəyyən edir.</p>
+            <span class="flow-count">1 gözləyir</span>
+        </a>
+        <a class="flow-card" href="design/">
+            <span class="flow-no">3</span><h2>Dizayn və resept</h2><p>AutoCAD dizaynı və material siyahısı, seri məhsulda hazır resept.</p>
+            <span class="flow-count">1 gözləyir</span>
+        </a>
+        <a class="flow-card" href="costing/">
+            <span class="flow-no">4</span><h2>Kalkulyasiya və planlama</h2><p>Maya dəyəri, +25% xərc, +50% gəlir, istehsal tarixi.</p>
+            <span class="flow-count">1 gözləyir</span>
+        </a>
+        <a class="flow-card" href="approval/">
+            <span class="flow-no">5</span><h2>Müştəri və menecer təsdiqi</h2><p>Qiymət və tarix təqdim edilir. Razılıq yoxdursa proses dayanır.</p>
+            <span class="flow-count">1 gözləyir</span>
+        </a>
+        <a class="flow-card" href="supply/">
+            <span class="flow-no">6</span><h2>Xammal təminatı</h2><p>Reseptə görə ehtiyac hesablanır və anbar qalığı ilə müqayisə edilir.</p>
+            <span class="flow-count">1 gözləyir</span>
+        </a>
+        <a class="flow-card" href="purchasing/">
+            <span class="flow-no">7</span><h2>Satınalma</h2><p>Yalnız çatışmayan miqdar təchizatçıdan alınır.</p>
+            
+        </a>
+        <a class="flow-card" href="warehouse/">
+            <span class="flow-no">8</span><h2>Anbar</h2><p>Mal qəbul edilir, ayrılan materiallar istehsala verilir.</p>
+            <span class="flow-count">2 gözləyir</span>
+        </a>
+        <a class="flow-card" href="production/">
+            <span class="flow-no">9</span><h2>İstehsal</h2><p>Sexlərdə proseslər qeyd olunur, sonda məhsul sənədlə təsdiqlənir.</p>
+            <span class="flow-count">1 gedir</span>
+        </a>
+        <a class="flow-card" href="completion/">
+            <span class="flow-no">10</span><h2>Tamamlanma</h2><p>Hazır məhsul müştəriyə təhvil verilir, statuslar yenilənir.</p>
+            
+        </a>
+    </section>
+
+    <section class="card">
+        <div class="card-head"><h2>Son sifarişlər</h2><a href="orders/">Hamısına bax</a></div>
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Sifariş</th><th>Müştəri</th><th>Məhsul</th><th>Növ</th><th>Status</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td><a href="orders/SF-2026-0009/">SF-2026-0009</a></td>
+                    <td>Gənclik Kafe</td>
+                    <td>Metal ayaqlı stol</td>
+                    <td>Seri sifariş</td>
+                    <td><span class="badge badge-yellow">Kalkulyasiya / Gözləyir</span></td>
+                </tr>
+                <tr>
+                    <td><a href="orders/SF-2026-0008/">SF-2026-0008</a></td>
+                    <td>Tural Əhmədov</td>
+                    <td>Kitab rəfi</td>
+                    <td>Yeni sifariş</td>
+                    <td><span class="badge badge-red">Proses dayandırıldı</span></td>
+                </tr>
+                <tr>
+                    <td><a href="orders/SF-2026-0007/">SF-2026-0007</a></td>
+                    <td>Mənzil Plus MMC</td>
+                    <td>Dolab 3 qapılı</td>
+                    <td>Seri sifariş</td>
+                    <td><span class="badge badge-blue">Yeni</span></td>
+                </tr>
+                <tr>
+                    <td><a href="orders/SF-2026-0006/">SF-2026-0006</a></td>
+                    <td>Leyla Rzayeva</td>
+                    <td>Güzgülü qarderob</td>
+                    <td>Özəl sifariş</td>
+                    <td><span class="badge badge-purple">Dizayn mərhələsində</span></td>
+                </tr>
+                <tr>
+                    <td><a href="orders/SF-2026-0005/">SF-2026-0005</a></td>
+                    <td>Atrium Dizayn MMC</td>
+                    <td>Resepşn masası</td>
+                    <td>Yeni sifariş</td>
+                    <td><span class="badge badge-yellow">Kalkulyasiya / Gözləyir</span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+    </div>
+</div>
+
+<div id="static-notice" role="status" hidden style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);
+max-width:calc(100% - 32px);padding:10px 16px;border-radius:9px;background:#1f2421;color:#fff;font-size:13.5px;z-index:10">
+Bu, dizayn nümunəsidir. Dəyişikliklər yadda saxlanılmır.</div>
+<script>
+document.addEventListener('submit', event => {
+    event.preventDefault();
+    const notice = document.getElementById('static-notice');
+    notice.hidden = false;
+    clearTimeout(notice.timer);
+    notice.timer = setTimeout(() => notice.hidden = true, 3000);
+});
+</script>
+</body>
+</html>

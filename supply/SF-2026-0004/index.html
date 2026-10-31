@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Anbar yoxlanışı · Alzoni ERP</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="../../css/app.css">
+</head>
+<body>
+<div class="app">
+    <aside class="sidebar">
+        <a class="brand" href="../../">
+            <strong>Alzoni ERP</strong>
+            <span>Alzoni MMC</span>
+        </a>
+        <nav>
+            <div class="nav-title">Proses</div>
+            <a href="../../">İş axını</a>
+            <a href="../../orders/">
+    <span>Sifarişlər</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../../design/">
+    <span>Dizayn</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../../costing/">
+    <span>Kalkulyasiya</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../../approval/">
+    <span>Təsdiq</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../" class="active">
+    <span>Xammal təminatı</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../../purchasing/">
+    <span>Satınalma</span>
+    
+</a>
+            <a href="../../warehouse/">
+    <span>Anbar</span>
+    <span class="nav-count">2</span>
+</a>
+            <a href="../../production/">
+    <span>İstehsal</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="../../completion/">
+    <span>Tamamlanma</span>
+    
+</a>
+            <div class="nav-title">Məlumatlar</div>
+            <a href="../../recipes/">
+    <span>Reseptlər</span>
+    
+</a>
+            <a href="../../materials/">
+    <span>Material kartları</span>
+    
+</a>
+            <a href="../../warehouses/">
+    <span>Anbarlar</span>
+    
+</a>
+            <a href="../../workshops/">
+    <span>Sexlər və proseslər</span>
+    
+</a>
+            <div class="nav-title">Sistem</div>
+            <a href="../../users/">
+    <span>İstifadəçilər</span>
+    
+</a>
+            <a href="../../settings/">
+    <span>Parametrlər</span>
+    
+</a>
+        </nav>
+        <div class="sidebar-note">Dizayn nümunəsi. Məlumatlar uydurmadır.</div>
+        <a class="user-chip" href="../../profile/">
+            <span class="avatar">KƏ</span>
+            <span class="user-chip-text">
+                <strong>Kamran Əliyev</strong>
+                <small>Administrator</small>
+            </span>
+        </a>
+    </aside>
+    <div class="shell">
+        
+        
+        <main class="content">
+    <div class="page-head">
+    <div>
+        <div class="eyebrow">Mərhələ 6</div>
+        <h1>Anbar qalığı ilə müqayisə</h1>
+        <p>SF-2026-0004 · Fərdi qonaq otağı dəsti</p>
+    </div>
+</div>
+    <section class="card">
+        <div class="card-head"><h2>Ümumi xammal ehtiyacı: 1 ədəd × 1 məhsula düşən material</h2></div>
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Material</th><th>Anbar</th><th class="num">Tələb olunan</th><th class="num">Anbardan veriləcək</th><th class="num">Satınalmaya gedəcək</th><th>Nəticə</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>Laminat lövhə 18 mm</td>
+                    <td>Xammal Anbarı</td>
+                    <td class="num">6 ədəd</td>
+                    <td class="num">6</td>
+                    <td class="num">0</td>
+                    <td><span class="badge badge-green">Tam var</span></td>
+                </tr>
+                <tr>
+                    <td>Sünger 40 dns</td>
+                    <td>Xammal Anbarı</td>
+                    <td class="num">4 m²</td>
+                    <td class="num">4</td>
+                    <td class="num">0</td>
+                    <td><span class="badge badge-green">Tam var</span></td>
+                </tr>
+                <tr>
+                    <td>Mebel parçası</td>
+                    <td>Xammal Anbarı</td>
+                    <td class="num">8 m</td>
+                    <td class="num">8</td>
+                    <td class="num">0</td>
+                    <td><span class="badge badge-green">Tam var</span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <form class="form-actions" action="#" method="post">
+        <button class="btn btn-primary" type="submit">İstehsal sifarişini aç</button>
+    </form>
+</main>
+    </div>
+</div>
+
+<div id="static-notice" role="status" hidden style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);
+max-width:calc(100% - 32px);padding:10px 16px;border-radius:9px;background:#1f2421;color:#fff;font-size:13.5px;z-index:10">
+Bu, dizayn nümunəsidir. Dəyişikliklər yadda saxlanılmır.</div>
+<script>
+document.addEventListener('submit', event => {
+    event.preventDefault();
+    const notice = document.getElementById('static-notice');
+    notice.hidden = false;
+    clearTimeout(notice.timer);
+    notice.timer = setTimeout(() => notice.hidden = true, 3000);
+});
+</script>
+</body>
+</html>
