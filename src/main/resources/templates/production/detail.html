@@ -1,0 +1,41 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('İstehsal', ~{::main})}">
+<body>
+<main class="content">
+    <div th:replace="~{fragments :: pageHead(9, 'İstehsal', ${order.no + ' · ' + order.product})}"></div>
+    <section class="card card-pad"><dl th:replace="~{fragments :: summary(${order})}"></dl></section>
+
+    <section class="card">
+        <div class="card-head"><h2>Proseslər</h2></div>
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Sex</th><th>Proses</th><th>Başlanğıc</th><th>Bitmə</th><th></th></tr></thead>
+                <tbody>
+                <tr th:each="s, i : ${order.route}">
+                    <td th:text="${s.process.workshop}"></td>
+                    <td th:text="${s.process.process}"></td>
+                    <td th:text="${@fmt.date(s.startedAt)}"></td>
+                    <td th:text="${@fmt.date(s.finishedAt)}"></td>
+                    <td class="actions">
+                        <form th:if="${s.startedAt == null}" th:action="@{/production/{no}/steps/{i}/start(no=${order.no},i=${i.index})}" method="post"><button class="btn btn-small">Başlat</button></form>
+                        <form th:if="${s.running}" th:action="@{/production/{no}/steps/{i}/finish(no=${order.no},i=${i.index})}" method="post"><button class="btn btn-small btn-primary">Bitir</button></form>
+                        <span class="badge badge-green" th:if="${s.done}">Bitib</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <form class="card card-pad decision" th:if="${order.routeDone}" th:action="@{/production/{no}/complete(no=${order.no})}" method="post">
+        <h2>Məhsul istehsal edildi</h2>
+        <label>Hazır məhsul anbarı
+            <select name="warehouse" required>
+                <option th:each="w : ${warehouses}" th:value="${w.name}" th:text="${w.name}" th:selected="${w.name == 'Hazır Məhsul'}"></option>
+            </select>
+        </label>
+        <button class="btn btn-primary" type="submit">İstehsalı sənədlə təsdiqlə</button>
+    </form>
+</main>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('İstifadəçilər', ~{::main})}">
+<body>
+<main class="content">
+    <div class="page-head">
+        <div><h1>İstifadəçilər</h1><p>Sistemdə işləyən əməkdaşlar və prosesdəki rolları.</p></div>
+        <a class="btn btn-primary" th:href="@{/users/new}">Yeni istifadəçi</a>
+    </div>
+    <section class="card">
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Ad, soyad</th><th>Rol</th><th>Əlaqə nömrəsi</th><th>E-poçt</th><th>Status</th><th></th></tr></thead>
+                <tbody>
+                <tr th:each="u : ${users}">
+                    <td>
+                        <div class="user-cell">
+                            <span class="avatar" th:text="${u.initials}"></span>
+                            <span th:text="${u.name}"></span>
+                        </div>
+                    </td>
+                    <td th:text="${u.role.label}"></td>
+                    <td th:text="${@fmt.text(u.phone)}"></td>
+                    <td th:text="${@fmt.text(u.email)}"></td>
+                    <td>
+                        <span class="badge badge-green" th:if="${u.active}">Aktiv</span>
+                        <span class="badge badge-red" th:unless="${u.active}">Deaktiv</span>
+                    </td>
+                    <td class="actions"><a class="btn btn-small" th:href="@{/users/{id}(id=${u.id})}">Düzəliş et</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

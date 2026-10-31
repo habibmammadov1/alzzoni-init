@@ -1,0 +1,24 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('Parametrlər', ~{::main})}">
+<body>
+<main class="content narrow">
+    <div th:replace="~{fragments :: pageHead(0, 'Parametrlər', 'Yeni sifarişlər bu dəyərlərlə başlayır. Kalkulyasiyada hər sifariş üçün dəyişmək olar.')}"></div>
+    <form class="stack" th:action="@{/settings}" method="post">
+        <section class="card card-pad">
+            <h2>Şirkət</h2>
+            <label>Şirkətin adı <input name="companyName" th:value="${settings.companyName}" required></label>
+        </section>
+        <section class="card card-pad">
+            <h2>Kalkulyasiya</h2>
+            <div class="form-grid">
+                <label>Əlavə xərc, % <input name="expensePct" type="number" min="0" step="0.01" th:value="${settings.expensePct}" required></label>
+                <label>Gəlir, % <input name="profitPct" type="number" min="0" step="0.01" th:value="${settings.profitPct}" required></label>
+                <label>İstehsal müddəti, gün <input name="productionDays" type="number" min="1" th:value="${settings.productionDays}" required></label>
+            </div>
+            <p class="note">Gəlir faizi cəmi xərcin üzərinə hesablanır: maya dəyəri → +xərc → +gəlir.</p>
+        </section>
+        <div class="form-actions"><button class="btn btn-primary" type="submit">Yadda saxla</button></div>
+    </form>
+</main>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('Material kartları', ~{::main})}">
+<body>
+<main class="content">
+    <div th:replace="~{fragments :: pageHead(0, 'Material kartları', 'Xammal, yarımfabrikat və hazır məhsul siyahısı.')}"></div>
+    <div class="filters">
+        <a th:href="@{/materials}" th:classappend="${selected == null} ? 'active'">Hamısı</a>
+        <a th:each="t : ${types}" th:href="@{/materials(type=${t})}" th:classappend="${selected == t} ? 'active'" th:text="${t.label}"></a>
+    </div>
+    <section class="card">
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Kod</th><th>Ad</th><th>Növ</th><th>Anbar</th><th class="num">Qalıq</th><th class="num">Ayrılıb</th><th class="num">Son alış qiyməti</th></tr></thead>
+                <tbody>
+                <tr th:each="m : ${materials}">
+                    <td th:text="${m.code}"></td>
+                    <td th:text="${m.name}"></td>
+                    <td th:text="${m.type.label}"></td>
+                    <td th:text="${m.warehouse.name}"></td>
+                    <td class="num" th:text="${@fmt.qty(m.stock)} + ' ' + ${m.unit}"></td>
+                    <td class="num" th:text="${@fmt.qty(m.reserved)}"></td>
+                    <td class="num" th:text="${@fmt.money(m.lastPrice)}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

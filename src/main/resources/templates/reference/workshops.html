@@ -1,0 +1,14 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('Sexlər və proseslər', ~{::main})}">
+<body>
+<main class="content">
+    <div th:replace="~{fragments :: pageHead(0, 'İstehsal sexləri və prosesləri', null)}"></div>
+    <div class="ref-grid">
+        <section class="card card-pad" th:each="w : ${workshops}">
+            <h2 th:text="${w.name}"></h2>
+            <ol class="process-list"><li th:each="p : ${w.processNames}" th:text="${p}"></li></ol>
+        </section>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="az" xmlns:th="http://www.thymeleaf.org" th:fragment="page(pageTitle, content)">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${pageTitle} + ' · Alzoni ERP'">Alzoni ERP</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<div class="app">
+    <aside class="sidebar">
+        <a class="brand" th:href="@{/}">
+            <strong>Alzoni ERP</strong>
+            <span th:text="${settings.companyName}">Şirkət</span>
+        </a>
+        <nav>
+            <div class="nav-title">Proses</div>
+            <a th:href="@{/}" th:classappend="${path == '/'} ? 'active'">İş axını</a>
+            <a th:replace="~{:: navItem('/orders', 'Sifarişlər', ${nav['orders']})}"></a>
+            <a th:replace="~{:: navItem('/design', 'Dizayn', ${nav['design']})}"></a>
+            <a th:replace="~{:: navItem('/costing', 'Kalkulyasiya', ${nav['costing']})}"></a>
+            <a th:replace="~{:: navItem('/approval', 'Təsdiq', ${nav['approval']})}"></a>
+            <a th:replace="~{:: navItem('/supply', 'Xammal təminatı', ${nav['supply']})}"></a>
+            <a th:replace="~{:: navItem('/purchasing', 'Satınalma', ${nav['purchasing']})}"></a>
+            <a th:replace="~{:: navItem('/warehouse', 'Anbar', ${nav['warehouse']})}"></a>
+            <a th:replace="~{:: navItem('/production', 'İstehsal', ${nav['production']})}"></a>
+            <a th:replace="~{:: navItem('/completion', 'Tamamlanma', ${nav['completion']})}"></a>
+            <div class="nav-title">Məlumatlar</div>
+            <a th:replace="~{:: navItem('/recipes', 'Reseptlər', 0)}"></a>
+            <a th:replace="~{:: navItem('/materials', 'Material kartları', 0)}"></a>
+            <a th:replace="~{:: navItem('/warehouses', 'Anbarlar', 0)}"></a>
+            <a th:replace="~{:: navItem('/workshops', 'Sexlər və proseslər', 0)}"></a>
+            <div class="nav-title">Sistem</div>
+            <a th:replace="~{:: navItem('/users', 'İstifadəçilər', 0)}"></a>
+            <a th:replace="~{:: navItem('/settings', 'Parametrlər', 0)}"></a>
+        </nav>
+        <div class="sidebar-note">Nümunə məlumatlar. Tətbiq yenidən başladıqda sıfırlanır.</div>
+        <a class="user-chip" th:href="@{/profile}" th:classappend="${path == '/profile'} ? 'active'">
+            <span class="avatar" th:text="${me.initials}"></span>
+            <span class="user-chip-text">
+                <strong th:text="${me.name}"></strong>
+                <small th:text="${me.role.label}"></small>
+            </span>
+        </a>
+    </aside>
+    <div class="shell">
+        <div class="flash flash-error" th:if="${error}" th:text="${error}" role="alert"></div>
+        <div class="flash flash-success" th:if="${success}" th:text="${success}" role="status"></div>
+        <main th:replace="${content}"></main>
+    </div>
+</div>
+</body>
+</html>
+
+<a th:fragment="navItem(href, label, count)" th:href="@{${href}}"
+   th:classappend="${#strings.startsWith(path, href)} ? 'active'">
+    <span th:text="${label}">Bölmə</span>
+    <span class="nav-count" th:if="${count > 0}" th:text="${count}">0</span>
+</a>

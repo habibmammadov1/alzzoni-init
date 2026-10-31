@@ -1,0 +1,44 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('Təsdiq', ~{::main})}">
+<body>
+<main class="content">
+    <div th:replace="~{fragments :: pageHead(5, 'Müştəri və menecer təsdiqi', ${order.no + ' · ' + order.product})}"></div>
+    <div class="columns">
+        <section class="card card-pad">
+            <h2>Sifariş</h2>
+            <dl th:replace="~{fragments :: summary(${order})}"></dl>
+        </section>
+        <section class="card card-pad">
+            <h2>Qiymət</h2>
+            <table th:replace="~{fragments :: costBreakdown(${order})}"></table>
+        </section>
+    </div>
+    <section class="card card-pad">
+        <h2>Müştəriyə təqdim edilən şərtlər</h2>
+        <dl class="facts">
+            <div><dt>Son qiymət</dt><dd th:text="${@fmt.money(order.orderTotal)}"></dd></div>
+            <div><dt>Hazırlanma tarixi</dt><dd th:text="${@fmt.date(order.readyDate)}"></dd></div>
+            <div><dt>İstehsal müddəti</dt><dd th:text="${order.productionDays} + ' gün'"></dd></div>
+            <div><dt>İstehsal şərtləri</dt><dd th:text="${@fmt.text(order.conditions)}"></dd></div>
+        </dl>
+    </section>
+
+    <div class="columns">
+        <form class="card card-pad decision" th:action="@{/approval/{no}(no=${order.no})}" method="post">
+            <h2>Müştəri razıdır</h2>
+            <input type="hidden" name="approved" value="true">
+            <label class="check"><input type="checkbox" required> Son qiymət yoxlanıldı</label>
+            <label class="check"><input type="checkbox" required> Hazırlanma tarixi yoxlanıldı</label>
+            <label class="check"><input type="checkbox" required> İstehsal şərtləri yoxlanıldı</label>
+            <button class="btn btn-primary" type="submit">Təsdiqlə və istehsala hazırla</button>
+        </form>
+        <form class="card card-pad decision" th:action="@{/approval/{no}(no=${order.no})}" method="post">
+            <h2>Müştəri razı deyil</h2>
+            <input type="hidden" name="approved" value="false">
+            <label>İmtina səbəbi <textarea name="reason" rows="3" required></textarea></label>
+            <button class="btn btn-danger" type="submit">Prosesi dayandır</button>
+        </form>
+    </div>
+</main>
+</body>
+</html>

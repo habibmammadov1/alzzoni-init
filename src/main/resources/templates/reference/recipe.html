@@ -1,0 +1,42 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page(${recipe.product.name}, ~{::main})}">
+<body>
+<main class="content">
+    <div th:replace="~{fragments :: pageHead(0, ${recipe.product.name}, ${recipe.product.code + ' · ' + recipe.product.type.label})}"></div>
+    <section class="card card-pad">
+        <h2>Texnoloji kart</h2>
+        <p th:text="${recipe.techCard}"></p>
+    </section>
+    <section class="card">
+        <div class="card-head"><h2>Material siyahısı (1 ədəd)</h2></div>
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Kod</th><th>Material</th><th>Növ</th><th class="num">Miqdar</th></tr></thead>
+                <tbody>
+                <tr th:each="l : ${recipe.lines}">
+                    <td>
+                        <a th:if="${erp.hasRecipe(l.material.code)}" th:href="@{/recipes/{code}(code=${l.material.code})}" th:text="${l.material.code}"></a>
+                        <span th:unless="${erp.hasRecipe(l.material.code)}" th:text="${l.material.code}"></span>
+                    </td>
+                    <td th:text="${l.material.name}"></td>
+                    <td th:text="${l.material.type.label}"></td>
+                    <td class="num" th:text="${@fmt.qty(l.qty)} + ' ' + ${l.material.unit}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <section class="card">
+        <div class="card-head"><h2>İstehsal marşrutu</h2></div>
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Sex</th><th>Proses</th></tr></thead>
+                <tbody>
+                <tr th:each="p : ${recipe.route}"><td th:text="${p.workshop}"></td><td th:text="${p.process}"></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

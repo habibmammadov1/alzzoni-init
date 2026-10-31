@@ -1,0 +1,44 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<span th:fragment="status(s)" class="badge" th:classappend="'badge-' + ${s.color}" th:text="${s.label}">Status</span>
+
+<ol th:fragment="stepper(o)" class="stepper">
+    <li th:each="s : ${flowStatuses}" th:class="${'step-' + o.stepState(s)}">
+        <span class="step-dot"></span>
+        <span th:text="${s.label}">Status</span>
+    </li>
+</ol>
+
+<dl th:fragment="summary(o)" class="facts">
+    <div><dt>Müştəri</dt><dd>
+        <span th:text="${o.customer}">Müştəri</span>
+        <span class="badge badge-yellow" th:if="${o.specialCustomer}">Xüsusi (kənar)</span>
+    </dd></div>
+    <div><dt>Sifariş növü</dt><dd th:text="${o.type.label}">Növ</dd></div>
+    <div><dt>Məhsul</dt><dd th:text="${o.product}">Məhsul</dd></div>
+    <div><dt>Miqdar</dt><dd th:text="${o.qty} + ' ədəd'">1</dd></div>
+    <div><dt>Menecer</dt><dd th:text="${o.manager}">Menecer</dd></div>
+    <div><dt>İstənilən tarix</dt><dd th:text="${@fmt.date(o.requestedDate)}">—</dd></div>
+</dl>
+
+<table th:fragment="costBreakdown(o)" class="table calc">
+    <tr><td>Xammal maya dəyəri (1 ədəd)</td><td class="num" th:text="${@fmt.money(o.materialCost)}">0</td></tr>
+    <tr><td th:text="'Əlavə xərc +' + ${@fmt.qty(o.expensePct)} + '%'">Xərc</td><td class="num" th:text="${@fmt.money(o.expense)}">0</td></tr>
+    <tr class="subtotal"><td>Cəmi xərc</td><td class="num" th:text="${@fmt.money(o.totalCost)}">0</td></tr>
+    <tr><td th:text="'Gəlir +' + ${@fmt.qty(o.profitPct)} + '%'">Gəlir</td><td class="num" th:text="${@fmt.money(o.profit)}">0</td></tr>
+    <tr class="subtotal"><td>Satış qiyməti (1 ədəd)</td><td class="num" th:text="${@fmt.money(o.unitPrice)}">0</td></tr>
+    <tr class="grand"><td th:text="'Sifariş cəmi (' + ${o.qty} + ' ədəd)'">Cəmi</td><td class="num" th:text="${@fmt.money(o.orderTotal)}">0</td></tr>
+</table>
+
+<div th:fragment="pageHead(step, title, hint)" class="page-head">
+    <div>
+        <div class="eyebrow" th:if="${step > 0}" th:text="'Mərhələ ' + ${step}">Mərhələ</div>
+        <h1 th:text="${title}">Başlıq</h1>
+        <p th:if="${hint != null}" th:text="${hint}">İzah</p>
+    </div>
+</div>
+
+</body>
+</html>

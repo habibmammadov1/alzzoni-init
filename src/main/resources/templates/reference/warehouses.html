@@ -1,0 +1,24 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('Anbarlar', ~{::main})}">
+<body>
+<main class="content">
+    <div th:replace="~{fragments :: pageHead(0, 'Anbarlar', 'Anbarlar üzrə material qalıqları.')}"></div>
+    <div class="ref-grid">
+        <section class="card" th:each="w : ${warehouses}">
+            <div class="card-head"><h2 th:text="${w.name}"></h2></div>
+            <div class="table-wrap">
+                <table class="table">
+                    <tbody>
+                    <tr th:each="m : ${erp.materials(w)}">
+                        <td th:text="${m.name}"></td>
+                        <td class="num" th:text="${@fmt.qty(m.available)} + ' / ' + ${@fmt.qty(m.stock)} + ' ' + ${m.unit}" title="Mövcud / cəmi qalıq"></td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(erp.materials(w))}"><td colspan="2" class="empty">Material yoxdur.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</main>
+</body>
+</html>

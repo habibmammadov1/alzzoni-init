@@ -1,0 +1,35 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('Sifarişlər', ~{::main})}">
+<body>
+<main class="content">
+    <div class="page-head">
+        <div><h1>Sifarişlər</h1><p>Bütün satış sifarişləri və cari statusları.</p></div>
+        <a class="btn btn-primary" th:href="@{/orders/new}">Yeni sifariş</a>
+    </div>
+    <div class="filters">
+        <a th:href="@{/orders}" th:classappend="${selected == null} ? 'active'">Hamısı</a>
+        <a th:each="s : ${statuses}" th:href="@{/orders(status=${s})}" th:classappend="${selected == s} ? 'active'" th:text="${s.label}"></a>
+    </div>
+    <section class="card">
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Sifariş</th><th>Tarix</th><th>Müştəri</th><th>Məhsul</th><th>Növ</th><th class="num">Miqdar</th><th>Menecer</th><th>Status</th></tr></thead>
+                <tbody>
+                <tr th:each="o : ${orders}">
+                    <td><a th:href="@{/orders/{no}(no=${o.no})}" th:text="${o.no}"></a></td>
+                    <td th:text="${@fmt.date(o.createdAt)}"></td>
+                    <td th:text="${o.customer}"></td>
+                    <td th:text="${o.product}"></td>
+                    <td th:text="${o.type.label}"></td>
+                    <td class="num" th:text="${o.qty}"></td>
+                    <td th:text="${o.manager}"></td>
+                    <td><span th:replace="~{fragments :: status(${o.status})}"></span></td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(orders)}"><td colspan="8" class="empty">Sifariş tapılmadı.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

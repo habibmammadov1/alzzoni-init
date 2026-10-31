@@ -1,0 +1,28 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page(${title}, ~{::main})}">
+<body>
+<main class="content">
+    <div th:replace="~{fragments :: pageHead(${step}, ${title}, ${hint})}"></div>
+    <section class="card">
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Sifariş</th><th>Müştəri</th><th>Məhsul</th><th>Növ</th><th class="num">Miqdar</th><th>Menecer</th><th>Status</th><th></th></tr></thead>
+                <tbody>
+                <tr th:each="o : ${orders}">
+                    <td><a th:href="@{/orders/{no}(no=${o.no})}" th:text="${o.no}"></a></td>
+                    <td th:text="${o.customer}"></td>
+                    <td th:text="${o.product}"></td>
+                    <td th:text="${o.type.label}"></td>
+                    <td class="num" th:text="${o.qty}"></td>
+                    <td th:text="${o.manager}"></td>
+                    <td><span th:replace="~{fragments :: status(${o.status})}"></span></td>
+                    <td class="actions"><a class="btn btn-small" th:href="@{${basePath + o.no}}" th:text="${action}"></a></td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(orders)}"><td colspan="8" class="empty">Bu mərhələdə gözləyən sifariş yoxdur.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

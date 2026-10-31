@@ -1,0 +1,25 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page(${user == null} ? 'Yeni istifadəçi' : ${user.name}, ~{::main})}">
+<body>
+<main class="content narrow">
+    <div th:replace="~{fragments :: pageHead(0, ${user == null} ? 'Yeni istifadəçi' : ${user.name}, null)}"></div>
+    <form class="card card-pad" th:action="${user == null} ? @{/users} : @{/users/{id}(id=${user.id})}" method="post">
+        <label>Ad, soyad <input name="name" th:value="${user?.name}" required></label>
+        <label>Rol
+            <select name="role" required>
+                <option th:each="r : ${roles}" th:value="${r}" th:text="${r.label}" th:selected="${user != null and user.role == r}"></option>
+            </select>
+        </label>
+        <div class="form-grid">
+            <label>Əlaqə nömrəsi <input name="phone" type="tel" th:value="${user?.phone}"></label>
+            <label>E-poçt <input name="email" type="email" th:value="${user?.email}"></label>
+        </div>
+        <label class="check"><input type="checkbox" name="active" value="true" th:checked="${user == null or user.active}"> Aktiv istifadəçi</label>
+        <div class="form-actions">
+            <a class="btn btn-ghost" th:href="@{/users}">Ləğv et</a>
+            <button class="btn btn-primary" type="submit">Yadda saxla</button>
+        </div>
+    </form>
+</main>
+</body>
+</html>

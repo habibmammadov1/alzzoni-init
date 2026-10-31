@@ -1,0 +1,24 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('Reseptlər', ~{::main})}">
+<body>
+<main class="content">
+    <div th:replace="~{fragments :: pageHead(0, 'Məhsul reseptləri', 'Hazır məhsul → yarımfabrikat → xammal. Seri sifarişlər bu reseptlər üzrə hazırlanır.')}"></div>
+    <section class="card">
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Kod</th><th>Məhsul</th><th>Növ</th><th class="num">Material sayı</th><th class="num">Proses sayı</th></tr></thead>
+                <tbody>
+                <tr th:each="r : ${recipes}">
+                    <td><a th:href="@{/recipes/{code}(code=${r.product.code})}" th:text="${r.product.code}"></a></td>
+                    <td th:text="${r.product.name}"></td>
+                    <td th:text="${r.product.type.label}"></td>
+                    <td class="num" th:text="${r.lines.size()}"></td>
+                    <td class="num" th:text="${r.route.size()}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

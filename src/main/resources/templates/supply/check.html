@@ -1,0 +1,29 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('Anbar yoxlanışı', ~{::main})}">
+<body>
+<main class="content">
+    <div th:replace="~{fragments :: pageHead(6, 'Anbar qalığı ilə müqayisə', ${order.no + ' · ' + order.product})}"></div>
+    <section class="card">
+        <div class="card-head"><h2 th:text="'Ümumi xammal ehtiyacı: ' + ${order.qty} + ' ədəd × 1 məhsula düşən material'"></h2></div>
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Material</th><th>Anbar</th><th class="num">Tələb olunan</th><th class="num">Anbardan veriləcək</th><th class="num">Satınalmaya gedəcək</th><th>Nəticə</th></tr></thead>
+                <tbody>
+                <tr th:each="r : ${requirements}">
+                    <td th:text="${r.material.name}"></td>
+                    <td th:text="${r.material.warehouse.name}"></td>
+                    <td class="num" th:text="${@fmt.qty(r.required)} + ' ' + ${r.material.unit}"></td>
+                    <td class="num" th:text="${@fmt.qty(r.fromStock)}"></td>
+                    <td class="num" th:text="${@fmt.qty(r.shortage)}"></td>
+                    <td><span class="badge" th:classappend="'badge-' + ${r.resultColor}" th:text="${r.result}"></span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <form class="form-actions" th:action="@{/supply/{no}/open(no=${order.no})}" method="post">
+        <button class="btn btn-primary" type="submit">İstehsal sifarişini aç</button>
+    </form>
+</main>
+</body>
+</html>

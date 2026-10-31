@@ -1,0 +1,51 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('Profil', ~{::main})}">
+<body>
+<main class="content">
+    <div class="profile-head">
+        <span class="avatar avatar-large" th:text="${me.initials}"></span>
+        <div>
+            <h1 th:text="${me.name}"></h1>
+            <p th:text="${me.role.label + ' · ' + settings.companyName}"></p>
+        </div>
+    </div>
+
+    <div class="columns">
+        <form class="card card-pad" th:action="@{/profile}" method="post">
+            <h2>Şəxsi məlumatlar</h2>
+            <label>Ad, soyad <input name="name" th:value="${me.name}" required></label>
+            <label>Əlaqə nömrəsi <input name="phone" type="tel" th:value="${me.phone}"></label>
+            <label>E-poçt <input name="email" type="email" th:value="${me.email}"></label>
+            <div class="form-actions"><button class="btn btn-primary" type="submit">Yadda saxla</button></div>
+        </form>
+
+        <section class="card card-pad">
+            <div class="card-title-row">
+                <h2>Tapşırıqlarım</h2>
+                <span class="muted" th:text="${openTasks} + ' açıq iş'"></span>
+            </div>
+            <div class="task-list">
+                <a class="task-row" th:each="t : ${tasks}" th:href="@{${t.path}}">
+                    <span th:text="${t.label}"></span>
+                    <strong th:classappend="${t.count == 0} ? 'task-zero'" th:text="${t.count}"></strong>
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <form class="card card-pad switcher" th:action="@{/profile/switch}" method="post">
+        <div>
+            <h2>İstifadəçini dəyiş</h2>
+            <p class="note">Giriş sistemi hələ yoxdur. Sistemi fərqli rollarla görmək üçün istifadəçi seçin.</p>
+        </div>
+        <div class="switcher-controls">
+            <select name="userId" aria-label="İstifadəçi">
+                <option th:each="u : ${activeUsers}" th:value="${u.id}" th:selected="${u.id == me.id}"
+                        th:text="${u.name + ' · ' + u.role.label}"></option>
+            </select>
+            <button class="btn" type="submit">Keç</button>
+        </div>
+    </form>
+</main>
+</body>
+</html>

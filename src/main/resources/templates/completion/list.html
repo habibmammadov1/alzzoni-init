@@ -1,0 +1,50 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('Tamamlanma', ~{::main})}">
+<body>
+<main class="content">
+    <div th:replace="~{fragments :: pageHead(10, 'Tamamlanma', 'Hazır məhsul müştəriyə təhvil verilir və sifariş tamamlanır.')}"></div>
+
+    <section class="card">
+        <div class="card-head"><h2>Təhvil gözləyir</h2></div>
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Sifariş</th><th>Müştəri</th><th>Məhsul</th><th class="num">Miqdar</th><th>İstehsal edilib</th><th>Anbar</th><th></th></tr></thead>
+                <tbody>
+                <tr th:each="o : ${ready}">
+                    <td><a th:href="@{/orders/{no}(no=${o.no})}" th:text="${o.no}"></a></td>
+                    <td th:text="${o.customer}"></td>
+                    <td th:text="${o.product}"></td>
+                    <td class="num" th:text="${o.qty}"></td>
+                    <td th:text="${@fmt.date(o.producedAt)}"></td>
+                    <td th:text="${o.finishedWarehouse}"></td>
+                    <td class="actions">
+                        <form th:action="@{/completion/{no}/deliver(no=${o.no})}" method="post"><button class="btn btn-small btn-primary">Müştəriyə təhvil ver</button></form>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(ready)}"><td colspan="7" class="empty">Təhvil gözləyən məhsul yoxdur.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="card">
+        <div class="card-head"><h2>Tamamlanmış sifarişlər</h2></div>
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Sifariş</th><th>Müştəri</th><th>Məhsul</th><th class="num">Cəmi</th><th>Təhvil tarixi</th></tr></thead>
+                <tbody>
+                <tr th:each="o : ${done}">
+                    <td><a th:href="@{/orders/{no}(no=${o.no})}" th:text="${o.no}"></a></td>
+                    <td th:text="${o.customer}"></td>
+                    <td th:text="${o.product}"></td>
+                    <td class="num" th:text="${@fmt.money(o.orderTotal)}"></td>
+                    <td th:text="${@fmt.date(o.deliveredAt)}"></td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(done)}"><td colspan="5" class="empty">Tamamlanmış sifariş yoxdur.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

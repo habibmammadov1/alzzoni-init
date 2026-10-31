@@ -1,0 +1,36 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('Satınalma', ~{::main})}">
+<body>
+<main class="content">
+    <div th:replace="~{fragments :: pageHead(7, 'Satınalma', 'İstehsal tələbi → xammal çatışmazlığı → satınalma sifarişi → təchizatçı → malın qəbulu. Birbaşa alış, tender yoxdur.')}"></div>
+    <section class="card">
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Nömrə</th><th>Sifariş</th><th>Material</th><th class="num">Çatışan miqdar</th><th>Təchizatçı</th><th>Status</th><th></th></tr></thead>
+                <tbody>
+                <tr th:each="p : ${purchases}">
+                    <td th:text="${p.no}"></td>
+                    <td><a th:href="@{/orders/{no}(no=${p.order.no})}" th:text="${p.order.no}"></a></td>
+                    <td th:text="${p.material.name}"></td>
+                    <td class="num" th:text="${@fmt.qty(p.qty)} + ' ' + ${p.material.unit}"></td>
+                    <td>
+                        <span th:text="${@fmt.text(p.supplier)}"></span>
+                        <small class="muted" th:if="${p.expectedDate != null}" th:text="'Gözlənilir: ' + ${@fmt.date(p.expectedDate)}"></small>
+                    </td>
+                    <td><span th:replace="~{fragments :: status(${p.status})}"></span></td>
+                    <td class="actions">
+                        <form class="inline-form" th:if="${p.status.name() == 'TELEB'}" th:action="@{/purchasing/{no}/order(no=${p.no})}" method="post">
+                            <input name="supplier" placeholder="Təchizatçı" required aria-label="Təchizatçı">
+                            <input name="expectedDate" type="date" aria-label="Gözlənilən tarix">
+                            <button class="btn btn-small btn-primary">Sifariş ver</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(purchases)}"><td colspan="7" class="empty">Satınalma tələbi yoxdur.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

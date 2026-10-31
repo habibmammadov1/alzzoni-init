@@ -1,0 +1,49 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('Xammal təminatı', ~{::main})}">
+<body>
+<main class="content">
+    <div th:replace="~{fragments :: pageHead(6, 'İstehsala hazırlıq: xammal təminatı', 'Təsdiqlənmiş sifarişlər üzrə istehsal sifarişi açılır, ehtiyac anbar qalığı ilə müqayisə edilir.')}"></div>
+
+    <section class="card">
+        <div class="card-head"><h2>İstehsal sifarişi açılmalıdır</h2></div>
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Sifariş</th><th>Müştəri</th><th>Məhsul</th><th class="num">Miqdar</th><th>Hazırlanma tarixi</th><th></th></tr></thead>
+                <tbody>
+                <tr th:each="o : ${queue}">
+                    <td><a th:href="@{/orders/{no}(no=${o.no})}" th:text="${o.no}"></a></td>
+                    <td th:text="${o.customer}"></td>
+                    <td th:text="${o.product}"></td>
+                    <td class="num" th:text="${o.qty}"></td>
+                    <td th:text="${@fmt.date(o.readyDate)}"></td>
+                    <td class="actions"><a class="btn btn-small" th:href="@{/supply/{no}(no=${o.no})}">Anbarı yoxla</a></td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(queue)}"><td colspan="6" class="empty">Gözləyən sifariş yoxdur.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="card">
+        <div class="card-head"><h2>Təminat gedir</h2></div>
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Sifariş</th><th>Material</th><th class="num">Tələb</th><th class="num">Verilib</th><th>Nəticə</th></tr></thead>
+                <tbody>
+                <th:block th:each="o : ${inProgress}">
+                    <tr th:each="r : ${o.requirements}">
+                        <td><a th:href="@{/orders/{no}(no=${o.no})}" th:text="${o.no}"></a></td>
+                        <td th:text="${r.material.name}"></td>
+                        <td class="num" th:text="${@fmt.qty(r.required)} + ' ' + ${r.material.unit}"></td>
+                        <td class="num" th:text="${@fmt.qty(r.issued)}"></td>
+                        <td><span class="badge" th:classappend="'badge-' + ${r.resultColor}" th:text="${r.result}"></span></td>
+                    </tr>
+                </th:block>
+                <tr th:if="${#lists.isEmpty(inProgress)}"><td colspan="5" class="empty">Təminat prosesində sifariş yoxdur.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

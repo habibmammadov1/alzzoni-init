@@ -1,0 +1,92 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('Kalkulyasiya', ~{::main})}">
+<body>
+<main class="content">
+    <div th:replace="~{fragments :: pageHead(4, 'Kalkulyasiya və planlama', ${order.no + ' · ' + order.product})}"></div>
+    <section class="card card-pad"><dl th:replace="~{fragments :: summary(${order})}"></dl></section>
+
+    <form class="stack" th:action="@{/costing/{no}(no=${order.no})}" method="post">
+        <section class="card">
+            <div class="card-head"><h2>Xammal maya dəyəri (1 ədəd məhsul)</h2></div>
+            <div class="table-wrap">
+                <table class="table" id="cost-lines">
+                    <thead><tr><th>Material</th><th>Növ</th><th class="num">Miqdar</th><th class="num">Son alış qiyməti</th><th class="num">Anbar qalığı</th><th class="num">Məbləğ</th></tr></thead>
+                    <tbody>
+                    <tr th:each="l : ${order.lines}" th:attr="data-qty=${l.qtyPerUnit}">
+                        <td th:text="${l.material.name}"></td>
+                        <td th:text="${l.material.type.label}"></td>
+                        <td class="num" th:text="${@fmt.qty(l.qtyPerUnit)} + ' ' + ${l.material.unit}"></td>
+                        <td class="num">
+                            <span th:if="${l.material.lastPrice != null}" th:attr="data-price=${l.material.lastPrice}" th:text="${@fmt.money(l.material.lastPrice)}"></span>
+                            <input th:if="${l.material.lastPrice == null}" class="input-price" type="number" min="0.01" step="0.01" required
+                                   th:name="'price_' + ${l.material.code}" th:value="${l.manualPrice}" placeholder="Əl ilə"
+                                   th:attr="aria-label='Qiymət: ' + ${l.material.name}">
+                        </td>
+                        <td class="num" th:text="${@fmt.qty(l.material.available)} + ' ' + ${l.material.unit}"></td>
+                        <td class="num" data-amount></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="columns">
+            <section class="card card-pad">
+                <h2>Xərc və gəlir</h2>
+                <div class="form-grid">
+                    <label>Əlavə xərc, % <input id="expensePct" name="expensePct" type="number" min="0" step="0.01" th:value="${order.expensePct}" required></label>
+                    <label>Gəlir, % <input id="profitPct" name="profitPct" type="number" min="0" step="0.01" th:value="${order.profitPct}" required></label>
+                </div>
+                <table class="table calc">
+                    <tr><td>Xammal maya dəyəri</td><td class="num" id="r-material"></td></tr>
+                    <tr><td>Əlavə xərc</td><td class="num" id="r-expense"></td></tr>
+                    <tr class="subtotal"><td>Cəmi xərc</td><td class="num" id="r-total"></td></tr>
+                    <tr><td>Gəlir</td><td class="num" id="r-profit"></td></tr>
+                    <tr class="subtotal"><td>Satış qiyməti (1 ədəd)</td><td class="num" id="r-unit"></td></tr>
+                    <tr class="grand"><td th:text="'Sifariş cəmi (' + ${order.qty} + ' ədəd)'"></td><td class="num" id="r-order" th:attr="data-order-qty=${order.qty}"></td></tr>
+                </table>
+            </section>
+            <section class="card card-pad">
+                <h2>İstehsal planı</h2>
+                <div class="form-grid">
+                    <label>İstehsal tarixi <input name="productionDate" type="date" th:value="${defaultDate}" required></label>
+                    <label>İstehsal müddəti, gün <input name="productionDays" type="number" min="1" th:value="${settings.productionDays}" required></label>
+                </div>
+                <label>İstehsal şərtləri <textarea name="conditions" rows="4"></textarea></label>
+            </section>
+        </div>
+
+        <div class="form-actions"><button class="btn btn-primary" type="submit">Menecerin təsdiqinə göndər</button></div>
+    </form>
+    <script>
+        const money = value => value.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' AZN';
+        const round = value => Math.round((value + Number.EPSILON) * 100) / 100;
+        const num = id => Number(document.getElementById(id).value) || 0;
+        const set = (id, value) => document.getElementById(id).textContent = money(value);
+        const recalc = () => {
+            let material = 0;
+            document.querySelectorAll('#cost-lines tbody tr').forEach(row => {
+                const fixed = row.querySelector('[data-price]');
+                const price = fixed ? Number(fixed.dataset.price) : Number(row.querySelector('input').value) || 0;
+                const amount = price * Number(row.dataset.qty);
+                row.querySelector('[data-amount]').textContent = money(amount);
+                material += amount;
+            });
+            material = round(material);
+            const expense = round(material * num('expensePct') / 100);
+            const total = material + expense;
+            const profit = round(total * num('profitPct') / 100);
+            const unit = total + profit;
+            set('r-material', material);
+            set('r-expense', expense);
+            set('r-total', total);
+            set('r-profit', profit);
+            set('r-unit', unit);
+            set('r-order', unit * Number(document.getElementById('r-order').dataset.orderQty));
+        };
+        document.querySelector('form.stack').addEventListener('input', recalc);
+        recalc();
+    </script>
+</main>
+</body>
+</html>

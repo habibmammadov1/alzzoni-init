@@ -1,0 +1,81 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('İş axını', ~{::main})}">
+<body>
+<main class="content">
+    <div class="page-head">
+        <div>
+            <h1>İstehsal sifarişi iş axını</h1>
+            <p>Sifarişdən hazır məhsula qədər bütün proses bir sistemdə.</p>
+        </div>
+        <a class="btn btn-primary" th:href="@{/orders/new}">Yeni sifariş</a>
+    </div>
+
+    <section class="status-strip" aria-label="Sifariş statusları">
+        <a th:each="s : ${flowStatuses}" th:href="@{/orders(status=${s})}" class="status-tile" th:classappend="'tile-' + ${s.color}">
+            <strong th:text="${erp.count(s)}">0</strong>
+            <span th:text="${s.label}">Status</span>
+        </a>
+    </section>
+
+    <section class="flow" aria-label="Proses mərhələləri">
+        <a class="flow-card" th:href="@{/orders/new}">
+            <span class="flow-no">1</span><h2>Sifarişin qəbulu</h2><p>Satış meneceri müştəri məlumatlarını daxil edir, sifarişi qeyd edir.</p>
+        </a>
+        <a class="flow-card" th:href="@{/orders(status='YENI')}">
+            <span class="flow-no">2</span><h2>Sifarişin növü</h2><p>Yeni, özəl və ya seri. Növ sifarişin yolunu müəyyən edir.</p>
+            <span class="flow-count" th:if="${nav['orders'] > 0}" th:text="${nav['orders']} + ' gözləyir'"></span>
+        </a>
+        <a class="flow-card" th:href="@{/design}">
+            <span class="flow-no">3</span><h2>Dizayn və resept</h2><p>AutoCAD dizaynı və material siyahısı, seri məhsulda hazır resept.</p>
+            <span class="flow-count" th:if="${nav['design'] > 0}" th:text="${nav['design']} + ' gözləyir'"></span>
+        </a>
+        <a class="flow-card" th:href="@{/costing}">
+            <span class="flow-no">4</span><h2>Kalkulyasiya və planlama</h2><p th:text="'Maya dəyəri, +' + ${@fmt.qty(settings.expensePct)} + '% xərc, +' + ${@fmt.qty(settings.profitPct)} + '% gəlir, istehsal tarixi.'"></p>
+            <span class="flow-count" th:if="${nav['costing'] > 0}" th:text="${nav['costing']} + ' gözləyir'"></span>
+        </a>
+        <a class="flow-card" th:href="@{/approval}">
+            <span class="flow-no">5</span><h2>Müştəri və menecer təsdiqi</h2><p>Qiymət və tarix təqdim edilir. Razılıq yoxdursa proses dayanır.</p>
+            <span class="flow-count" th:if="${nav['approval'] > 0}" th:text="${nav['approval']} + ' gözləyir'"></span>
+        </a>
+        <a class="flow-card" th:href="@{/supply}">
+            <span class="flow-no">6</span><h2>Xammal təminatı</h2><p>Reseptə görə ehtiyac hesablanır və anbar qalığı ilə müqayisə edilir.</p>
+            <span class="flow-count" th:if="${nav['supply'] > 0}" th:text="${nav['supply']} + ' gözləyir'"></span>
+        </a>
+        <a class="flow-card" th:href="@{/purchasing}">
+            <span class="flow-no">7</span><h2>Satınalma</h2><p>Yalnız çatışmayan miqdar təchizatçıdan alınır.</p>
+            <span class="flow-count" th:if="${nav['purchasing'] > 0}" th:text="${nav['purchasing']} + ' gözləyir'"></span>
+        </a>
+        <a class="flow-card" th:href="@{/warehouse}">
+            <span class="flow-no">8</span><h2>Anbar</h2><p>Mal qəbul edilir, ayrılan materiallar istehsala verilir.</p>
+            <span class="flow-count" th:if="${nav['warehouse'] > 0}" th:text="${nav['warehouse']} + ' gözləyir'"></span>
+        </a>
+        <a class="flow-card" th:href="@{/production}">
+            <span class="flow-no">9</span><h2>İstehsal</h2><p>Sexlərdə proseslər qeyd olunur, sonda məhsul sənədlə təsdiqlənir.</p>
+            <span class="flow-count" th:if="${nav['production'] > 0}" th:text="${nav['production']} + ' gedir'"></span>
+        </a>
+        <a class="flow-card" th:href="@{/completion}">
+            <span class="flow-no">10</span><h2>Tamamlanma</h2><p>Hazır məhsul müştəriyə təhvil verilir, statuslar yenilənir.</p>
+            <span class="flow-count" th:if="${nav['completion'] > 0}" th:text="${nav['completion']} + ' gözləyir'"></span>
+        </a>
+    </section>
+
+    <section class="card">
+        <div class="card-head"><h2>Son sifarişlər</h2><a th:href="@{/orders}">Hamısına bax</a></div>
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Sifariş</th><th>Müştəri</th><th>Məhsul</th><th>Növ</th><th>Status</th></tr></thead>
+                <tbody>
+                <tr th:each="o : ${recent}">
+                    <td><a th:href="@{/orders/{no}(no=${o.no})}" th:text="${o.no}"></a></td>
+                    <td th:text="${o.customer}"></td>
+                    <td th:text="${o.product}"></td>
+                    <td th:text="${o.type.label}"></td>
+                    <td><span th:replace="~{fragments :: status(${o.status})}"></span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

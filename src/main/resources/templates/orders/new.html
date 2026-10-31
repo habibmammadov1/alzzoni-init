@@ -1,0 +1,56 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('Yeni sifariş', ~{::main})}">
+<body>
+<main class="content">
+    <div th:replace="~{fragments :: pageHead(1, 'Sifarişin qəbulu', 'Satış meneceri sifarişi qəbul edir və növünü müəyyən edir.')}"></div>
+    <form class="stack" th:action="@{/orders}" method="post">
+        <section class="card card-pad">
+            <h2>Müştəri</h2>
+            <div class="form-grid">
+                <label>Müştəri / təşkilat <input name="customer" required></label>
+                <label>Əlaqə nömrəsi <input name="phone" type="tel"></label>
+                <label>Sifarişi verən menecer <input name="manager" th:value="${me.role.name() == 'SATIS'} ? ${me.name}" required></label>
+                <label>İstənilən tarix <input name="requestedDate" type="date"></label>
+            </div>
+            <label class="check"><input type="checkbox" name="specialCustomer" value="true"> Xüsusi müştəri (kənar)</label>
+        </section>
+
+        <section class="card card-pad">
+            <h2>Sifarişin növü</h2>
+            <div class="choice-grid">
+                <label class="choice" th:each="t, i : ${types}">
+                    <input type="radio" name="type" required th:value="${t}" th:attr="data-design=${t.designRequired}" th:checked="${i.first}">
+                    <strong th:text="${t.label}"></strong>
+                    <span th:text="${t.hint}"></span>
+                </label>
+            </div>
+            <div class="form-grid">
+                <label data-when="design">Məhsulun adı <input name="product"></label>
+                <label data-when="recipe" hidden>Resept (hazır məhsul)
+                    <select name="recipeCode">
+                        <option value="">Seçin</option>
+                        <option th:each="r : ${recipes}" th:value="${r.product.code}" th:text="${r.product.code + ' · ' + r.product.name}"></option>
+                    </select>
+                </label>
+                <label>Miqdar <input name="qty" type="number" min="1" value="1" required></label>
+            </div>
+            <label>Qeyd <textarea name="note" rows="2"></textarea></label>
+        </section>
+
+        <div class="form-actions"><button class="btn btn-primary" type="submit">Sifarişi qeyd et</button></div>
+    </form>
+    <script>
+        const typeInputs = document.querySelectorAll('input[name="type"]');
+        const syncType = () => {
+            const design = document.querySelector('input[name="type"]:checked').dataset.design === 'true';
+            document.querySelector('[data-when="design"]').hidden = !design;
+            document.querySelector('[data-when="recipe"]').hidden = design;
+            document.querySelector('input[name="product"]').required = design;
+            document.querySelector('select[name="recipeCode"]').required = !design;
+        };
+        typeInputs.forEach(input => input.addEventListener('change', syncType));
+        syncType();
+    </script>
+</main>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('Dizayn', ~{::main})}">
+<body>
+<main class="content">
+    <div th:replace="~{fragments :: pageHead(3, 'Dizayn və texniki hazırlıq', ${order.no + ' · ' + order.product})}"></div>
+    <section class="card card-pad"><dl th:replace="~{fragments :: summary(${order})}"></dl></section>
+
+    <form class="stack" th:action="@{/design/{no}(no=${order.no})}" method="post">
+        <section class="card card-pad">
+            <h2>Dizayn</h2>
+            <div class="form-grid">
+                <label>Dizayner <input name="designer" th:value="${me.role.name() == 'DIZAYNER'} ? ${me.name}"></label>
+                <label>AutoCAD faylı <input name="cadFile" placeholder="məs. SF-2026-0006.dwg" required></label>
+                <label>Ölçülər <input name="dimensions" placeholder="məs. 240 × 90 × 60 sm"></label>
+            </div>
+            <label>Texniki məlumatlar <textarea name="technicalNotes" rows="2"></textarea></label>
+        </section>
+
+        <section class="card card-pad">
+            <div class="card-title-row">
+                <h2>Lazım olan yarımfabrikat və xammallar</h2>
+                <button class="btn btn-small" type="button" id="add-line">Sətir əlavə et</button>
+            </div>
+            <p class="note">Miqdar 1 ədəd məhsul üçün yazılır.</p>
+            <div id="lines" class="lines">
+                <div class="line" data-line>
+                    <select name="materialCode" required aria-label="Material">
+                        <option value="">Material seçin</option>
+                        <option th:each="m : ${materials}" th:value="${m.code}" th:text="${m.code + ' · ' + m.name + ' (' + m.unit + ')'}"></option>
+                    </select>
+                    <input name="materialQty" type="number" min="0.001" step="0.001" placeholder="Miqdar" required aria-label="Miqdar">
+                    <button class="btn btn-small btn-ghost" type="button" data-remove aria-label="Sətri sil">Sil</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="card card-pad">
+            <h2>İstehsal sexləri və prosesləri</h2>
+            <div class="route-grid">
+                <fieldset th:each="w : ${workshops}">
+                    <legend th:text="${w.name}"></legend>
+                    <label class="check" th:each="p : ${w.processes()}">
+                        <input type="checkbox" name="route" th:value="${p.id}"> <span th:text="${p.process}"></span>
+                    </label>
+                </fieldset>
+            </div>
+        </section>
+
+        <div class="form-actions"><button class="btn btn-primary" type="submit">Planlamaya ötür</button></div>
+    </form>
+    <script>
+        const lines = document.getElementById('lines');
+        const blank = lines.querySelector('[data-line]').cloneNode(true);
+        document.getElementById('add-line').addEventListener('click', () => lines.append(blank.cloneNode(true)));
+        lines.addEventListener('click', event => {
+            if (event.target.matches('[data-remove]') && lines.children.length > 1) {
+                event.target.closest('[data-line]').remove();
+            }
+        });
+    </script>
+</main>
+</body>
+</html>

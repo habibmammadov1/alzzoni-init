@@ -1,0 +1,71 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page('Anbar', ~{::main})}">
+<body>
+<main class="content">
+    <div class="page-head">
+        <div>
+            <div class="eyebrow">Mərhələ 8</div>
+            <h1>Anbar</h1>
+            <p>Gələn mallar qəbul edilir, sifariş üçün ayrılan materiallar istehsala təhvil verilir.</p>
+        </div>
+        <a class="btn" th:href="@{/warehouses}">Anbar qalıqları</a>
+    </div>
+
+    <section class="card">
+        <div class="card-head"><h2>Mal qəbulu</h2></div>
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Nömrə</th><th>Material</th><th class="num">Miqdar</th><th>Təchizatçı</th><th>Anbar</th><th></th></tr></thead>
+                <tbody>
+                <tr th:each="p : ${incoming}">
+                    <td th:text="${p.no}"></td>
+                    <td th:text="${p.material.name}"></td>
+                    <td class="num" th:text="${@fmt.qty(p.qty)} + ' ' + ${p.material.unit}"></td>
+                    <td th:text="${p.supplier}"></td>
+                    <td th:text="${p.material.warehouse.name}"></td>
+                    <td class="actions">
+                        <form class="inline-form" th:action="@{/warehouse/receive/{no}(no=${p.no})}" method="post">
+                            <input name="invoiceNo" placeholder="Qaimə №" required aria-label="Qaimə nömrəsi">
+                            <label class="check"><input type="checkbox" required> Miqdar yoxlanıldı</label>
+                            <button class="btn btn-small btn-primary">Mədaxil et</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(incoming)}"><td colspan="6" class="empty">Qəbul gözləyən mal yoxdur.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="card">
+        <div class="card-head"><h2>İstehsala veriləcək materiallar</h2></div>
+        <div th:if="${#lists.isEmpty(issueQueue)}" class="empty">Verilməli material yoxdur.</div>
+        <div class="issue" th:each="o : ${issueQueue}">
+            <div class="issue-head">
+                <div>
+                    <a th:href="@{/orders/{no}(no=${o.no})}" th:text="${o.no}"></a>
+                    <span class="muted" th:text="${o.product}"></span>
+                </div>
+                <form th:action="@{/warehouse/issue/{no}(no=${o.no})}" method="post">
+                    <button class="btn btn-small btn-primary">Təhvil ver</button>
+                </form>
+            </div>
+            <div class="table-wrap">
+                <table class="table">
+                    <thead><tr><th>Material</th><th>Anbar</th><th class="num">Tələb</th><th class="num">Hazır</th><th class="num">Verilib</th></tr></thead>
+                    <tbody>
+                    <tr th:each="r : ${o.requirements}">
+                        <td th:text="${r.material.name}"></td>
+                        <td th:text="${r.material.warehouse.name}"></td>
+                        <td class="num" th:text="${@fmt.qty(r.required)} + ' ' + ${r.material.unit}"></td>
+                        <td class="num" th:text="${@fmt.qty(r.reserved)}"></td>
+                        <td class="num" th:text="${@fmt.qty(r.issued)}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

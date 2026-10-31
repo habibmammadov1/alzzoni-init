@@ -1,0 +1,119 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: page(${order.no}, ~{::main})}">
+<body>
+<main class="content">
+    <div class="page-head">
+        <div>
+            <div class="eyebrow">Sifariş</div>
+            <h1 th:text="${order.no}">SF</h1>
+        </div>
+        <span th:replace="~{fragments :: status(${order.status})}"></span>
+    </div>
+
+    <ol th:replace="~{fragments :: stepper(${order})}"></ol>
+
+    <section class="next" th:switch="${order.status.name()}">
+        <div th:case="'YENI'" class="next-row">
+            <p th:text="${order.type.designRequired} ? 'Sifariş dizaynerə göndərilməlidir.' : 'Seri sifarişdə dizayn olmur, resept üzrə kalkulyasiyaya keçir.'"></p>
+            <form th:action="@{/orders/{no}/route(no=${order.no})}" method="post">
+                <button class="btn btn-primary" th:text="${order.type.designRequired} ? 'Dizaynerə göndər' : 'Kalkulyasiyaya göndər'"></button>
+            </form>
+        </div>
+        <div th:case="'DIZAYN'" class="next-row"><p>Dizayner məhsulu hazırlamalı və material siyahısını verməlidir.</p><a class="btn btn-primary" th:href="@{/design/{no}(no=${order.no})}">Dizayna keç</a></div>
+        <div th:case="'KALKULYASIYA'" class="next-row">
+            <p th:text="${order.costed} ? 'Kalkulyasiya hazırdır, menecerin son təsdiqi gözlənilir.' : 'Planlama və qiymət hesablanmalıdır.'"></p>
+            <a class="btn btn-primary" th:href="@{${order.costed} ? '/approval/' + ${order.no} : '/costing/' + ${order.no}}" th:text="${order.costed} ? 'Təsdiqə keç' : 'Kalkulyasiyaya keç'"></a>
+        </div>
+        <div th:case="'TESDIQLENDI'" class="next-row"><p>Sifariş təsdiqlənib. İstehsal sifarişi rəsmi açılmalıdır.</p><a class="btn btn-primary" th:href="@{/supply/{no}(no=${order.no})}">Xammal təminatına keç</a></div>
+        <div th:case="'XAMMAL'" class="next-row"><p>Materiallar anbardan verilir, çatışan hissə satınalmadadır.</p><a class="btn btn-primary" th:href="@{/warehouse}">Anbara keç</a></div>
+        <div th:case="'ISTEHSALDA'" class="next-row">
+            <p th:text="${order.producedAt != null} ? 'Məhsul hazırdır, müştəriyə təhvil verilməlidir.' : 'Məhsul sexlərdə hazırlanır.'"></p>
+            <a class="btn btn-primary" th:href="@{${order.producedAt != null} ? '/completion' : '/production/' + ${order.no}}" th:text="${order.producedAt != null} ? 'Təhvilə keç' : 'İstehsala keç'"></a>
+        </div>
+        <div th:case="'TAMAMLANDI'" class="next-row"><p th:text="'Sifariş ' + ${@fmt.date(order.deliveredAt)} + ' tarixində müştəriyə təhvil verilib.'"></p></div>
+        <div th:case="'DAYANDIRILDI'" class="next-row next-stop"><p th:text="'Proses dayandırılıb: ' + ${order.stopReason}"></p></div>
+    </section>
+
+    <div class="columns">
+        <section class="card card-pad">
+            <h2>Sifariş məlumatları</h2>
+            <dl th:replace="~{fragments :: summary(${order})}"></dl>
+            <p class="note" th:if="${order.note != null and !order.note.isBlank()}" th:text="${order.note}"></p>
+        </section>
+        <section class="card card-pad" th:if="${order.costed}">
+            <h2>Kalkulyasiya</h2>
+            <table th:replace="~{fragments :: costBreakdown(${order})}"></table>
+            <dl class="facts">
+                <div><dt>İstehsal tarixi</dt><dd th:text="${@fmt.date(order.productionDate)}"></dd></div>
+                <div><dt>Müddət</dt><dd th:text="${order.productionDays} + ' gün'"></dd></div>
+                <div><dt>Hazırlanma tarixi</dt><dd th:text="${@fmt.date(order.readyDate)}"></dd></div>
+                <div><dt>İstehsal şərtləri</dt><dd th:text="${@fmt.text(order.conditions)}"></dd></div>
+            </dl>
+        </section>
+        <section class="card card-pad" th:if="${order.type.designRequired and order.cadFile != null}">
+            <h2>Dizayn</h2>
+            <dl class="facts">
+                <div><dt>Dizayner</dt><dd th:text="${@fmt.text(order.designer)}"></dd></div>
+                <div><dt>AutoCAD faylı</dt><dd th:text="${order.cadFile}"></dd></div>
+                <div><dt>Ölçülər</dt><dd th:text="${@fmt.text(order.dimensions)}"></dd></div>
+                <div><dt>Texniki məlumat</dt><dd th:text="${@fmt.text(order.technicalNotes)}"></dd></div>
+            </dl>
+        </section>
+    </div>
+
+    <section class="card" th:unless="${#lists.isEmpty(order.requirements)}">
+        <div class="card-head"><h2>Xammal təminatı</h2></div>
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Material</th><th class="num">Tələb</th><th class="num">Anbardan</th><th class="num">Çatışan</th><th class="num">Verilib</th><th>Nəticə</th></tr></thead>
+                <tbody>
+                <tr th:each="r : ${order.requirements}">
+                    <td th:text="${r.material.name}"></td>
+                    <td class="num" th:text="${@fmt.qty(r.required)} + ' ' + ${r.material.unit}"></td>
+                    <td class="num" th:text="${@fmt.qty(r.fromStock)}"></td>
+                    <td class="num" th:text="${@fmt.qty(r.shortage)}"></td>
+                    <td class="num" th:text="${@fmt.qty(r.issued)}"></td>
+                    <td><span class="badge" th:classappend="'badge-' + ${r.resultColor}" th:text="${r.result}"></span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="card" th:unless="${#lists.isEmpty(purchases)}">
+        <div class="card-head"><h2>Satınalma</h2><a th:href="@{/purchasing}">Satınalmaya keç</a></div>
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Nömrə</th><th>Material</th><th class="num">Miqdar</th><th>Təchizatçı</th><th>Status</th></tr></thead>
+                <tbody>
+                <tr th:each="p : ${purchases}">
+                    <td th:text="${p.no}"></td>
+                    <td th:text="${p.material.name}"></td>
+                    <td class="num" th:text="${@fmt.qty(p.qty)} + ' ' + ${p.material.unit}"></td>
+                    <td th:text="${@fmt.text(p.supplier)}"></td>
+                    <td><span th:replace="~{fragments :: status(${p.status})}"></span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="card" th:unless="${#lists.isEmpty(order.route)}">
+        <div class="card-head"><h2>İstehsal prosesləri</h2></div>
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Sex</th><th>Proses</th><th>Başlanğıc</th><th>Bitmə</th></tr></thead>
+                <tbody>
+                <tr th:each="s : ${order.route}">
+                    <td th:text="${s.process.workshop}"></td>
+                    <td th:text="${s.process.process}"></td>
+                    <td th:text="${@fmt.date(s.startedAt)}"></td>
+                    <td th:text="${@fmt.date(s.finishedAt)}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+</body>
+</html>

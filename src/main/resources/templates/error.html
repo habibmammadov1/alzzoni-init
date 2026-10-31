@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="az" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Xəta · Alzoni ERP</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<main class="content error-page">
+    <div class="eyebrow" th:text="${status}">404</div>
+    <h1 th:text="${status == 404} ? 'Səhifə tapılmadı' : 'Xəta baş verdi'">Xəta</h1>
+    <p><a class="btn btn-primary" th:href="@{/}">İş axınına qayıt</a></p>
+</main>
+</body>
+</html>
