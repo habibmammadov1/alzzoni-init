@@ -1,28 +1,30 @@
-# Alzoni ERP – İstehsal sifarişi səhifələri
+# Alzoni ERP – interfeys dizaynı
 
-Spring Boot 4.1 (Java 21, Gradle, Spring MVC, Thymeleaf). Səhifələr `Protokol_PR-2026-000006` sənədinə və
-"İstehsal Sifarişi İş Axını" sxeminə əsasən hazırlanıb.
+İstehsal sifarişi iş axınının statik HTML/CSS maketi. Backend yoxdur: bütün səhifələr hazır nümunə
+məlumatlarla yazılıb, formalar heç yerə göndərilmir.
+
+Açmaq üçün `index.html` faylını brauzerdə açın və ya qovluğu istənilən statik serverlə paylaşın:
 
 ```bash
-./gradlew bootRun
+python -m http.server 4321
 ```
 
-Tətbiq http://localhost:8080 ünvanında açılır. Verilənlər bazası yoxdur: nümunə məlumatlar
-`SeedData` sinfindədir, yaddaşda saxlanılır və hər başlatmada sıfırlanır.
+Sonra http://localhost:4321 ünvanını açın.
 
-| Mərhələ | Səhifə |
+| Bölmə | Səhifə |
 | --- | --- |
-| İş axını | `/` |
-| 1–2. Sifarişin qəbulu və növü | `/orders`, `/orders/new`, `/orders/{no}` |
-| 3. Dizayn | `/design`, `/design/{no}`, resept: `/recipes` |
-| 4. Kalkulyasiya və planlama | `/costing`, `/costing/{no}` |
-| 5. Müştəri və menecer təsdiqi | `/approval`, `/approval/{no}` |
-| 6. Xammal təminatı | `/supply`, `/supply/{no}` |
-| 7. Satınalma | `/purchasing` |
-| 8. Anbar | `/warehouse` |
-| 9. İstehsal | `/production`, `/production/{no}` |
-| 10. Tamamlanma | `/completion` |
-| Məlumatlar | `/recipes`, `/materials`, `/warehouses`, `/workshops` |
-| Sistem | `/profile`, `/users`, `/settings` |
+| İş axını | `index.html` |
+| Sifarişlər | `orders.html`, statuslar üzrə `orders-<status>.html`, tamamlanma bölməsi `orders.html#completion` |
+| Yeni sifariş | `order-new.html` (müştəri seçimi və "Yeni müştəri" popupu) |
+| Sifariş | `order-<nömrə>.html`, redaktə: `order-<nömrə>-edit.html` |
+| Dizayn | `design-SF-2026-0006.html` |
+| Kalkulyasiya | `costing-SF-2026-0005.html` |
+| Təsdiq | `approval.html`, `approval-SF-2026-0009.html` |
+| Xammal təminatı | `supply.html`, `supply-SF-2026-0004.html` |
+| Satınalma | `purchasing.html` |
+| Anbar | `warehouse.html` |
+| İstehsal | `production.html`, `production-SF-2026-0002.html` |
+| Məlumatlar | `recipes.html`, `recipe-<kod>.html`, `materials.html` |
+| Sistem | `profile.html`, `users.html`, `user-<id>.html`, `user-new.html`, `settings.html` |
 
-Giriş sistemi hələ yoxdur: cari istifadəçi profil səhifəsində seçilir və rollar səhifələrə girişi məhdudlaşdırmır.
+Bütün stillər `css/app.css` faylındadır.

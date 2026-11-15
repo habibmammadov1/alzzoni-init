@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>İş axını · Alzoni ERP</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div class="app">
+    <aside class="sidebar">
+        <a class="brand" href="index.html">
+            <strong>Alzoni ERP</strong>
+            <span>Alzoni MMC</span>
+        </a>
+        <nav>
+            <div class="nav-title">Proses</div>
+            <a href="index.html" class="active">İş axını</a>
+            <a href="orders.html">
+    <span>Sifarişlər</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="approval.html">
+    <span>Təsdiq</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="supply.html">
+    <span>Xammal təminatı</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="purchasing.html">
+    <span>Satınalma</span>
+    
+</a>
+            <a href="warehouse.html">
+    <span>Anbar</span>
+    <span class="nav-count">2</span>
+</a>
+            <a href="production.html">
+    <span>İstehsal</span>
+    <span class="nav-count">1</span>
+</a>
+            <details class="nav-group">
+                <summary>Məlumatlar</summary>
+                <a href="recipes.html">
+    <span>Reseptlər</span>
+    
+</a>
+                <a href="materials.html">
+    <span>Material kartları</span>
+    
+</a>
+            </details>
+            <details class="nav-group">
+                <summary>Sistem</summary>
+                <a href="users.html">
+    <span>İstifadəçilər</span>
+    
+</a>
+                <a href="settings.html">
+    <span>Parametrlər</span>
+    
+</a>
+            </details>
+        </nav>
+        <div class="sidebar-note">Nümunə məlumatlar. Tətbiq yenidən başladıqda sıfırlanır.</div>
+        <a class="user-chip" href="profile.html">
+            <span class="avatar">VA</span>
+            <span class="user-chip-text">
+                <strong>Valeh Ağayev</strong>
+                <small>Administrator</small>
+            </span>
+        </a>
+    </aside>
+    <div class="shell">
+        
+        
+        <main class="content">
+    <div class="page-head">
+        <div>
+            <h1>İstehsal sifarişi iş axını</h1>
+            <p>Sifarişdən hazır məhsula qədər bütün proses bir sistemdə.</p>
+        </div>
+        <a class="btn btn-primary" href="order-new.html">Yeni sifariş</a>
+    </div>
+
+    <section class="status-strip" aria-label="Sifariş statusları">
+        <a href="orders-yeni.html" class="status-tile tile-blue">
+            <strong>1</strong>
+            <span>Yeni</span>
+        </a><a href="orders-dizayn.html" class="status-tile tile-purple">
+            <strong>1</strong>
+            <span>Dizayn mərhələsində</span>
+        </a><a href="orders-kalkulyasiya.html" class="status-tile tile-yellow">
+            <strong>2</strong>
+            <span>Kalkulyasiya / Gözləyir</span>
+        </a><a href="orders-tesdiqlendi.html" class="status-tile tile-green">
+            <strong>1</strong>
+            <span>Müştəri təsdiqlədi</span>
+        </a><a href="orders-xammal.html" class="status-tile tile-blue">
+            <strong>1</strong>
+            <span>Xammal təminatı</span>
+        </a><a href="orders-istehsalda.html" class="status-tile tile-purple">
+            <strong>1</strong>
+            <span>İstehsalda</span>
+        </a><a href="orders-tamamlandi.html" class="status-tile tile-green">
+            <strong>1</strong>
+            <span>Tamamlandı</span>
+        </a>
+    </section>
+
+    <section class="flow" aria-label="Proses mərhələləri">
+        <a class="flow-card" href="order-new.html">
+            <span class="flow-no">1</span><h2>Sifarişin qəbulu</h2><p>Satış meneceri müştəri məlumatlarını daxil edir, sifarişi qeyd edir.</p>
+        </a>
+        <a class="flow-card" href="orders-yeni.html">
+            <span class="flow-no">2</span><h2>Sifarişin növü</h2><p>Yeni və ya mövcud məhsul. Növ sifarişin yolunu müəyyən edir.</p>
+            <span class="flow-count">1 gözləyir</span>
+        </a>
+        <a class="flow-card" href="orders-dizayn.html">
+            <span class="flow-no">3</span><h2>Dizayn və resept</h2><p>AutoCAD dizaynı və material siyahısı, mövcud məhsulda hazır resept.</p>
+            <span class="flow-count">1 gözləyir</span>
+        </a>
+        <a class="flow-card" href="orders-kalkulyasiya.html">
+            <span class="flow-no">4</span><h2>Kalkulyasiya və planlama</h2><p>Maya dəyəri, +25% xərc, +50% gəlir, istehsal tarixi.</p>
+            <span class="flow-count">1 gözləyir</span>
+        </a>
+        <a class="flow-card" href="approval.html">
+            <span class="flow-no">5</span><h2>Müştəri və menecer təsdiqi</h2><p>Qiymət və tarix təqdim edilir. Razılıq yoxdursa proses dayanır.</p>
+            <span class="flow-count">1 gözləyir</span>
+        </a>
+        <a class="flow-card" href="supply.html">
+            <span class="flow-no">6</span><h2>Xammal təminatı</h2><p>Reseptə görə ehtiyac hesablanır və anbar qalığı ilə müqayisə edilir.</p>
+            <span class="flow-count">1 gözləyir</span>
+        </a>
+        <a class="flow-card" href="purchasing.html">
+            <span class="flow-no">7</span><h2>Satınalma</h2><p>Yalnız çatışmayan miqdar təchizatçıdan alınır.</p>
+            
+        </a>
+        <a class="flow-card" href="warehouse.html">
+            <span class="flow-no">8</span><h2>Anbar</h2><p>Mal qəbul edilir, ayrılan materiallar istehsala verilir.</p>
+            <span class="flow-count">2 gözləyir</span>
+        </a>
+        <a class="flow-card" href="production.html">
+            <span class="flow-no">9</span><h2>İstehsal</h2><p>Sexlərdə proseslər qeyd olunur, sonda məhsul sənədlə təsdiqlənir.</p>
+            <span class="flow-count">1 gedir</span>
+        </a>
+        <a class="flow-card" href="orders.html#completion">
+            <span class="flow-no">10</span><h2>Tamamlanma</h2><p>Hazır məhsul müştəriyə təhvil verilir, statuslar yenilənir.</p>
+            
+        </a>
+    </section>
+
+    <section class="card">
+        <div class="card-head"><h2>Son sifarişlər</h2><a href="orders.html">Hamısına bax</a></div>
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Sifariş</th><th>Müştəri</th><th>Məhsul</th><th>Növ</th><th>Status</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td><a href="order-SF-2026-0009.html">SF-2026-0009</a></td>
+                    <td>Gənclik Kafe</td>
+                    <td>Metal ayaqlı stol</td>
+                    <td>Mövcud məhsul</td>
+                    <td><span class="badge badge-yellow">Kalkulyasiya / Gözləyir</span></td>
+                </tr>
+                <tr>
+                    <td><a href="order-SF-2026-0008.html">SF-2026-0008</a></td>
+                    <td>Tural Əhmədov</td>
+                    <td>Kitab rəfi</td>
+                    <td>Yeni məhsul</td>
+                    <td><span class="badge badge-red">Proses dayandırıldı</span></td>
+                </tr>
+                <tr>
+                    <td><a href="order-SF-2026-0007.html">SF-2026-0007</a></td>
+                    <td>Mənzil Plus MMC</td>
+                    <td>Dolab 3 qapılı</td>
+                    <td>Mövcud məhsul</td>
+                    <td><span class="badge badge-blue">Yeni</span></td>
+                </tr>
+                <tr>
+                    <td><a href="order-SF-2026-0006.html">SF-2026-0006</a></td>
+                    <td>Leyla Rzayeva</td>
+                    <td>Güzgülü qarderob</td>
+                    <td>Yeni məhsul</td>
+                    <td><span class="badge badge-purple">Dizayn mərhələsində</span></td>
+                </tr>
+                <tr>
+                    <td><a href="order-SF-2026-0005.html">SF-2026-0005</a></td>
+                    <td>Atrium Dizayn MMC</td>
+                    <td>Resepşn masası</td>
+                    <td>Yeni məhsul</td>
+                    <td><span class="badge badge-yellow">Kalkulyasiya / Gözləyir</span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+    </div>
+</div>
+</body>
+</html>

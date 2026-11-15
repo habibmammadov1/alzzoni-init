@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sifarişlər · Alzoni ERP</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div class="app">
+    <aside class="sidebar">
+        <a class="brand" href="index.html">
+            <strong>Alzoni ERP</strong>
+            <span>Alzoni MMC</span>
+        </a>
+        <nav>
+            <div class="nav-title">Proses</div>
+            <a href="index.html">İş axını</a>
+            <a href="orders.html" class="active">
+    <span>Sifarişlər</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="approval.html">
+    <span>Təsdiq</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="supply.html">
+    <span>Xammal təminatı</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="purchasing.html">
+    <span>Satınalma</span>
+    
+</a>
+            <a href="warehouse.html">
+    <span>Anbar</span>
+    <span class="nav-count">2</span>
+</a>
+            <a href="production.html">
+    <span>İstehsal</span>
+    <span class="nav-count">1</span>
+</a>
+            <details class="nav-group">
+                <summary>Məlumatlar</summary>
+                <a href="recipes.html">
+    <span>Reseptlər</span>
+    
+</a>
+                <a href="materials.html">
+    <span>Material kartları</span>
+    
+</a>
+            </details>
+            <details class="nav-group">
+                <summary>Sistem</summary>
+                <a href="users.html">
+    <span>İstifadəçilər</span>
+    
+</a>
+                <a href="settings.html">
+    <span>Parametrlər</span>
+    
+</a>
+            </details>
+        </nav>
+        <div class="sidebar-note">Nümunə məlumatlar. Tətbiq yenidən başladıqda sıfırlanır.</div>
+        <a class="user-chip" href="profile.html">
+            <span class="avatar">VA</span>
+            <span class="user-chip-text">
+                <strong>Valeh Ağayev</strong>
+                <small>Administrator</small>
+            </span>
+        </a>
+    </aside>
+    <div class="shell">
+        
+        
+        <main class="content">
+    <div class="page-head">
+        <div><h1>Sifarişlər</h1><p>Bütün satış sifarişləri və cari statusları.</p></div>
+        <a class="btn btn-primary" href="order-new.html">Yeni sifariş</a>
+    </div>
+    <div class="filters">
+        <a href="orders.html">Hamısı</a>
+        <a href="orders-yeni.html">Yeni</a><a href="orders-dizayn.html">Dizayn mərhələsində</a><a href="orders-kalkulyasiya.html" class="active">Kalkulyasiya / Gözləyir</a><a href="orders-tesdiqlendi.html">Müştəri təsdiqlədi</a><a href="orders-xammal.html">Xammal təminatı</a><a href="orders-istehsalda.html">İstehsalda</a><a href="orders-tamamlandi.html">Tamamlandı</a><a href="orders-dayandirildi.html">Proses dayandırıldı</a>
+    </div>
+    <section class="card">
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Sifariş</th><th>Tarix</th><th>Müştəri</th><th>Məhsul</th><th>Növ</th><th class="num">Miqdar</th><th>Menecer</th><th>Status</th><th></th></tr></thead>
+                <tbody>
+                <tr>
+                    <td class="nowrap"><a href="order-SF-2026-0009.html">SF-2026-0009</a></td>
+                    <td>15.11.2026</td>
+                    <td>Gənclik Kafe</td>
+                    <td>Metal ayaqlı stol</td>
+                    <td>Mövcud məhsul</td>
+                    <td class="num">4</td>
+                    <td>Rauf Quliyev</td>
+                    <td><span class="badge badge-yellow">Kalkulyasiya / Gözləyir</span></td>
+                    <td class="actions"><div class="row-actions">
+                        <a class="btn btn-small" href="order-SF-2026-0009.html">Bax</a>
+                        <a class="btn btn-small" href="order-SF-2026-0009-edit.html">Redaktə</a>
+                        
+                        
+                        <span class="btn btn-small is-disabled"
+                              title="Mövcud məhsulda dizayn olmur">Dizayn</span>
+                        
+                        <span class="btn btn-small is-disabled"
+                              title="Kalkulyasiya artıq aparılıb">Kalkulyasiya</span>
+                    </div></td>
+                </tr>
+                <tr>
+                    <td class="nowrap"><a href="order-SF-2026-0005.html">SF-2026-0005</a></td>
+                    <td>15.11.2026</td>
+                    <td>Atrium Dizayn MMC</td>
+                    <td>Resepşn masası</td>
+                    <td>Yeni məhsul</td>
+                    <td class="num">1</td>
+                    <td>Nigar Həsənova</td>
+                    <td><span class="badge badge-yellow">Kalkulyasiya / Gözləyir</span></td>
+                    <td class="actions"><div class="row-actions">
+                        <a class="btn btn-small" href="order-SF-2026-0005.html">Bax</a>
+                        <a class="btn btn-small" href="order-SF-2026-0005-edit.html">Redaktə</a>
+                        
+                        
+                        <span class="btn btn-small is-disabled"
+                              title="Sifariş dizayn mərhələsində deyil">Dizayn</span>
+                        <a class="btn btn-small btn-primary" href="costing-SF-2026-0005.html">Kalkulyasiya</a>
+                        
+                    </div></td>
+                </tr>
+                
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="card" id="completion">
+        <div class="card-head"><h2>Təhvil gözləyir</h2></div>
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Sifariş</th><th>Müştəri</th><th>Məhsul</th><th class="num">Miqdar</th><th>İstehsal edilib</th><th>Anbar</th><th></th></tr></thead>
+                <tbody>
+                
+                <tr><td colspan="7" class="empty">Təhvil gözləyən məhsul yoxdur.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="card">
+        <div class="card-head"><h2>Tamamlanmış sifarişlər</h2></div>
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Sifariş</th><th>Müştəri</th><th>Məhsul</th><th class="num">Cəmi</th><th>Təhvil tarixi</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td><a href="order-SF-2026-0001.html">SF-2026-0001</a></td>
+                    <td>Bakı Mebel MMC</td>
+                    <td>Dolab 3 qapılı</td>
+                    <td class="num">867.40 AZN</td>
+                    <td>15.11.2026</td>
+                </tr>
+                
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+    </div>
+</div>
+</body>
+</html>

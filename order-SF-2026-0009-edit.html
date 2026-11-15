@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SF-2026-0009 · Redaktə · Alzoni ERP</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div class="app">
+    <aside class="sidebar">
+        <a class="brand" href="index.html">
+            <strong>Alzoni ERP</strong>
+            <span>Alzoni MMC</span>
+        </a>
+        <nav>
+            <div class="nav-title">Proses</div>
+            <a href="index.html">İş axını</a>
+            <a href="orders.html" class="active">
+    <span>Sifarişlər</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="approval.html">
+    <span>Təsdiq</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="supply.html">
+    <span>Xammal təminatı</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="purchasing.html">
+    <span>Satınalma</span>
+    
+</a>
+            <a href="warehouse.html">
+    <span>Anbar</span>
+    <span class="nav-count">2</span>
+</a>
+            <a href="production.html">
+    <span>İstehsal</span>
+    <span class="nav-count">1</span>
+</a>
+            <details class="nav-group">
+                <summary>Məlumatlar</summary>
+                <a href="recipes.html">
+    <span>Reseptlər</span>
+    
+</a>
+                <a href="materials.html">
+    <span>Material kartları</span>
+    
+</a>
+            </details>
+            <details class="nav-group">
+                <summary>Sistem</summary>
+                <a href="users.html">
+    <span>İstifadəçilər</span>
+    
+</a>
+                <a href="settings.html">
+    <span>Parametrlər</span>
+    
+</a>
+            </details>
+        </nav>
+        <div class="sidebar-note">Nümunə məlumatlar. Tətbiq yenidən başladıqda sıfırlanır.</div>
+        <a class="user-chip" href="profile.html">
+            <span class="avatar">VA</span>
+            <span class="user-chip-text">
+                <strong>Valeh Ağayev</strong>
+                <small>Administrator</small>
+            </span>
+        </a>
+    </aside>
+    <div class="shell">
+        
+        
+        <main class="content">
+    <div class="page-head">
+        <div>
+            <div class="eyebrow">Mövcud məhsul</div>
+            <h1>SF-2026-0009 · Redaktə</h1>
+        </div>
+        <span class="badge badge-yellow">Kalkulyasiya / Gözləyir</span>
+    </div>
+    <form onsubmit="return false" class="stack" action="#" method="post">
+        <section class="card card-pad">
+            <h2>Müştəri</h2>
+            <div class="form-grid">
+                <label>Müştəri
+    <span class="select-add">
+        <select name="customerId" id="customer-select" required>
+            <option value="">Müştəri seçin</option>
+            <option value="4">Atrium Dizayn MMC · Səidə Quliyeva · +994 12 410 00 04</option>
+            <option value="1">Bakı Mebel MMC · Kamran Hüseynov · +994 12 410 00 01</option>
+            <option value="6" selected="selected">Gənclik Kafe · Fərid Məmmədli · +994 50 410 00 06</option>
+            <option value="8">Leyla Rzayeva · +994 70 410 00 08</option>
+            <option value="5">Mənzil Plus MMC · Elvin Rəhimli · +994 12 410 00 05</option>
+            <option value="3">Ofis Evi MMC · Rəşad Nəsirov · +994 12 410 00 03</option>
+            <option value="7">Ramil Məmmədov · +994 55 410 00 07</option>
+            <option value="9">Tural Əhmədov · +994 51 410 00 09</option>
+            <option value="2">Xəzər Otel · Günel Səfərova · +994 12 410 00 02</option>
+        </select>
+        <button type="button" class="btn" data-open-customer>+ Yeni müştəri</button>
+    </span>
+</label>
+                <label>Menecer
+                    <select name="managerId" required>
+                        <option value="">Menecer seçin</option>
+                        <option value="3">Nigar Həsənova</option>
+                        <option value="4" selected="selected">Rauf Quliyev</option>
+                    </select>
+                </label>
+                <label>İstənilən tarix <input name="requestedDate" type="date" value="2026-12-06"></label>
+            </div>
+            <label class="check"><input type="checkbox" name="specialCustomer" value="true"> Xüsusi müştəri (kənar)</label>
+        </section>
+
+        <section class="card card-pad">
+            <h2>Məhsul</h2>
+            <div class="form-grid">
+                
+                <label>Məhsul (resept üzrə) <input value="Metal ayaqlı stol" disabled></label>
+                <label>Miqdar
+                    <input name="qty" type="number" min="1" value="4" required>
+                    
+                </label>
+            </div>
+            <label>Qeyd <textarea name="note" rows="2"></textarea></label>
+        </section>
+
+        <div class="form-actions">
+            <a class="btn" href="order-SF-2026-0009.html">Ləğv et</a>
+            <button class="btn btn-primary" type="submit">Yadda saxla</button>
+        </div>
+    </form>
+    
+    <dialog id="customer-dialog" class="dialog" aria-labelledby="customer-dialog-title">
+        <form id="customer-form" class="stack" method="dialog">
+            <div class="dialog-head">
+                <h2 id="customer-dialog-title">Yeni müştəri</h2>
+                <button type="button" class="btn btn-ghost btn-small" data-close-customer aria-label="Bağla">✕</button>
+            </div>
+            <div class="segmented" role="radiogroup" aria-label="Şəxs növü">
+                <label><input type="radio" name="type" value="FIZIKI" checked> Fiziki şəxs</label>
+                <label><input type="radio" name="type" value="HUQUQI"> Hüquqi şəxs</label>
+            </div>
+            <div class="form-grid">
+                <label data-legal hidden class="span-2">Şirkətin adı <input name="companyName"></label>
+                <label>Ad <input name="firstName" required></label>
+                <label>Soyad <input name="lastName" required></label>
+                <label>Telefon <input name="phone" type="tel" required></label>
+                <label>E-poçt <input name="email" type="email"></label>
+                <label class="span-2">Ünvan <input name="address"></label>
+            </div>
+            <p class="flash flash-error dialog-error" role="alert" hidden></p>
+            <div class="form-actions">
+                <button type="button" class="btn" data-close-customer>Ləğv et</button>
+                <button type="submit" class="btn btn-primary">Müştərini yarat</button>
+            </div>
+        </form>
+    </dialog>
+    <script>
+        (() => {
+            const dialog = document.getElementById('customer-dialog');
+            const form = document.getElementById('customer-form');
+            const select = document.getElementById('customer-select');
+            const error = form.querySelector('.dialog-error');
+            const legal = form.querySelector('[data-legal]');
+            const company = form.querySelector('input[name="companyName"]');
+
+            const syncType = () => {
+                const isLegal = form.querySelector('input[name="type"]:checked').value === 'HUQUQI';
+                legal.hidden = !isLegal;
+                company.required = isLegal;
+            };
+            form.querySelectorAll('input[name="type"]').forEach(r => r.addEventListener('change', syncType));
+
+            document.querySelector('[data-open-customer]').addEventListener('click', () => {
+                form.reset();
+                error.hidden = true;
+                syncType();
+                dialog.showModal();
+            });
+            form.querySelectorAll('[data-close-customer]').forEach(b => b.addEventListener('click', () => dialog.close()));
+
+            form.addEventListener('submit', event => {
+                event.preventDefault();
+                const data = Object.fromEntries(new FormData(form));
+                const person = data.firstName.trim() + ' ' + data.lastName.trim();
+                const label = (data.type === 'HUQUQI' ? data.companyName.trim() + ' · ' + person : person)
+                        + ' · ' + data.phone.trim();
+                select.add(new Option(label, 'new-' + Date.now(), true, true));
+                dialog.close();
+            });
+        })();
+    </script>
+
+</main>
+    </div>
+</div>
+</body>
+</html>
