@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Anbar · Alzoni ERP</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div class="app">
+    <aside class="sidebar">
+        <a class="brand" href="index.html">
+            <strong>Alzoni ERP</strong>
+            <span>Alzoni MMC</span>
+        </a>
+        <nav>
+            <div class="nav-title">Proses</div>
+            <a href="index.html">İş axını</a>
+            <a href="orders.html">
+    <span>Sifarişlər</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="approval.html">
+    <span>Təsdiq</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="supply.html">
+    <span>Xammal təminatı</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="purchasing.html">
+    <span>Satınalma</span>
+    
+</a>
+            <a href="warehouse.html" class="active">
+    <span>Anbar</span>
+    <span class="nav-count">2</span>
+</a>
+            <a href="production.html">
+    <span>İstehsal</span>
+    <span class="nav-count">1</span>
+</a>
+            <details class="nav-group">
+                <summary>Məlumatlar</summary>
+                <a href="recipes.html">
+    <span>Reseptlər</span>
+    
+</a>
+                <a href="materials.html">
+    <span>Material kartları</span>
+    
+</a>
+            </details>
+            <details class="nav-group">
+                <summary>Sistem</summary>
+                <a href="users.html">
+    <span>İstifadəçilər</span>
+    
+</a>
+                <a href="settings.html">
+    <span>Parametrlər</span>
+    
+</a>
+            </details>
+        </nav>
+        <div class="sidebar-note">Nümunə məlumatlar. Tətbiq yenidən başladıqda sıfırlanır.</div>
+        <a class="user-chip" href="profile.html">
+            <span class="avatar">VA</span>
+            <span class="user-chip-text">
+                <strong>Valeh Ağayev</strong>
+                <small>Administrator</small>
+            </span>
+        </a>
+    </aside>
+    <div class="shell">
+        
+        
+        <main class="content">
+    <div class="page-head">
+        <div>
+            <div class="eyebrow">Mərhələ 8</div>
+            <h1>Anbar</h1>
+            <p>Gələn mallar qəbul edilir, sifariş üçün ayrılan materiallar istehsala təhvil verilir.</p>
+        </div>
+        <a class="btn" href="materials.html">Anbar qalıqları</a>
+    </div>
+
+    <section class="card">
+        <div class="card-head"><h2>Mal qəbulu</h2></div>
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Nömrə</th><th>Material</th><th class="num">Miqdar</th><th>Təchizatçı</th><th>Anbar</th><th></th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>SA-2026-0001</td>
+                    <td>Metal ayaq dəsti</td>
+                    <td class="num">10 dəst</td>
+                    <td>Metal Təchizat MMC</td>
+                    <td>Çilingər</td>
+                    <td class="actions">
+                        <form onsubmit="return false" class="inline-form" action="#" method="post">
+                            <input name="invoiceNo" placeholder="Qaimə №" required aria-label="Qaimə nömrəsi">
+                            <label class="check"><input type="checkbox" required> Miqdar yoxlanıldı</label>
+                            <button class="btn btn-small btn-primary">Mədaxil et</button>
+                        </form>
+                    </td>
+                </tr>
+                
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="card">
+        <div class="card-head"><h2>İstehsala veriləcək materiallar</h2></div>
+        
+        <div class="issue">
+            <div class="issue-head">
+                <div>
+                    <a href="order-SF-2026-0003.html">SF-2026-0003</a>
+                    <span class="muted">Metal ayaqlı stol</span>
+                </div>
+                <form onsubmit="return false" action="#" method="post">
+                    <button class="btn btn-small btn-primary">Təhvil ver</button>
+                </form>
+            </div>
+            <div class="table-wrap">
+                <table class="table">
+                    <thead><tr><th>Material</th><th>Anbar</th><th class="num">Tələb</th><th class="num">Hazır</th><th class="num">Verilib</th></tr></thead>
+                    <tbody>
+                    <tr>
+                        <td>MDF lövhə 16 mm</td>
+                        <td>Xammal Anbarı</td>
+                        <td class="num">30 ədəd</td>
+                        <td class="num">30</td>
+                        <td class="num">0</td>
+                    </tr>
+                    <tr>
+                        <td>Boya (poliuretan)</td>
+                        <td>Xammal Anbarı</td>
+                        <td class="num">15 kq</td>
+                        <td class="num">15</td>
+                        <td class="num">0</td>
+                    </tr>
+                    <tr>
+                        <td>Metal ayaq dəsti</td>
+                        <td>Çilingər</td>
+                        <td class="num">30 dəst</td>
+                        <td class="num">20</td>
+                        <td class="num">0</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</main>
+    </div>
+</div>
+</body>
+</html>

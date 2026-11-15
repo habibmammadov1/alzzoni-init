@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>İstifadəçilər · Alzoni ERP</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div class="app">
+    <aside class="sidebar">
+        <a class="brand" href="index.html">
+            <strong>Alzoni ERP</strong>
+            <span>Alzoni MMC</span>
+        </a>
+        <nav>
+            <div class="nav-title">Proses</div>
+            <a href="index.html">İş axını</a>
+            <a href="orders.html">
+    <span>Sifarişlər</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="approval.html">
+    <span>Təsdiq</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="supply.html">
+    <span>Xammal təminatı</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="purchasing.html">
+    <span>Satınalma</span>
+    
+</a>
+            <a href="warehouse.html">
+    <span>Anbar</span>
+    <span class="nav-count">2</span>
+</a>
+            <a href="production.html">
+    <span>İstehsal</span>
+    <span class="nav-count">1</span>
+</a>
+            <details class="nav-group">
+                <summary>Məlumatlar</summary>
+                <a href="recipes.html">
+    <span>Reseptlər</span>
+    
+</a>
+                <a href="materials.html">
+    <span>Material kartları</span>
+    
+</a>
+            </details>
+            <details class="nav-group" open="open">
+                <summary>Sistem</summary>
+                <a href="users.html" class="active">
+    <span>İstifadəçilər</span>
+    
+</a>
+                <a href="settings.html">
+    <span>Parametrlər</span>
+    
+</a>
+            </details>
+        </nav>
+        <div class="sidebar-note">Nümunə məlumatlar. Tətbiq yenidən başladıqda sıfırlanır.</div>
+        <a class="user-chip" href="profile.html">
+            <span class="avatar">VA</span>
+            <span class="user-chip-text">
+                <strong>Valeh Ağayev</strong>
+                <small>Administrator</small>
+            </span>
+        </a>
+    </aside>
+    <div class="shell">
+        
+        
+        <main class="content">
+    <div class="page-head">
+        <div><h1>İstifadəçilər</h1><p>Sistemdə işləyən əməkdaşlar və prosesdəki rolları.</p></div>
+        <a class="btn btn-primary" href="user-new.html">Yeni istifadəçi</a>
+    </div>
+    <section class="card">
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Ad, soyad</th><th>Rol</th><th>Əlaqə nömrəsi</th><th>E-poçt</th><th>Status</th><th></th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="user-cell">
+                            <span class="avatar">VA</span>
+                            <span>Valeh Ağayev</span>
+                        </div>
+                    </td>
+                    <td>Administrator</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>
+                        <span class="badge badge-green">Aktiv</span>
+                        
+                    </td>
+                    <td class="actions"><a class="btn btn-small" href="user-1.html">Düzəliş et</a></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="user-cell">
+                            <span class="avatar">MA</span>
+                            <span>Mahir Aliyev</span>
+                        </div>
+                    </td>
+                    <td>Direktor</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>
+                        <span class="badge badge-green">Aktiv</span>
+                        
+                    </td>
+                    <td class="actions"><a class="btn btn-small" href="user-2.html">Düzəliş et</a></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="user-cell">
+                            <span class="avatar">NH</span>
+                            <span>Nigar Həsənova</span>
+                        </div>
+                    </td>
+                    <td>Satış meneceri</td>
+                    <td>+994 50 000 00 01</td>
+                    <td>nigar@alzoni.example</td>
+                    <td>
+                        <span class="badge badge-green">Aktiv</span>
+                        
+                    </td>
+                    <td class="actions"><a class="btn btn-small" href="user-3.html">Düzəliş et</a></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="user-cell">
+                            <span class="avatar">RQ</span>
+                            <span>Rauf Quliyev</span>
+                        </div>
+                    </td>
+                    <td>Satış meneceri</td>
+                    <td>+994 50 000 00 02</td>
+                    <td>rauf@alzoni.example</td>
+                    <td>
+                        <span class="badge badge-green">Aktiv</span>
+                        
+                    </td>
+                    <td class="actions"><a class="btn btn-small" href="user-4.html">Düzəliş et</a></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="user-cell">
+                            <span class="avatar">AK</span>
+                            <span>Aysel Kərimova</span>
+                        </div>
+                    </td>
+                    <td>Dizayner</td>
+                    <td>+994 50 000 00 03</td>
+                    <td>aysel@alzoni.example</td>
+                    <td>
+                        <span class="badge badge-green">Aktiv</span>
+                        
+                    </td>
+                    <td class="actions"><a class="btn btn-small" href="user-5.html">Düzəliş et</a></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="user-cell">
+                            <span class="avatar">EM</span>
+                            <span>Elşən Musayev</span>
+                        </div>
+                    </td>
+                    <td>Planlama / Kalkulyasiya</td>
+                    <td>+994 50 000 00 04</td>
+                    <td>elshan@alzoni.example</td>
+                    <td>
+                        <span class="badge badge-green">Aktiv</span>
+                        
+                    </td>
+                    <td class="actions"><a class="btn btn-small" href="user-6.html">Düzəliş et</a></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="user-cell">
+                            <span class="avatar">SA</span>
+                            <span>Səbinə Abbasova</span>
+                        </div>
+                    </td>
+                    <td>Satınalma meneceri</td>
+                    <td>+994 50 000 00 05</td>
+                    <td>sabina@alzoni.example</td>
+                    <td>
+                        <span class="badge badge-green">Aktiv</span>
+                        
+                    </td>
+                    <td class="actions"><a class="btn btn-small" href="user-7.html">Düzəliş et</a></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="user-cell">
+                            <span class="avatar">Vİ</span>
+                            <span>Vüqar İsmayılov</span>
+                        </div>
+                    </td>
+                    <td>Anbardar</td>
+                    <td>+994 50 000 00 06</td>
+                    <td>vuqar@alzoni.example</td>
+                    <td>
+                        <span class="badge badge-green">Aktiv</span>
+                        
+                    </td>
+                    <td class="actions"><a class="btn btn-small" href="user-8.html">Düzəliş et</a></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="user-cell">
+                            <span class="avatar">OB</span>
+                            <span>Orxan Babayev</span>
+                        </div>
+                    </td>
+                    <td>İstehsalçı</td>
+                    <td>+994 50 000 00 07</td>
+                    <td>orxan@alzoni.example</td>
+                    <td>
+                        <span class="badge badge-green">Aktiv</span>
+                        
+                    </td>
+                    <td class="actions"><a class="btn btn-small" href="user-9.html">Düzəliş et</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+    </div>
+</div>
+</body>
+</html>

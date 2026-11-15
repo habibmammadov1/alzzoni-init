@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rauf Quliyev · Alzoni ERP</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div class="app">
+    <aside class="sidebar">
+        <a class="brand" href="index.html">
+            <strong>Alzoni ERP</strong>
+            <span>Alzoni MMC</span>
+        </a>
+        <nav>
+            <div class="nav-title">Proses</div>
+            <a href="index.html">İş axını</a>
+            <a href="orders.html">
+    <span>Sifarişlər</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="approval.html">
+    <span>Təsdiq</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="supply.html">
+    <span>Xammal təminatı</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="purchasing.html">
+    <span>Satınalma</span>
+    
+</a>
+            <a href="warehouse.html">
+    <span>Anbar</span>
+    <span class="nav-count">2</span>
+</a>
+            <a href="production.html">
+    <span>İstehsal</span>
+    <span class="nav-count">1</span>
+</a>
+            <details class="nav-group">
+                <summary>Məlumatlar</summary>
+                <a href="recipes.html">
+    <span>Reseptlər</span>
+    
+</a>
+                <a href="materials.html">
+    <span>Material kartları</span>
+    
+</a>
+            </details>
+            <details class="nav-group" open="open">
+                <summary>Sistem</summary>
+                <a href="users.html" class="active">
+    <span>İstifadəçilər</span>
+    
+</a>
+                <a href="settings.html">
+    <span>Parametrlər</span>
+    
+</a>
+            </details>
+        </nav>
+        <div class="sidebar-note">Nümunə məlumatlar. Tətbiq yenidən başladıqda sıfırlanır.</div>
+        <a class="user-chip" href="profile.html">
+            <span class="avatar">VA</span>
+            <span class="user-chip-text">
+                <strong>Valeh Ağayev</strong>
+                <small>Administrator</small>
+            </span>
+        </a>
+    </aside>
+    <div class="shell">
+        
+        
+        <main class="content narrow">
+    <div class="page-head">
+    <div>
+        
+        <h1>Rauf Quliyev</h1>
+        
+    </div>
+</div>
+    <form onsubmit="return false" class="card card-pad" action="#" method="post">
+        <label>Ad, soyad <input name="name" value="Rauf Quliyev" required></label>
+        <label>Rol
+            <select name="role" required>
+                <option value="ADMIN">Administrator</option>
+                <option value="DIREKTOR">Direktor</option>
+                <option value="SATIS" selected="selected">Satış meneceri</option>
+                <option value="DIZAYNER">Dizayner</option>
+                <option value="PLANLAMA">Planlama / Kalkulyasiya</option>
+                <option value="SATINALMA">Satınalma meneceri</option>
+                <option value="ANBAR">Anbardar</option>
+                <option value="ISTEHSAL">İstehsalçı</option>
+            </select>
+        </label>
+        <div class="form-grid">
+            <label>Əlaqə nömrəsi <input name="phone" type="tel" value="+994 50 000 00 02"></label>
+            <label>E-poçt <input name="email" type="email" value="rauf@alzoni.example"></label>
+        </div>
+        <label class="check"><input type="checkbox" name="active" value="true" checked="checked"> Aktiv istifadəçi</label>
+        <div class="form-actions">
+            <a class="btn btn-ghost" href="users.html">Ləğv et</a>
+            <button class="btn btn-primary" type="submit">Yadda saxla</button>
+        </div>
+    </form>
+</main>
+    </div>
+</div>
+</body>
+</html>

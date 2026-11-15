@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="az">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Parametrlər · Alzoni ERP</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div class="app">
+    <aside class="sidebar">
+        <a class="brand" href="index.html">
+            <strong>Alzoni ERP</strong>
+            <span>Alzoni MMC</span>
+        </a>
+        <nav>
+            <div class="nav-title">Proses</div>
+            <a href="index.html">İş axını</a>
+            <a href="orders.html">
+    <span>Sifarişlər</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="approval.html">
+    <span>Təsdiq</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="supply.html">
+    <span>Xammal təminatı</span>
+    <span class="nav-count">1</span>
+</a>
+            <a href="purchasing.html">
+    <span>Satınalma</span>
+    
+</a>
+            <a href="warehouse.html">
+    <span>Anbar</span>
+    <span class="nav-count">2</span>
+</a>
+            <a href="production.html">
+    <span>İstehsal</span>
+    <span class="nav-count">1</span>
+</a>
+            <details class="nav-group">
+                <summary>Məlumatlar</summary>
+                <a href="recipes.html">
+    <span>Reseptlər</span>
+    
+</a>
+                <a href="materials.html">
+    <span>Material kartları</span>
+    
+</a>
+            </details>
+            <details class="nav-group" open="open">
+                <summary>Sistem</summary>
+                <a href="users.html">
+    <span>İstifadəçilər</span>
+    
+</a>
+                <a href="settings.html" class="active">
+    <span>Parametrlər</span>
+    
+</a>
+            </details>
+        </nav>
+        <div class="sidebar-note">Nümunə məlumatlar. Tətbiq yenidən başladıqda sıfırlanır.</div>
+        <a class="user-chip" href="profile.html">
+            <span class="avatar">VA</span>
+            <span class="user-chip-text">
+                <strong>Valeh Ağayev</strong>
+                <small>Administrator</small>
+            </span>
+        </a>
+    </aside>
+    <div class="shell">
+        
+        
+        <main class="content narrow">
+    <div class="page-head">
+    <div>
+        
+        <h1>Parametrlər</h1>
+        <p>Yeni sifarişlər bu dəyərlərlə başlayır. Kalkulyasiyada hər sifariş üçün dəyişmək olar.</p>
+    </div>
+</div>
+    <form onsubmit="return false" class="stack" action="#" method="post">
+        <section class="card card-pad">
+            <h2>Şirkət</h2>
+            <label>Şirkətin adı <input name="companyName" value="Alzoni MMC" required></label>
+        </section>
+        <section class="card card-pad">
+            <h2>Kalkulyasiya</h2>
+            <div class="form-grid">
+                <label>Əlavə xərc, % <input name="expensePct" type="number" min="0" step="0.01" value="25" required></label>
+                <label>Gəlir, % <input name="profitPct" type="number" min="0" step="0.01" value="50" required></label>
+                <label>İstehsal müddəti, gün <input name="productionDays" type="number" min="1" value="10" required></label>
+            </div>
+            <p class="note">Gəlir faizi cəmi xərcin üzərinə hesablanır: maya dəyəri → +xərc → +gəlir.</p>
+        </section>
+        <div class="form-actions"><button class="btn btn-primary" type="submit">Yadda saxla</button></div>
+    </form>
+</main>
+    </div>
+</div>
+</body>
+</html>
