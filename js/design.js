@@ -39,35 +39,22 @@
         `<option value="${v}"${v === selected ? ' selected' : ''}>${t}</option>`).join('');
 
     const template = `
-        <div class="mat-head">
-            <label>Kateqoriya
-                <select data-cat>
-                    <option value="">Seçin</option>
-                    ${Object.entries(CATEGORIES).map(([k, c]) => `<option value="${k}">${c.label}</option>`).join('')}
-                </select>
-            </label>
-            <label>Xammal
-                <select data-mat disabled><option value="">Əvvəl kateqoriya seçin</option></select>
-            </label>
-            <button class="btn btn-small btn-ghost mat-remove" type="button" data-remove aria-label="Sətri sil">Sil</button>
+        <div class="mat-row">
+            <select data-cat aria-label="Kateqoriya">
+                <option value="">Kateqoriya</option>
+                ${Object.entries(CATEGORIES).map(([k, c]) => `<option value="${k}">${c.label}</option>`).join('')}
+            </select>
+            <select data-mat disabled aria-label="Xammal"><option value="">Xammal</option></select>
+            <input type="number" min="0" step="1" data-en placeholder="En" aria-label="En (mm)">
+            <input type="number" min="0" step="1" data-uzun placeholder="Uzun" aria-label="Uzun (mm)">
+            <input type="number" min="0" step="1" data-say placeholder="Say" aria-label="Say">
+            <label class="mat-loss" title="10% itki əlavə et"><input type="checkbox" data-loss checked> <span>10%</span></label>
+            <strong class="mat-qty" data-result>—</strong>
+            <button class="icon-btn" type="button" data-remove aria-label="Sətri sil" title="Sil">×</button>
         </div>
-        <div class="mat-body" hidden>
-            <label data-field="en">En (mm) <input type="number" min="0" step="1" data-en placeholder="0"></label>
-            <label data-field="uzun">Uzun (mm) <input type="number" min="0" step="1" data-uzun placeholder="0"></label>
-            <label data-field="say"><span data-say-label>Say</span> <input type="number" min="0" step="1" data-say placeholder="0"></label>
-            <label class="check mat-loss"><input type="checkbox" data-loss checked> <span>+10% itki</span></label>
-            <div class="mat-result" aria-live="polite">
-                <small>Lazım olan miqdar</small>
-                <strong data-result>—</strong>
-                <span data-formula></span>
-            </div>
-            <div class="mat-extras">
-                <div class="mat-extras-head">
-                    <span>Əlavə elementlər</span>
-                    <button class="btn btn-small btn-ghost" type="button" data-add-el>+ Əlavə element</button>
-                </div>
-                <div class="mat-extras-list" data-els></div>
-            </div>
+        <div class="mat-extras">
+            <div class="mat-extras-list" data-els></div>
+            <button class="link-btn" type="button" data-add-el>+ Əlavə element</button>
         </div>`;
 
     const elementRow = (type = '', size = '') => `
@@ -77,7 +64,7 @@
                 ${options(ELEMENTS, type)}
             </select>
             <label class="mat-el-size"><input type="number" min="0" step="0.1" data-el-size value="${size}" placeholder="Ölçü" aria-label="Ölçü (mm)"><span>mm</span></label>
-            <button class="btn btn-small btn-ghost" type="button" data-remove-el aria-label="Elementi sil">×</button>
+            <button class="icon-btn" type="button" data-remove-el aria-label="Elementi sil" title="Sil">×</button>
         </div>`;
 
     function fillMaterials(line, cat, selected) {
@@ -85,24 +72,24 @@
         const list = MATERIALS.filter(m => m.cat === cat);
         select.disabled = !cat;
         select.innerHTML = cat
-            ? '<option value="">Xammal seçin</option>' + options(list.map(m => [m.code, `${m.code} · ${m.name}`]), selected)
-            : '<option value="">Əvvəl kateqoriya seçin</option>';
+            ? '<option value="">Xammal seçin</option>' + options(list.map(m => [m.code, m.name]), selected)
+            : '<option value="">Xammal</option>';
     }
 
     function compute(line) {
         const cat = line.querySelector('[data-cat]').value;
         const material = byCode[line.querySelector('[data-mat]').value];
-        const body = line.querySelector('.mat-body');
-        body.hidden = !cat || !material;
-        line.dataset.qty = '';
-        if (body.hidden) return;
-
         const c = CATEGORIES[cat];
-        body.querySelectorAll('[data-field]').forEach(f => {
-            const name = f.dataset.field;
-            f.hidden = !c.fields.includes(name);
+        ['en', 'uzun', 'say'].forEach(name => {
+            line.querySelector(`[data-${name}]`).classList.toggle('is-off', !!c && !c.fields.includes(name));
         });
-        line.querySelector('[data-say-label]').textContent = cat === 'kq' ? 'Miqdar (kq)' : 'Say';
+        line.querySelector('[data-say]').placeholder = cat === 'kq' ? 'kq' : 'Say';
+
+        const result = line.querySelector('[data-result]');
+        line.dataset.qty = '';
+        result.textContent = '—';
+        result.title = '';
+        if (!c || !material) return;
 
         const v = {
             en: +line.querySelector('[data-en]').value || 0,
@@ -110,23 +97,15 @@
             say: +line.querySelector('[data-say]').value || 0
         };
         const base = c.calc(v);
+        if (!base) return;
         const loss = line.querySelector('[data-loss]').checked;
         const total = loss ? base * (1 + LOSS) : base;
-        const unit = unitOf(material);
-
-        const result = line.querySelector('[data-result]');
-        const formula = line.querySelector('[data-formula]');
-        if (!base) {
-            result.textContent = '—';
-            formula.textContent = c.fields.length > 1 ? 'Ölçüləri və sayı daxil edin' : 'Sayı daxil edin';
-            return;
-        }
-        result.textContent = `${fmt(total)} ${unit}`;
+        result.textContent = `${fmt(total)} ${unitOf(material)}`;
         const parts = {
             list: `${v.en}/1000 × ${v.uzun}/1000 × ${v.say} = ${fmt(base)}`,
             metraj: `${v.uzun}/1000 × ${v.say} = ${fmt(base)}`
         }[cat] || fmt(base);
-        formula.textContent = loss ? `${parts} + ${fmt(base * LOSS)} itki` : parts;
+        result.title = loss ? `${parts} + ${fmt(base * LOSS)} itki` : parts;
         line.dataset.qty = total;
     }
 
@@ -150,7 +129,9 @@
 
     function refresh(card) {
         const lines = card.querySelector('[data-lines]');
-        card.querySelector('[data-empty]').hidden = lines.children.length > 0;
+        const has = lines.children.length > 0;
+        card.querySelector('[data-empty]').hidden = has;
+        card.querySelector('.mat-cols').hidden = !has;
     }
 
     function updateTotals() {
@@ -178,6 +159,10 @@
 
     document.querySelectorAll('.sex-card').forEach(card => {
         const lines = card.querySelector('[data-lines]');
+        lines.insertAdjacentHTML('beforebegin', `
+            <div class="mat-cols" aria-hidden="true">
+                <span>Kateqoriya</span><span>Xammal</span><span>En, mm</span><span>Uzun, mm</span><span>Say</span><span>İtki</span><span class="num">Lazım olan</span><span></span>
+            </div>`);
         lines.querySelectorAll('[data-init]').forEach(holder => {
             holder.replaceWith(makeLine(JSON.parse(holder.dataset.init)));
         });
