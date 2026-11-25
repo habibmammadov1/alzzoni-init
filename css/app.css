@@ -176,6 +176,9 @@ h2 { font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
 .user-chip-text { display: grid; min-width: 0; line-height: 1.3; }
 .user-chip-text strong { overflow: hidden; font-size: 13.5px; font-weight: 500; white-space: nowrap; text-overflow: ellipsis; }
 .user-chip-text small { overflow: hidden; color: var(--side-muted); font-size: 12px; white-space: nowrap; text-overflow: ellipsis; }
+.credit { margin: 0; padding: 0 22px 18px; color: var(--side-faint); font-size: 11.5px; line-height: 1.5; }
+.credit a { color: var(--side-muted); font-weight: 500; text-decoration: underline; text-decoration-color: rgba(255, 255, 255, .2); text-underline-offset: 3px; transition: color .15s, text-decoration-color .15s; }
+.credit a:hover { color: var(--side-ink); text-decoration-color: currentColor; }
 
 /* Page */
 
@@ -515,6 +518,7 @@ legend { padding: 0 0 8px; font-size: 13.5px; font-weight: 500; color: var(--ink
     .brand { padding: 16px; }
     .user-chip { position: absolute; top: 10px; right: 12px; margin: 0; padding: 4px; background: transparent; }
     .user-chip-text { display: none; }
+    .credit { padding: 0 16px 12px; }
     .switcher { grid-template-columns: minmax(0, 1fr); }
     .content { padding: 24px 16px 40px; gap: 20px; }
     .flash { width: calc(100% - 32px); margin-top: 16px; }
