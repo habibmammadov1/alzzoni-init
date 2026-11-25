@@ -371,34 +371,35 @@ small.muted { display: block; font-weight: 400; }
 .choice span { color: var(--muted); font-size: 13px; }
 
 .design-hint { margin: -8px 0 0; }
-.sex-card { display: grid; gap: 18px; }
+.sex-card { display: grid; gap: 14px; }
 .sex-card h2 { display: flex; align-items: center; gap: 10px; }
 .sex-no { flex: none; white-space: nowrap; padding: 2px 9px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 12px; font-weight: 600; letter-spacing: .02em; }
-.sex-procs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; padding: 12px 14px; border-radius: var(--radius-small); background: var(--row-hover); }
-.sex-procs legend { float: left; padding: 0; margin-right: 4px; color: var(--muted); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .06em; }
-.mat-lines { display: grid; gap: 12px; }
+.sex-procs { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.sex-procs .check { font-size: 13.5px; color: var(--text); }
+.mat-cols, .mat-row { display: grid; grid-template-columns: 110px minmax(160px, 1fr) 84px 84px 70px 58px 104px 28px; gap: 8px; align-items: center; }
+.mat-cols { padding: 0 2px 2px; color: var(--faint); font-size: 11.5px; font-weight: 500; }
+.mat-cols .num { text-align: right; }
+.mat-cols[hidden] { display: none; }
+.mat-lines { display: grid; gap: 4px; }
 .mat-lines:empty { display: none; }
-.mat-line { display: grid; gap: 14px; padding: 16px; border: 1px solid var(--line); border-radius: 14px; }
-.mat-head { display: grid; grid-template-columns: minmax(140px, 200px) minmax(0, 1fr) auto; gap: 12px; align-items: end; }
-.mat-head label, .mat-body label:not(.check) { font-size: 12.5px; color: var(--muted); }
-.mat-body { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 12px; align-items: end; }
-.mat-body[hidden], .mat-body [hidden] { display: none; }
-.mat-loss { align-self: end; min-height: 40px; font-size: 13.5px; }
-.mat-result { grid-column: span 2; display: grid; gap: 1px; justify-items: end; padding: 8px 12px; border-radius: var(--radius-small); background: var(--row-hover); text-align: right; }
-.mat-result small { color: var(--muted); font-size: 11.5px; }
-.mat-result strong { color: var(--ink); font-size: 18px; font-weight: 600; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
-.mat-result span { color: var(--faint); font-size: 11.5px; font-variant-numeric: tabular-nums; }
-.mat-remove { align-self: end; }
-.mat-extras { grid-column: 1 / -1; display: grid; gap: 8px; padding-top: 12px; border-top: 1px dashed var(--line); }
-.mat-extras-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-.mat-extras-head span { color: var(--muted); font-size: 12.5px; font-weight: 500; }
-.mat-extras-list { display: grid; gap: 8px; }
+.mat-line { display: grid; gap: 6px; padding: 8px 0; border-top: 1px solid var(--line); }
+.mat-line:first-child { border-top: 0; padding-top: 0; }
+.mat-row input, .mat-row select, .mat-el input, .mat-el select { padding: 7px 10px; font-size: 13.5px; }
+.mat-row input.is-off { visibility: hidden; }
+.mat-loss { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 400; color: var(--muted); cursor: pointer; }
+.mat-qty { color: var(--ink); font-size: 14px; font-weight: 600; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; cursor: help; }
+.icon-btn { width: 28px; height: 28px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 8px; background: transparent; color: var(--faint); font-size: 18px; line-height: 1; cursor: pointer; transition: background-color .15s, color .15s; }
+.icon-btn:hover { background: var(--hover); color: var(--ink); }
+.mat-extras { display: grid; gap: 6px; padding-left: 118px; justify-items: start; }
+.mat-extras-list { display: grid; gap: 6px; width: 100%; max-width: 420px; }
 .mat-extras-list:empty { display: none; }
-.mat-el { display: grid; grid-template-columns: minmax(0, 1fr) 130px auto; gap: 8px; align-items: center; }
+.mat-el { display: grid; grid-template-columns: minmax(0, 1fr) 110px 28px; gap: 8px; align-items: center; }
 .mat-el-size { position: relative; display: block; }
-.mat-el-size input { padding-right: 40px; }
-.mat-el-size span { position: absolute; top: 50%; right: 12px; transform: translateY(-50%); color: var(--faint); font-size: 12.5px; font-weight: 400; pointer-events: none; }
-.mat-empty { margin: 0; padding: 14px; border: 1px dashed var(--line); border-radius: 14px; color: var(--faint); font-size: 13.5px; text-align: center; }
+.mat-el-size input { padding-right: 38px; }
+.mat-el-size span { position: absolute; top: 50%; right: 10px; transform: translateY(-50%); color: var(--faint); font-size: 12px; font-weight: 400; pointer-events: none; }
+.link-btn { padding: 0; border: 0; background: none; color: var(--muted); font: inherit; font-size: 12.5px; cursor: pointer; }
+.link-btn:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.mat-empty { margin: 0; padding: 12px; border: 1px dashed var(--line); border-radius: 12px; color: var(--faint); font-size: 13px; text-align: center; }
 .mat-empty[hidden] { display: none; }
 .mat-total td { padding: 9px 0; border-top: 1px solid var(--line); }
 .mat-total tr:first-child td { border-top: 0; }
@@ -560,9 +561,11 @@ legend { padding: 0 0 8px; font-size: 13.5px; font-weight: 500; color: var(--ink
     .table th:first-child, .table td:first-child { padding-left: 16px; }
     .table th:last-child, .table td:last-child { padding-right: 16px; }
     .issue-head { padding: 12px 16px; }
-    .mat-head { grid-template-columns: minmax(0, 1fr); }
-    .mat-result { grid-column: 1 / -1; }
-    .mat-remove { justify-self: end; }
+    .mat-cols { display: none; }
+    .mat-row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .mat-row [data-cat], .mat-row [data-mat] { grid-column: span 3; }
+    .mat-row input.is-off { display: none; }
+    .mat-extras { padding-left: 0; }
     .contact-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); padding-bottom: 8px; border-bottom: 1px solid var(--line); }
     .contact-head { display: none; }
 }
