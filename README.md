@@ -15,7 +15,7 @@ Sonra http://localhost:4321 ünvanını açın.
 | --- | --- |
 | İş axını | `index.html` |
 | Sifarişlər | `orders.html`, statuslar üzrə `orders-<status>.html`, tamamlanma bölməsi `orders.html#completion` |
-| Yeni sifariş | `order-new.html` (müştəri seçimi və "Yeni müştəri" popupu) |
+| Yeni sifariş | `order-new.html` (müştəri və əlaqəli şəxslərin seçimi, "Yeni müştəri" popupu; `?customer=<id>` müştərini əvvəlcədən seçir) |
 | Sifariş | `order-<nömrə>.html`, redaktə: `order-<nömrə>-edit.html` |
 | Dizayn | `design-SF-2026-0006.html` |
 | Kalkulyasiya | `costing-SF-2026-0005.html` |
@@ -24,7 +24,7 @@ Sonra http://localhost:4321 ünvanını açın.
 | Satınalma | `purchasing.html` |
 | Anbar | `warehouse.html` |
 | İstehsal | `production.html`, `production-SF-2026-0002.html` |
-| Məlumatlar | `recipes.html`, `recipe-<kod>.html`, `materials.html` |
+| Məlumatlar | `customers.html`, `customers-huquqi.html`, `customers-fiziki.html`, `customer-<id>.html`, `customer-new.html`, `recipes.html`, `recipe-<kod>.html`, `materials.html` |
 | Sistem | `profile.html`, `users.html`, `user-<id>.html`, `user-new.html`, `settings.html` |
 
-Bütün stillər `css/app.css` faylındadır.
+Bütün stillər `css/app.css` faylındadır. Müştəri nümunə məlumatları və müştəri/əlaqəli şəxs formalarının davranışı `js/customers.js` faylındadır.
