@@ -10,9 +10,9 @@
     };
 
     const MATERIALS = [
-        { code: 'XM-001', name: 'Laminat lövhə 18 mm', cat: 'list', band: true },
-        { code: 'XM-002', name: 'MDF lövhə 16 mm', cat: 'list', band: true },
-        { code: 'YF-001', name: 'Korpus paneli', cat: 'list', band: true },
+        { code: 'XM-001', name: 'Laminat lövhə 18 mm', cat: 'list' },
+        { code: 'XM-002', name: 'MDF lövhə 16 mm', cat: 'list' },
+        { code: 'YF-001', name: 'Korpus paneli', cat: 'list' },
         { code: 'XM-004', name: 'Güzgü şüşə 4 mm', cat: 'list' },
         { code: 'XM-005', name: 'Sünger 40 dns', cat: 'list' },
         { code: 'XM-006', name: 'Mebel parçası', cat: 'metraj' },
@@ -24,11 +24,12 @@
         { code: 'XM-008', name: 'Boya (poliuretan)', cat: 'kq' }
     ];
 
-    const BANDS = [
-        ['', 'Bant yoxdur'],
-        ['PVC-04', 'PVC 0,4 mm'],
-        ['PVC-2', 'PVC 2 mm'],
-        ['ABS-1', 'ABS 1 mm']
+    const ELEMENTS = [
+        ['PVC', 'PVC bant'],
+        ['ABS', 'ABS bant'],
+        ['MEL', 'Melamin bant'],
+        ['AKR', 'Akril bant'],
+        ['ALU', 'Alüminium kənar profil']
     ];
 
     const byCode = Object.fromEntries(MATERIALS.map(m => [m.code, m]));
@@ -54,13 +55,29 @@
             <label data-field="en">En (mm) <input type="number" min="0" step="1" data-en placeholder="0"></label>
             <label data-field="uzun">Uzun (mm) <input type="number" min="0" step="1" data-uzun placeholder="0"></label>
             <label data-field="say"><span data-say-label>Say</span> <input type="number" min="0" step="1" data-say placeholder="0"></label>
-            <label data-field="band" hidden>Bant növü <select data-band>${options(BANDS, '')}</select></label>
             <label class="check mat-loss"><input type="checkbox" data-loss checked> <span>+10% itki</span></label>
             <div class="mat-result" aria-live="polite">
                 <small>Lazım olan miqdar</small>
                 <strong data-result>—</strong>
                 <span data-formula></span>
             </div>
+            <div class="mat-extras">
+                <div class="mat-extras-head">
+                    <span>Əlavə elementlər</span>
+                    <button class="btn btn-small btn-ghost" type="button" data-add-el>+ Əlavə element</button>
+                </div>
+                <div class="mat-extras-list" data-els></div>
+            </div>
+        </div>`;
+
+    const elementRow = (type = '', size = '') => `
+        <div class="mat-el" data-el>
+            <select data-el-type aria-label="Əlavə element">
+                <option value="">Element seçin</option>
+                ${options(ELEMENTS, type)}
+            </select>
+            <label class="mat-el-size"><input type="number" min="0" step="0.1" data-el-size value="${size}" placeholder="Ölçü" aria-label="Ölçü (mm)"><span>mm</span></label>
+            <button class="btn btn-small btn-ghost" type="button" data-remove-el aria-label="Elementi sil">×</button>
         </div>`;
 
     function fillMaterials(line, cat, selected) {
@@ -83,7 +100,7 @@
         const c = CATEGORIES[cat];
         body.querySelectorAll('[data-field]').forEach(f => {
             const name = f.dataset.field;
-            f.hidden = name === 'band' ? !material.band : !c.fields.includes(name);
+            f.hidden = !c.fields.includes(name);
         });
         line.querySelector('[data-say-label]').textContent = cat === 'kq' ? 'Miqdar (kq)' : 'Say';
 
@@ -124,7 +141,7 @@
             line.querySelector('[data-en]').value = init.en ?? '';
             line.querySelector('[data-uzun]').value = init.uzun ?? '';
             line.querySelector('[data-say]').value = init.say ?? '';
-            line.querySelector('[data-band]').value = init.band || '';
+            line.querySelector('[data-els]').innerHTML = (init.el || []).map(([t, z]) => elementRow(t, z)).join('');
             line.querySelector('[data-loss]').checked = init.loss !== false;
         }
         compute(line);
@@ -174,6 +191,18 @@
         });
 
         card.addEventListener('click', event => {
+            const addEl = event.target.closest('[data-add-el]');
+            if (addEl) {
+                const list = addEl.closest('[data-line]').querySelector('[data-els]');
+                list.insertAdjacentHTML('beforeend', elementRow());
+                list.lastElementChild.querySelector('select').focus();
+                return;
+            }
+            const removeEl = event.target.closest('[data-remove-el]');
+            if (removeEl) {
+                removeEl.closest('[data-el]').remove();
+                return;
+            }
             const remove = event.target.closest('[data-remove]');
             if (!remove) return;
             remove.closest('[data-line]').remove();
@@ -183,7 +212,7 @@
 
         card.addEventListener('change', event => {
             const line = event.target.closest('[data-line]');
-            if (!line) return;
+            if (!line || event.target.closest('[data-el]')) return;
             if (event.target.matches('[data-cat]')) fillMaterials(line, event.target.value, '');
             compute(line);
             updateTotals();
@@ -191,7 +220,7 @@
 
         card.addEventListener('input', event => {
             const line = event.target.closest('[data-line]');
-            if (!line || !event.target.matches('input[type=number]')) return;
+            if (!line || !event.target.matches('input[type=number]') || event.target.matches('[data-el-size]')) return;
             compute(line);
             updateTotals();
         });

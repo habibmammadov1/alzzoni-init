@@ -389,6 +389,15 @@ small.muted { display: block; font-weight: 400; }
 .mat-result strong { color: var(--ink); font-size: 18px; font-weight: 600; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
 .mat-result span { color: var(--faint); font-size: 11.5px; font-variant-numeric: tabular-nums; }
 .mat-remove { align-self: end; }
+.mat-extras { grid-column: 1 / -1; display: grid; gap: 8px; padding-top: 12px; border-top: 1px dashed var(--line); }
+.mat-extras-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.mat-extras-head span { color: var(--muted); font-size: 12.5px; font-weight: 500; }
+.mat-extras-list { display: grid; gap: 8px; }
+.mat-extras-list:empty { display: none; }
+.mat-el { display: grid; grid-template-columns: minmax(0, 1fr) 130px auto; gap: 8px; align-items: center; }
+.mat-el-size { position: relative; display: block; }
+.mat-el-size input { padding-right: 40px; }
+.mat-el-size span { position: absolute; top: 50%; right: 12px; transform: translateY(-50%); color: var(--faint); font-size: 12.5px; font-weight: 400; pointer-events: none; }
 .mat-empty { margin: 0; padding: 14px; border: 1px dashed var(--line); border-radius: 14px; color: var(--faint); font-size: 13.5px; text-align: center; }
 .mat-empty[hidden] { display: none; }
 .mat-total td { padding: 9px 0; border-top: 1px solid var(--line); }
