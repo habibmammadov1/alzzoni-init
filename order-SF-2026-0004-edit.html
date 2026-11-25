@@ -44,6 +44,10 @@
 </a>
             <details class="nav-group">
                 <summary><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5.5" rx="8" ry="3"/><path d="M4 5.5v13c0 1.7 3.6 3 8 3s8-1.3 8-3v-13M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg><span>Məlumatlar</span></summary>
+                <a href="customers.html"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2"/><circle cx="9" cy="11" r="2.3"/><path d="M5.6 16.5a3.6 3.6 0 0 1 6.8 0M14.5 10h4M14.5 13.5h3"/></svg>
+    <span>Müştərilər</span>
+    
+</a>
                 <a href="recipes.html"><svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v15H5.5A1.5 1.5 0 0 0 4 19.5z"/><path d="M4 19.5A1.5 1.5 0 0 0 5.5 21H20"/></svg>
     <span>Reseptlər</span>
     
@@ -92,15 +96,15 @@
     <span class="select-add">
         <select name="customerId" id="customer-select" required>
             <option value="">Müştəri seçin</option>
-            <option value="4">Atrium Dizayn MMC · Səidə Quliyeva · +994 12 410 00 04</option>
-            <option value="1">Bakı Mebel MMC · Kamran Hüseynov · +994 12 410 00 01</option>
-            <option value="6">Gənclik Kafe · Fərid Məmmədli · +994 50 410 00 06</option>
-            <option value="8">Leyla Rzayeva · +994 70 410 00 08</option>
-            <option value="5">Mənzil Plus MMC · Elvin Rəhimli · +994 12 410 00 05</option>
-            <option value="3">Ofis Evi MMC · Rəşad Nəsirov · +994 12 410 00 03</option>
-            <option value="7" selected="selected">Ramil Məmmədov · +994 55 410 00 07</option>
-            <option value="9">Tural Əhmədov · +994 51 410 00 09</option>
-            <option value="2">Xəzər Otel · Günel Səfərova · +994 12 410 00 02</option>
+            <option value="4">Atrium Dizayn MMC · hüquqi şəxs</option>
+            <option value="1">Bakı Mebel MMC · hüquqi şəxs</option>
+            <option value="6">Gənclik Kafe · hüquqi şəxs</option>
+            <option value="8">Leyla Rzayeva · fiziki şəxs</option>
+            <option value="5">Mənzil Plus MMC · hüquqi şəxs</option>
+            <option value="3">Ofis Evi MMC · hüquqi şəxs</option>
+            <option value="7" selected="selected">Ramil Məmmədov · fiziki şəxs</option>
+            <option value="9">Tural Əhmədov · fiziki şəxs</option>
+            <option value="2">Xəzər Otel · hüquqi şəxs</option>
         </select>
         <button type="button" class="btn" data-open-customer>+ Yeni müştəri</button>
     </span>
@@ -114,6 +118,13 @@
                 </label>
                 <label>İstənilən tarix <input name="requestedDate" type="date" value="2026-12-15"></label>
             </div>
+            <fieldset class="contact-picker" data-contact-picker data-selected="7-0,7-1">
+                <legend>Əlaqəli şəxslər</legend>
+                <div class="picker-list" data-picker-list></div>
+                <p class="note" data-picker-empty>Əvvəlcə müştəri seçin.</p>
+                <p class="flash flash-error inline-flash" role="alert" data-picker-error hidden>Ən azı bir əlaqəli şəxs seçin.</p>
+                <p class="note" data-picker-foot hidden>Siyahıda olmayan şəxsi <a href="#" data-customer-link>müştəri kartında</a> əlavə edin.</p>
+            </fieldset>
             <label class="check"><input type="checkbox" name="specialCustomer" value="true" checked="checked"> Xüsusi müştəri (kənar)</label>
         </section>
 
@@ -136,66 +147,56 @@
         </div>
     </form>
     
-    <dialog id="customer-dialog" class="dialog" aria-labelledby="customer-dialog-title">
-        <form id="customer-form" class="stack" method="dialog">
+    <dialog id="customer-dialog" class="dialog dialog-wide" aria-labelledby="customer-dialog-title">
+        <form id="customer-form" class="stack" method="dialog" data-customer-form>
             <div class="dialog-head">
                 <h2 id="customer-dialog-title">Yeni müştəri</h2>
                 <button type="button" class="btn btn-ghost btn-small" data-close-customer aria-label="Bağla">✕</button>
             </div>
             <div class="segmented" role="radiogroup" aria-label="Şəxs növü">
-                <label><input type="radio" name="type" value="FIZIKI" checked> Fiziki şəxs</label>
-                <label><input type="radio" name="type" value="HUQUQI"> Hüquqi şəxs</label>
+                <label><input type="radio" name="customerType" value="FIZIKI" checked> Fiziki şəxs</label>
+                <label><input type="radio" name="customerType" value="HUQUQI"> Hüquqi şəxs</label>
             </div>
             <div class="form-grid">
-                <label data-legal hidden class="span-2">Şirkətin adı <input name="companyName"></label>
-                <label>Ad <input name="firstName" required></label>
-                <label>Soyad <input name="lastName" required></label>
-                <label>Telefon <input name="phone" type="tel" required></label>
-                <label>E-poçt <input name="email" type="email"></label>
-                <label class="span-2">Ünvan <input name="address"></label>
+                <label data-legal hidden>Şirkətin adı <input name="companyName" value="" data-required></label>
+                <label data-legal hidden>VÖEN <input name="voen" inputmode="numeric" value=""></label>
+                <label data-person>Ad <input name="firstName" value="" data-required></label>
+                <label data-person>Soyad <input name="lastName" value="" data-required></label>
+                <label data-person>Telefon <input name="phone" type="tel" value="" data-required></label>
+                <label data-legal hidden>Ofis telefonu <input name="officePhone" type="tel" value=""></label>
+                <label>E-poçt <input name="email" type="email" value=""></label>
+                <label class="span-2">Ünvan <input name="address" value=""></label>
             </div>
-            <p class="flash flash-error dialog-error" role="alert" hidden></p>
+            <div class="contacts" data-contacts>
+                <div class="section-head">
+                    <h3 data-contacts-title>Əlaqəli şəxslər</h3>
+                    <p data-contacts-hint></p>
+                </div>
+                <div class="contact-row contact-head" aria-hidden="true"><span>Ad Soyad</span><span>Vəzifə / münasibət</span><span>Telefon</span><span>E-poçt</span><span></span><span></span></div>
+                <div class="contact-list" data-contact-list>
+                    
+                </div>
+                <p class="note" data-contacts-empty hidden>Əlaqəli şəxs əlavə edilməyib.</p>
+                <button type="button" class="btn btn-small" data-add-contact>+ Əlaqəli şəxs əlavə et</button>
+                <template data-contact-template>
+                    <div class="contact-row" data-contact-row>
+                        <input name="contactName" placeholder="Ad Soyad" aria-label="Ad Soyad" value="" required>
+                        <input name="contactRole" placeholder="Vəzifə / münasibət" aria-label="Vəzifə / münasibət" value="">
+                        <input name="contactPhone" type="tel" placeholder="Telefon" aria-label="Telefon" value="" required>
+                        <input name="contactEmail" type="email" placeholder="E-poçt" aria-label="E-poçt" value="">
+                        <label class="check contact-primary" title="Əsas əlaqəli şəxs"><input type="radio" name="primaryContact"> Əsas</label>
+                        <button type="button" class="btn btn-ghost btn-small" data-remove-contact aria-label="Əlaqəli şəxsi sil">✕</button>
+                    </div>
+                </template>
+            </div>
+            <p class="flash flash-error dialog-error" role="alert" data-form-error hidden></p>
             <div class="form-actions">
                 <button type="button" class="btn" data-close-customer>Ləğv et</button>
                 <button type="submit" class="btn btn-primary">Müştərini yarat</button>
             </div>
         </form>
     </dialog>
-    <script>
-        (() => {
-            const dialog = document.getElementById('customer-dialog');
-            const form = document.getElementById('customer-form');
-            const select = document.getElementById('customer-select');
-            const error = form.querySelector('.dialog-error');
-            const legal = form.querySelector('[data-legal]');
-            const company = form.querySelector('input[name="companyName"]');
-
-            const syncType = () => {
-                const isLegal = form.querySelector('input[name="type"]:checked').value === 'HUQUQI';
-                legal.hidden = !isLegal;
-                company.required = isLegal;
-            };
-            form.querySelectorAll('input[name="type"]').forEach(r => r.addEventListener('change', syncType));
-
-            document.querySelector('[data-open-customer]').addEventListener('click', () => {
-                form.reset();
-                error.hidden = true;
-                syncType();
-                dialog.showModal();
-            });
-            form.querySelectorAll('[data-close-customer]').forEach(b => b.addEventListener('click', () => dialog.close()));
-
-            form.addEventListener('submit', event => {
-                event.preventDefault();
-                const data = Object.fromEntries(new FormData(form));
-                const person = data.firstName.trim() + ' ' + data.lastName.trim();
-                const label = (data.type === 'HUQUQI' ? data.companyName.trim() + ' · ' + person : person)
-                        + ' · ' + data.phone.trim();
-                select.add(new Option(label, 'new-' + Date.now(), true, true));
-                dialog.close();
-            });
-        })();
-    </script>
+    <script src="js/customers.js"></script>
 
 </main>
     </div>
