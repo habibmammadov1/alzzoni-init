@@ -90,29 +90,133 @@
     <div>
         <div class="eyebrow">Mərhələ 9</div>
         <h1>İstehsal</h1>
-        <p>Sexlərə ötürülmüş sifarişlər. Proseslər resept və dizayn üzrə qeyd olunur.</p>
+        <p>Hər sifariş üçün sexlərin başlama və bitmə tarixini təyin edin. Bir sex digərindən asılıdırsa, qeyd edin; qrafik avtomatik yenilənir.</p>
     </div>
 </div>
-    <section class="card">
+    <nav class="page-tabs page-tabs-scroll" aria-label="İstehsal sexləri"><a href="production.html" class="active">Ümumi istehsal</a><a href="production-sex-1.html">Sex 1 · Laminasiya (korpus) <span class="tab-count">2</span></a><a href="production-sex-2.html">Sex 2 · Yumşaq <span class="tab-count">2</span></a><a href="production-sex-3.html">Sex 3 · Çilingər sexi <span class="tab-count">1</span></a><a href="production-sex-4.html">Sex 4 · Boya sexi <span class="tab-count">2</span></a></nav>
+
+    <section class="status-strip" aria-label="Sexlər"><a class="status-tile" href="production-sex-1.html"><strong>2</strong><span>Sex 1 · Laminasiya (korpus)</span></a><a class="status-tile" href="production-sex-2.html"><strong>2</strong><span>Sex 2 · Yumşaq</span></a><a class="status-tile" href="production-sex-3.html"><strong>1</strong><span>Sex 3 · Çilingər sexi</span></a><a class="status-tile" href="production-sex-4.html"><strong>2</strong><span>Sex 4 · Boya sexi</span></a></section>
+    <div class="prod-legend">
+        <span class="muted">Hazırlanma tarixinə görə (bu gün 26.11.2026):</span>
+        <span class="badge badge-red">Kritik · 2 gün və az</span>
+        <span class="badge badge-yellow">Yaxınlaşır · 3–5 gün</span>
+        <span class="badge badge-green">Normal · 5 gündən çox</span>
+    </div>
+
+    <p class="note prod-rule">Xammallar sexdən-sexə verilmir: hər sex öz xammalını anbardan alır.</p>
+
+    <section class="card prod-order" id="SF-2026-0002" data-deadline="2026-11-27" data-today="2026-11-26">
+        <div class="card-head prod-order-head">
+            <div>
+                <h2><a href="order-SF-2026-0002.html">SF-2026-0002</a> · Yumşaq divan</h2>
+                <p class="muted"><a class="muted" href="customer-2.html">Xəzər Otel</a> · 2 ədəd · hazırlanma tarixi 27.11.2026</p>
+            </div>
+            <span class="badge badge-red" title="Hazırlanma tarixi 27.11.2026">Kritik · 1 gün qalıb</span>
+        </div>
         <div class="table-wrap">
-            <table class="table">
-                <thead><tr><th>Sifariş</th><th>Müştəri</th><th>Məhsul</th><th>Növ</th><th class="num">Miqdar</th><th>Menecer</th><th>Status</th><th></th></tr></thead>
+            <table class="table prod-plan">
+                <thead><tr><th>Sex</th><th>Başlama</th><th>Bitmə</th><th>Asılılıq</th><th>Vəziyyət</th></tr></thead>
                 <tbody>
-                <tr>
-                    <td><a href="order-SF-2026-0002.html">SF-2026-0002</a></td>
-                    <td>Xəzər Otel</td>
-                    <td>Yumşaq divan</td>
-                    <td>Mövcud məhsul</td>
-                    <td class="num">2</td>
-                    <td>Nigar Həsənova</td>
-                    <td><span class="badge badge-purple">İstehsalda</span></td>
-                    <td class="actions"><a class="btn btn-small" href="production-SF-2026-0002.html">Prosesləri aç</a></td>
-                </tr>
-                
+                    <tr data-sex="3" data-state="done">
+                        <td class="nowrap"><a href="production-sex-3.html"><span class="sex-no">Sex 3</span></a> Çilingər sexi</td>
+                        <td><input type="date" value="2026-11-17" data-start aria-label="Başlama"></td>
+                        <td><input type="date" value="2026-11-19" data-end aria-label="Bitmə"></td>
+                        <td><select data-dep aria-label="Asılılıq"><option value="">Asılı deyil</option><option value="2">Sex 2 bitəndən sonra</option></select></td>
+                        <td class="nowrap"><span class="state state-done">Bitib</span> <small class="muted">1/1</small></td>
+                    </tr>
+                    <tr data-sex="2" data-state="active">
+                        <td class="nowrap"><a href="production-sex-2.html"><span class="sex-no">Sex 2</span></a> Yumşaq</td>
+                        <td><input type="date" value="2026-11-19" data-start aria-label="Başlama"></td>
+                        <td><input type="date" value="2026-11-27" data-end aria-label="Bitmə"></td>
+                        <td><select data-dep aria-label="Asılılıq"><option value="">Asılı deyil</option><option value="3" selected>Sex 3 bitəndən sonra</option></select></td>
+                        <td class="nowrap"><span class="state state-active">Davam edir</span> <small class="muted">1/2</small></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
+        <p class="prod-warn" data-warn hidden></p>
+        <div class="gantt" data-gantt aria-label="SF-2026-0002 istehsal qrafiki"></div>
     </section>
+    <section class="card prod-order" id="SF-2026-0004" data-deadline="2026-11-29" data-today="2026-11-26">
+        <div class="card-head prod-order-head">
+            <div>
+                <h2><a href="order-SF-2026-0004.html">SF-2026-0004</a> · Fərdi qonaq otağı dəsti</h2>
+                <p class="muted"><a class="muted" href="customer-7.html">Ramil Məmmədov</a> · 1 ədəd · hazırlanma tarixi 29.11.2026</p>
+            </div>
+            <span class="badge badge-yellow" title="Hazırlanma tarixi 29.11.2026">Yaxınlaşır · 3 gün qalıb</span>
+        </div>
+        <div class="table-wrap">
+            <table class="table prod-plan">
+                <thead><tr><th>Sex</th><th>Başlama</th><th>Bitmə</th><th>Asılılıq</th><th>Vəziyyət</th></tr></thead>
+                <tbody>
+                    <tr data-sex="1" data-state="active">
+                        <td class="nowrap"><a href="production-sex-1.html"><span class="sex-no">Sex 1</span></a> Laminasiya (korpus)</td>
+                        <td><input type="date" value="2026-11-23" data-start aria-label="Başlama"></td>
+                        <td><input type="date" value="2026-11-27" data-end aria-label="Bitmə"></td>
+                        <td><select data-dep aria-label="Asılılıq"><option value="">Asılı deyil</option><option value="2">Sex 2 bitəndən sonra</option><option value="4">Sex 4 bitəndən sonra</option></select></td>
+                        <td class="nowrap"><span class="state state-active">Davam edir</span> <small class="muted">1/2</small></td>
+                    </tr>
+                    <tr data-sex="2" data-state="active">
+                        <td class="nowrap"><a href="production-sex-2.html"><span class="sex-no">Sex 2</span></a> Yumşaq</td>
+                        <td><input type="date" value="2026-11-22" data-start aria-label="Başlama"></td>
+                        <td><input type="date" value="2026-11-28" data-end aria-label="Bitmə"></td>
+                        <td><select data-dep aria-label="Asılılıq"><option value="">Asılı deyil</option><option value="1">Sex 1 bitəndən sonra</option><option value="4">Sex 4 bitəndən sonra</option></select></td>
+                        <td class="nowrap"><span class="state state-active">Davam edir</span> <small class="muted">1/2</small></td>
+                    </tr>
+                    <tr data-sex="4" data-state="planned">
+                        <td class="nowrap"><a href="production-sex-4.html"><span class="sex-no">Sex 4</span></a> Boya sexi</td>
+                        <td><input type="date" value="2026-11-27" data-start aria-label="Başlama"></td>
+                        <td><input type="date" value="2026-11-29" data-end aria-label="Bitmə"></td>
+                        <td><select data-dep aria-label="Asılılıq"><option value="">Asılı deyil</option><option value="1" selected>Sex 1 bitəndən sonra</option><option value="2">Sex 2 bitəndən sonra</option></select></td>
+                        <td class="nowrap"><span class="state state-planned">Başlamayıb</span> <small class="muted">0/1</small></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="prod-warn" data-warn hidden></p>
+        <div class="gantt" data-gantt aria-label="SF-2026-0004 istehsal qrafiki"></div>
+    </section>
+    <section class="card prod-order" id="SF-2026-0003" data-deadline="2026-12-01" data-today="2026-11-26">
+        <div class="card-head prod-order-head">
+            <div>
+                <h2><a href="order-SF-2026-0003.html">SF-2026-0003</a> · Metal ayaqlı stol</h2>
+                <p class="muted"><a class="muted" href="customer-3.html">Ofis Evi MMC</a> · 30 ədəd · hazırlanma tarixi 01.12.2026</p>
+            </div>
+            <span class="badge badge-yellow" title="Hazırlanma tarixi 01.12.2026">Yaxınlaşır · 5 gün qalıb</span>
+        </div>
+        <div class="table-wrap">
+            <table class="table prod-plan">
+                <thead><tr><th>Sex</th><th>Başlama</th><th>Bitmə</th><th>Asılılıq</th><th>Vəziyyət</th></tr></thead>
+                <tbody>
+                    <tr data-sex="3" data-state="active">
+                        <td class="nowrap"><a href="production-sex-3.html"><span class="sex-no">Sex 3</span></a> Çilingər sexi</td>
+                        <td><input type="date" value="2026-11-20" data-start aria-label="Başlama"></td>
+                        <td><input type="date" value="2026-11-27" data-end aria-label="Bitmə"></td>
+                        <td><select data-dep aria-label="Asılılıq"><option value="">Asılı deyil</option><option value="1">Sex 1 bitəndən sonra</option><option value="4">Sex 4 bitəndən sonra</option></select></td>
+                        <td class="nowrap"><span class="state state-active">Davam edir</span> <small class="muted">0/1</small></td>
+                    </tr>
+                    <tr data-sex="1" data-state="active">
+                        <td class="nowrap"><a href="production-sex-1.html"><span class="sex-no">Sex 1</span></a> Laminasiya (korpus)</td>
+                        <td><input type="date" value="2026-11-21" data-start aria-label="Başlama"></td>
+                        <td><input type="date" value="2026-11-26" data-end aria-label="Bitmə"></td>
+                        <td><select data-dep aria-label="Asılılıq"><option value="">Asılı deyil</option><option value="3">Sex 3 bitəndən sonra</option><option value="4">Sex 4 bitəndən sonra</option></select></td>
+                        <td class="nowrap"><span class="state state-active">Davam edir</span> <small class="muted">1/2</small></td>
+                    </tr>
+                    <tr data-sex="4" data-state="planned">
+                        <td class="nowrap"><a href="production-sex-4.html"><span class="sex-no">Sex 4</span></a> Boya sexi</td>
+                        <td><input type="date" value="2026-11-27" data-start aria-label="Başlama"></td>
+                        <td><input type="date" value="2026-11-30" data-end aria-label="Bitmə"></td>
+                        <td><select data-dep aria-label="Asılılıq"><option value="">Asılı deyil</option><option value="3" selected>Sex 3 bitəndən sonra</option><option value="1">Sex 1 bitəndən sonra</option></select></td>
+                        <td class="nowrap"><span class="state state-planned">Başlamayıb</span> <small class="muted">0/1</small></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="prod-warn" data-warn hidden></p>
+        <div class="gantt" data-gantt aria-label="SF-2026-0003 istehsal qrafiki"></div>
+    </section>
+
+    <script src="js/production.js"></script>
 </main>
     </div>
 </div>

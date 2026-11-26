@@ -23,7 +23,7 @@ Sonra http://localhost:4321 ünvanını açın.
 | Xammal təminatı | `supply.html`, `supply-SF-2026-0004.html` |
 | Satınalma | `purchasing.html` (mütəxəssis: alırıq + tarix və ya imtina), `purchasing-review.html` (müdir: cavablara baxış) |
 | Anbar | `warehouse.html` |
-| İstehsal | `production.html`, `production-SF-2026-0002.html` |
+| İstehsal | `production.html` (sexlərin tarixləri, asılılıq, qrafik), `production-sex-<1-4>.html` (sexin sifarişləri, proseslər, qeyd) |
 | Hesabatlar | `reports.html` (tamamlanmış sifarişlər), `report-<nömrə>.html` (sifarişin kalkulyasiya hesabatı) |
 | Məlumatlar | `customers.html`, `customers-huquqi.html`, `customers-fiziki.html`, `customer-<id>.html`, `customer-new.html`, `recipes.html`, `recipe-<kod>.html`, `materials.html` |
 | Sistem | `profile.html`, `users.html`, `user-<id>.html`, `user-new.html`, `settings.html` |
