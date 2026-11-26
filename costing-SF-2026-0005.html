@@ -114,7 +114,7 @@
                 <table class="table" id="cost-lines">
                     <thead><tr><th>Xammal</th><th>Sex</th><th class="num">Lazım olan</th><th class="num">Real qalıq</th><th class="num">Rezerv</th><th class="num">Sərbəst</th><th class="num">Satınalmaya</th><th class="num">Son alış qiyməti</th><th class="num">Məbləğ</th></tr></thead>
                     <tbody>
-                    <tr data-qty="7" data-total="12" data-name="MDF lövhə 16 mm" data-unit="ədəd" data-real="22" data-reserve="12" data-buy="2" data-sexes="Laminasiya:7;Yumşaq:5">
+                    <tr data-qty="7" data-name="MDF lövhə 16 mm" data-sex="Laminasiya sexi" data-unit="ədəd" data-real="22" data-reserve="12" data-buy="0">
                         <td>MDF lövhə 16 mm</td>
                         <td>Laminasiya sexi</td>
                         <td class="num">7 ədəd</td>
@@ -125,7 +125,7 @@
                         <td class="num"><span data-price="38.00">38.00 AZN</span></td>
                         <td class="num" data-amount></td>
                     </tr>
-                    <tr data-qty="5">
+                    <tr data-qty="5" data-name="MDF lövhə 16 mm" data-sex="Yumşaq sexi" data-unit="ədəd" data-real="22" data-reserve="12" data-buy="2">
                         <td>MDF lövhə 16 mm</td>
                         <td>Yumşaq sexi</td>
                         <td class="num">5 ədəd</td>
@@ -136,7 +136,7 @@
                         <td class="num"><span data-price="38.00">38.00 AZN</span></td>
                         <td class="num" data-amount></td>
                     </tr>
-                    <tr data-qty="4" data-name="Dekorativ aksesuar (xüsusi)" data-unit="ədəd" data-real="0" data-reserve="0" data-buy="4" data-sexes="Yumşaq:4">
+                    <tr data-qty="4" data-name="Dekorativ aksesuar (xüsusi)" data-unit="ədəd" data-real="0" data-reserve="0" data-buy="4" data-sex="Yumşaq sexi">
                         <td>Dekorativ aksesuar (xüsusi)</td>
                         <td>Yumşaq sexi</td>
                         <td class="num">4 ədəd</td>
@@ -147,7 +147,7 @@
                         <td class="num"><input class="input-price" type="number" min="0.01" step="0.01" required name="price_XM-009" value="" placeholder="Əl ilə" aria-label="Qiymət: Dekorativ aksesuar (xüsusi)"></td>
                         <td class="num" data-amount></td>
                     </tr>
-                    <tr data-qty="2" data-name="Metal ayaq dəsti" data-unit="dəst" data-real="6" data-reserve="5" data-buy="1" data-sexes="Çilingər:2">
+                    <tr data-qty="2" data-name="Metal ayaq dəsti" data-unit="dəst" data-real="6" data-reserve="5" data-buy="1" data-sex="Çilingər sexi">
                         <td>Metal ayaq dəsti</td>
                         <td>Çilingər sexi</td>
                         <td class="num">2 dəst</td>
@@ -237,7 +237,7 @@
             </div>
             <div class="table-wrap">
                 <table class="table purchase-table">
-                    <thead><tr><th>Xammal və sex</th><th class="num">Lazım olan</th><th class="num">Real qalıq</th><th class="num">Rezerv</th><th class="num">Alınmalı</th><th>Nə vaxt lazımdır</th></tr></thead>
+                    <thead><tr><th>Xammal</th><th>Sex</th><th class="num">Lazım olan</th><th class="num">Real qalıq</th><th class="num">Rezerv</th><th class="num">Alınmalı</th><th>Nə vaxt lazımdır</th></tr></thead>
                     <tbody data-purchase-rows></tbody>
                 </table>
             </div>
@@ -257,18 +257,15 @@
             const sent = document.querySelector('[data-purchase-sent]');
             const rows = [...document.querySelectorAll('#cost-lines tbody tr[data-name]')];
             const fmt = v => String(v).replace('.', ',');
-            const sexChips = d => !d.sexes ? '' : '<div class="sex-split">' + d.sexes.split(';').map(x => {
-                const [name, qty] = x.split(':');
-                return `<span class="sex-chip">${name} sexi <b>${fmt(qty)} ${d.unit}</b></span>`;
-            }).join('') + '</div>';
             const buyCount = rows.filter(r => +r.dataset.buy > 0).length;
             document.querySelector('[data-buy-count]').textContent = buyCount + ' xammal';
 
             tbody.innerHTML = rows.map((r, i) => {
                 const d = r.dataset, buy = +d.buy;
                 return `<tr${buy ? '' : ' class="is-muted"'}>
-                    <td>${d.name}${sexChips(d)}</td>
-                    <td class="num">${fmt(d.total || d.qty)} ${d.unit}</td>
+                    <td>${d.name}</td>
+                    <td class="nowrap">${d.sex}</td>
+                    <td class="num">${fmt(d.qty)} ${d.unit}</td>
                     <td class="num">${fmt(d.real)} ${d.unit}</td>
                     <td class="num">${fmt(d.reserve)} ${d.unit}</td>
                     <td class="num">${buy ? `<strong>${fmt(buy)} ${d.unit}</strong>` : '<span class="badge badge-green">Anbarda var</span>'}</td>
