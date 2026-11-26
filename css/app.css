@@ -334,6 +334,15 @@ input[type=checkbox], input[type=radio] { width: auto; padding: 0; accent-color:
 .table td.stacked { line-height: 1.5; }
 .table td.stacked .badge { display: flex; width: fit-content; margin-top: 4px; }
 .table td.stacked .badge:first-child { margin-top: 0; }
+.general-flash { margin: 0 26px 12px; }
+.general-table tr.is-off td { color: var(--faint); }
+.general-table tr.is-off .badge { opacity: .5; }
+.general-table .check { font-weight: 500; }
+.general-table input[type=number] { width: 110px; padding: 6px 40px 6px 10px; }
+.qty-unit { position: relative; display: inline-block; }
+.qty-unit span { position: absolute; top: 50%; right: 10px; transform: translateY(-50%); color: var(--faint); font-size: 12px; font-weight: 400; pointer-events: none; }
+.general-count { margin-right: auto; font-size: 13px; }
+.table tr.is-new td { background: var(--green-soft); }
 .answer-done { color: var(--ink); font-size: 13.5px; font-weight: 500; margin-right: 4px; }
 .review-filter { flex-wrap: wrap; }
 .report-filter { flex-wrap: wrap; }

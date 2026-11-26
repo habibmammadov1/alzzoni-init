@@ -88,6 +88,7 @@
             <h1>Satınalma</h1>
             <p>Kalkulyasiyadan gələn hər xammala istehsaldan qabaq konkret cavab verin: ya hansı tarixə alınacağını yazın, ya da imtina edin.</p>
         </div>
+        <div class="head-actions"><button class="btn btn-primary" type="button" data-open-general>+ Ümumişlək xammal sifarişi</button></div>
     </div>
     <nav class="page-tabs" aria-label="Satınalma ekranları"><a href="purchasing.html" class="active">Tələblər və cavab</a><a href="purchasing-review.html">Cavablara baxış (müdir)</a></nav>
 
@@ -127,6 +128,42 @@
                     <td class="num">4 ədəd</td>
                     <td class="nowrap">08.12.2026</td>
                     <td class="actions" data-answer-cell><button class="btn btn-small btn-primary" type="button" data-answer>Cavab ver</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="card" id="general">
+        <div class="card-head">
+            <h2>Ümumişlək xammallar</h2>
+            <span class="muted">Heç bir sifarişə bağlı olmayan kley, yapışdırıcı və s.</span>
+        </div>
+        <p class="flash flash-success inline-flash general-flash" role="status" data-general-sent hidden></p>
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Nömrə</th><th>Xammal</th><th class="num">Miqdar</th><th>Nə vaxt lazımdır</th><th>Vəziyyət</th></tr></thead>
+                <tbody data-general-rows>
+                <tr data-request="ÜS-2026-0003" data-item="Silikon kley (şəffaf)" data-qty="24 ədəd" data-need="2026-12-03" data-need-label="03.12.2026">
+                    <td class="nowrap">ÜS-2026-0003 <span class="badge">Ümumi</span></td>
+                    <td>Silikon kley (şəffaf)</td>
+                    <td class="num">24 ədəd</td>
+                    <td class="nowrap">03.12.2026</td>
+                    <td class="actions" data-answer-cell><button class="btn btn-small btn-primary" type="button" data-answer>Cavab ver</button></td>
+                </tr>
+                <tr>
+                    <td class="nowrap">ÜS-2026-0002 <span class="badge">Ümumi</span></td>
+                    <td>PVA kley (D3)<br><small class="muted">Yapışdırıcı Mərkəzi · 2 günə çatdırılır</small></td>
+                    <td class="num">20 kq</td>
+                    <td class="nowrap">30.11.2026</td>
+                    <td class="actions"><span class="answer-done">Alınacaq · 29.11.2026</span> <span class="badge badge-green">Vaxtında</span></td>
+                </tr>
+                <tr>
+                    <td class="nowrap">ÜS-2026-0001 <span class="badge">Ümumi</span></td>
+                    <td>Şurup 4×30<br><small class="muted">Metal Təchizat MMC · qaimə Q-20412</small></td>
+                    <td class="num">5 000 ədəd</td>
+                    <td class="nowrap">22.11.2026</td>
+                    <td class="actions"><span class="badge badge-green">Anbara mədaxil · 20.11.2026</span></td>
                 </tr>
                 </tbody>
             </table>
@@ -281,6 +318,138 @@
                     cell.innerHTML = `<span class="badge badge-red">İmtina · ${form.reason.value}</span>`;
                 }
                 dialog.close();
+            });
+        })();
+    </script>
+    <dialog id="general-dialog" class="dialog dialog-wide" aria-labelledby="general-title">
+        <form class="stack" method="dialog" data-general-form>
+            <div class="dialog-head">
+                <div>
+                    <h2 id="general-title">Ümumişlək xammal sifarişi</h2>
+                    <p class="note">Sifarişə bağlı olmayan xammallar. Lazım olanları seçin, miqdarı və tarixi yazın. Minimumdan az qalanlar avtomatik seçilib.</p>
+                </div>
+                <button type="button" class="btn btn-ghost btn-small" data-close-general aria-label="Bağla">✕</button>
+            </div>
+            <div class="table-wrap">
+                <table class="table purchase-table general-table">
+                    <thead><tr><th>Xammal</th><th class="num">Anbar qalığı</th><th class="num">Minimum</th><th>Miqdar</th><th>Nə vaxt lazımdır</th></tr></thead>
+                    <tbody>
+                    <tr data-name="Silikon kley (şəffaf)" data-unit="ədəd" class="is-low">
+                        <td><label class="check"><input type="checkbox" data-pick checked> <span>Silikon kley (şəffaf)</span></label></td>
+                        <td class="num">6 ədəd <span class="badge badge-red">Az qalıb</span></td>
+                        <td class="num muted">20 ədəd</td>
+                        <td><label class="qty-unit"><input type="number" min="0" step="1" value="34" data-qty aria-label="Miqdar: Silikon kley (şəffaf)"><span>ədəd</span></label></td>
+                        <td><input type="date" data-need aria-label="Nə vaxt lazımdır: Silikon kley (şəffaf)"></td>
+                    </tr>
+                    <tr data-name="PVA kley (D3)" data-unit="kq" class="is-low">
+                        <td><label class="check"><input type="checkbox" data-pick checked> <span>PVA kley (D3)</span></label></td>
+                        <td class="num">8 kq <span class="badge badge-red">Az qalıb</span></td>
+                        <td class="num muted">15 kq</td>
+                        <td><label class="qty-unit"><input type="number" min="0" step="1" value="22" data-qty aria-label="Miqdar: PVA kley (D3)"><span>kq</span></label></td>
+                        <td><input type="date" data-need aria-label="Nə vaxt lazımdır: PVA kley (D3)"></td>
+                    </tr>
+                    <tr data-name="Kontakt yapışdırıcı" data-unit="kq">
+                        <td><label class="check"><input type="checkbox" data-pick> <span>Kontakt yapışdırıcı</span></label></td>
+                        <td class="num">12 kq</td>
+                        <td class="num muted">10 kq</td>
+                        <td><label class="qty-unit"><input type="number" min="0" step="1" value="" data-qty aria-label="Miqdar: Kontakt yapışdırıcı"><span>kq</span></label></td>
+                        <td><input type="date" data-need aria-label="Nə vaxt lazımdır: Kontakt yapışdırıcı"></td>
+                    </tr>
+                    <tr data-name="Montaj köpüyü" data-unit="ədəd" class="is-low">
+                        <td><label class="check"><input type="checkbox" data-pick checked> <span>Montaj köpüyü</span></label></td>
+                        <td class="num">4 ədəd <span class="badge badge-red">Az qalıb</span></td>
+                        <td class="num muted">10 ədəd</td>
+                        <td><label class="qty-unit"><input type="number" min="0" step="1" value="16" data-qty aria-label="Miqdar: Montaj köpüyü"><span>ədəd</span></label></td>
+                        <td><input type="date" data-need aria-label="Nə vaxt lazımdır: Montaj köpüyü"></td>
+                    </tr>
+                    <tr data-name="Şurup 4×30" data-unit="ədəd">
+                        <td><label class="check"><input type="checkbox" data-pick> <span>Şurup 4×30</span></label></td>
+                        <td class="num">3 200 ədəd</td>
+                        <td class="num muted">2 000 ədəd</td>
+                        <td><label class="qty-unit"><input type="number" min="0" step="1" value="" data-qty aria-label="Miqdar: Şurup 4×30"><span>ədəd</span></label></td>
+                        <td><input type="date" data-need aria-label="Nə vaxt lazımdır: Şurup 4×30"></td>
+                    </tr>
+                    <tr data-name="Zımpara kağızı P180" data-unit="vərəq" class="is-low">
+                        <td><label class="check"><input type="checkbox" data-pick checked> <span>Zımpara kağızı P180</span></label></td>
+                        <td class="num">40 vərəq <span class="badge badge-red">Az qalıb</span></td>
+                        <td class="num muted">100 vərəq</td>
+                        <td><label class="qty-unit"><input type="number" min="0" step="1" value="160" data-qty aria-label="Miqdar: Zımpara kağızı P180"><span>vərəq</span></label></td>
+                        <td><input type="date" data-need aria-label="Nə vaxt lazımdır: Zımpara kağızı P180"></td>
+                    </tr>
+                    <tr data-name="Boya həlledicisi" data-unit="l">
+                        <td><label class="check"><input type="checkbox" data-pick> <span>Boya həlledicisi</span></label></td>
+                        <td class="num">18 l</td>
+                        <td class="num muted">10 l</td>
+                        <td><label class="qty-unit"><input type="number" min="0" step="1" value="" data-qty aria-label="Miqdar: Boya həlledicisi"><span>l</span></label></td>
+                        <td><input type="date" data-need aria-label="Nə vaxt lazımdır: Boya həlledicisi"></td>
+                    </tr>
+                    <tr data-name="Kromka bant PVC 0,4 mm" data-unit="m">
+                        <td><label class="check"><input type="checkbox" data-pick> <span>Kromka bant PVC 0,4 mm</span></label></td>
+                        <td class="num">650 m</td>
+                        <td class="num muted">500 m</td>
+                        <td><label class="qty-unit"><input type="number" min="0" step="1" value="" data-qty aria-label="Miqdar: Kromka bant PVC 0,4 mm"><span>m</span></label></td>
+                        <td><input type="date" data-need aria-label="Nə vaxt lazımdır: Kromka bant PVC 0,4 mm"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="flash flash-error inline-flash" data-general-error hidden></p>
+            <div class="form-actions">
+                <span class="muted general-count" data-general-count></span>
+                <button type="button" class="btn" data-close-general>Ləğv et</button>
+                <button class="btn btn-primary" type="submit">Satınalmaya göndər</button>
+            </div>
+        </form>
+    </dialog>
+    <script>
+        (() => {
+            const dialog = document.getElementById('general-dialog');
+            const form = dialog.querySelector('form');
+            const body = document.querySelector('[data-general-rows]');
+            const error = dialog.querySelector('[data-general-error]');
+            const count = dialog.querySelector('[data-general-count]');
+            const sent = document.querySelector('[data-general-sent]');
+            let next = 4;
+            const rows = () => [...dialog.querySelectorAll('tbody tr')];
+            const picked = () => rows().filter(r => r.querySelector('[data-pick]').checked);
+            const sync = () => {
+                rows().forEach(r => {
+                    const on = r.querySelector('[data-pick]').checked;
+                    r.classList.toggle('is-off', !on);
+                    r.querySelector('[data-qty]').disabled = !on;
+                    r.querySelector('[data-need]').disabled = !on;
+                });
+                count.textContent = picked().length + ' xammal seçilib';
+            };
+            document.querySelector('[data-open-general]').addEventListener('click', () => { error.hidden = true; sync(); dialog.showModal(); });
+            dialog.querySelectorAll('[data-close-general]').forEach(b => b.addEventListener('click', () => dialog.close()));
+            form.addEventListener('change', sync);
+            form.addEventListener('submit', e => {
+                e.preventDefault();
+                const list = picked();
+                const bad = list.find(r => !(+r.querySelector('[data-qty]').value > 0) || !r.querySelector('[data-need]').value);
+                if (!list.length || bad) {
+                    error.textContent = !list.length ? 'Ən azı bir xammal seçin.' : `${bad.dataset.name}: miqdar və tarixi yazın.`;
+                    error.hidden = false;
+                    return;
+                }
+                list.forEach(r => {
+                    const no = 'ÜS-2026-' + String(next++).padStart(4, '0');
+                    const qty = r.querySelector('[data-qty]').value + ' ' + r.dataset.unit;
+                    const iso = r.querySelector('[data-need]').value;
+                    const lbl = iso.split('-').reverse().join('.');
+                    body.insertAdjacentHTML('afterbegin', `<tr data-request="${no}" data-item="${r.dataset.name}" data-qty="${qty}" data-need="${iso}" data-need-label="${lbl}" class="is-new">
+                        <td class="nowrap">${no} <span class="badge">Ümumi</span></td>
+                        <td>${r.dataset.name}</td>
+                        <td class="num">${qty}</td>
+                        <td class="nowrap">${lbl}</td>
+                        <td class="actions" data-answer-cell><button class="btn btn-small btn-primary" type="button" data-answer>Cavab ver</button></td>
+                    </tr>`);
+                });
+                dialog.close();
+                sent.textContent = `${list.length} ümumişlək xammal satınalmaya göndərildi. Vəziyyətini bu cədvəldə izləyə bilərsiniz.`;
+                sent.hidden = false;
+                document.getElementById('general').scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         })();
     </script>
