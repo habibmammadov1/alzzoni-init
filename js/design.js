@@ -40,8 +40,8 @@
 
     const template = `
         <div class="mat-row">
-            <span class="mat-search">
-                <input type="search" list="material-list" data-mat-search placeholder="Xammal axtar…" autocomplete="off" aria-label="Xammal">
+            <span class="combo">
+                <button type="button" class="combo-btn is-empty" data-combo aria-haspopup="listbox" aria-label="Xammal"><span data-combo-label>Xammal seçin</span></button>
                 <input type="hidden" data-mat>
             </span>
             <span class="mat-cat" data-cat-label>—</span>
@@ -103,6 +103,120 @@
         line.dataset.qty = total;
     }
 
+    // Xammal seçimi: açılan siyahı, üstündə axtarış
+    function setLabel(line) {
+        const m = byCode[line.querySelector('[data-mat]').value];
+        const label = line.querySelector('[data-combo-label]');
+        label.textContent = m ? m.name : 'Xammal seçin';
+        line.querySelector('[data-combo]').classList.toggle('is-empty', !m);
+    }
+
+    const panel = document.createElement('div');
+    panel.className = 'combo-panel';
+    panel.hidden = true;
+    panel.innerHTML = `<input type="search" class="combo-search" placeholder="Axtar…" aria-label="Xammal axtar" autocomplete="off">
+        <div class="combo-list" role="listbox"></div>`;
+    document.body.append(panel);
+    const search = panel.querySelector('.combo-search');
+    const listBox = panel.querySelector('.combo-list');
+    let current = null;
+
+    function renderList() {
+        const q = search.value.trim().toLowerCase();
+        const selected = current && current.closest('[data-line]').querySelector('[data-mat]').value;
+        let html = '';
+        Object.entries(CATEGORIES).forEach(([k, c]) => {
+            const items = MATERIALS.filter(m => m.cat === k && (!q || m.name.toLowerCase().includes(q) || m.code.toLowerCase().includes(q)));
+            if (!items.length) return;
+            html += `<div class="combo-group">${c.label}</div>` + items.map(m =>
+                `<button type="button" class="combo-opt${m.code === selected ? ' is-selected' : ''}" role="option" data-code="${m.code}"><span>${m.name}</span><small>${m.code}</small></button>`).join('');
+        });
+        listBox.innerHTML = html || '<p class="combo-none">Heç nə tapılmadı</p>';
+        const first = listBox.querySelector('.combo-opt');
+        if (first) first.classList.add('is-active');
+    }
+
+    function place() {
+        const r = current.getBoundingClientRect();
+        const width = Math.max(r.width, 300);
+        panel.style.width = width + 'px';
+        panel.style.left = Math.min(r.left, window.innerWidth - width - 12) + 'px';
+        const below = window.innerHeight - r.bottom;
+        if (below < 320 && r.top > below) {
+            panel.style.top = '';
+            panel.style.bottom = (window.innerHeight - r.top + 4) + 'px';
+        } else {
+            panel.style.bottom = '';
+            panel.style.top = (r.bottom + 4) + 'px';
+        }
+    }
+
+    function openCombo(btn) {
+        btn.scrollIntoView({ block: 'nearest' });
+        current = btn;
+        search.value = '';
+        renderList();
+        panel.hidden = false;
+        btn.classList.add('is-open');
+        place();
+        search.focus();
+        const sel = listBox.querySelector('.is-selected');
+        if (sel) sel.scrollIntoView({ block: 'nearest' });
+    }
+
+    function closeCombo() {
+        if (!current) return;
+        current.classList.remove('is-open');
+        panel.hidden = true;
+        current = null;
+    }
+
+    function choose(code) {
+        const line = current.closest('[data-line]');
+        line.querySelector('[data-mat]').value = code;
+        setLabel(line);
+        compute(line);
+        updateTotals();
+        const btn = current;
+        closeCombo();
+        btn.focus();
+    }
+
+    search.addEventListener('input', renderList);
+    search.addEventListener('keydown', e => {
+        const opts = [...listBox.querySelectorAll('.combo-opt')];
+        let i = opts.findIndex(o => o.classList.contains('is-active'));
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (!opts.length) return;
+            opts[i]?.classList.remove('is-active');
+            i = e.key === 'ArrowDown' ? Math.min(i + 1, opts.length - 1) : Math.max(i - 1, 0);
+            opts[i].classList.add('is-active');
+            opts[i].scrollIntoView({ block: 'nearest' });
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            if (opts[i]) choose(opts[i].dataset.code);
+        } else if (e.key === 'Escape') {
+            const btn = current;
+            closeCombo();
+            btn.focus();
+        }
+    });
+    listBox.addEventListener('click', e => {
+        const opt = e.target.closest('.combo-opt');
+        if (opt) choose(opt.dataset.code);
+    });
+    document.addEventListener('click', e => {
+        const btn = e.target.closest('[data-combo]');
+        if (btn) {
+            if (btn === current) closeCombo(); else openCombo(btn);
+            return;
+        }
+        if (current && !panel.contains(e.target)) closeCombo();
+    });
+    window.addEventListener('resize', () => current && place());
+    window.addEventListener('scroll', () => current && place(), true);
+
     function makeLine(init = {}) {
         const line = document.createElement('div');
         line.className = 'mat-line';
@@ -110,7 +224,7 @@
         line.innerHTML = template;
         if (init.mat) {
             line.querySelector('[data-mat]').value = init.mat;
-            line.querySelector('[data-mat-search]').value = byCode[init.mat].name;
+            setLabel(line);
             line.querySelector('[data-en]').value = init.en ?? '';
             line.querySelector('[data-uzun]').value = init.uzun ?? '';
             line.querySelector('[data-say]').value = init.say ?? '';
@@ -164,11 +278,12 @@
         });
         refresh(card);
 
-        card.querySelector('[data-add]').addEventListener('click', () => {
+        card.querySelector('[data-add]').addEventListener('click', event => {
+            event.stopPropagation();
             const line = makeLine();
             lines.append(line);
             refresh(card);
-            line.querySelector('[data-mat-search]').focus();
+            openCombo(line.querySelector('[data-combo]'));
         });
 
         card.addEventListener('click', event => {
@@ -199,24 +314,12 @@
         });
 
         card.addEventListener('input', event => {
-            if (event.target.matches('[data-mat-search]')) {
-                const line = event.target.closest('[data-line]');
-                const q = event.target.value.trim().toLowerCase();
-                const m = MATERIALS.find(x => x.name.toLowerCase() === q);
-                line.querySelector('[data-mat]').value = m ? m.code : '';
-                event.target.classList.toggle('is-unknown', !!q && !m);
-                compute(line);
-                updateTotals();
-                return;
-            }
             const line = event.target.closest('[data-line]');
             if (!line || !event.target.matches('input[type=number]') || event.target.matches('[data-el-size]')) return;
             compute(line);
             updateTotals();
         });
     });
-
-    document.body.insertAdjacentHTML('beforeend', `<datalist id="material-list">${MATERIALS.map(m => `<option value="${m.name}" label="${CATEGORIES[m.cat].label} · ${m.code}"></option>`).join('')}</datalist>`);
 
     const tabs = [...document.querySelectorAll('[data-tab]')];
     tabs.forEach(tab => tab.addEventListener('click', () => {
