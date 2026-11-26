@@ -642,6 +642,8 @@ a.or-id:hover { color: var(--ink); text-decoration: underline; text-underline-of
 .sex-split { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
 .sex-chip { display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px; border-radius: 999px; background: var(--hover); color: var(--muted); font-size: 12px; font-weight: 400; white-space: nowrap; }
 #cost-lines td:nth-child(2) { white-space: nowrap; }
+.prio-select { width: 58px; padding: 5px 8px; font-size: 13px; }
+#cost-lines tr.is-short td:nth-child(2) { color: var(--red); }
 .sex-chip b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
 .content:has(.order-scroll) { max-width: 1480px; }
 .card.order-scroll { max-height: max(380px, calc(100vh - 290px)); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #d4d4d8 transparent; }

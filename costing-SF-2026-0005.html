@@ -112,33 +112,36 @@
             </div>
             <div class="table-wrap">
                 <table class="table" id="cost-lines">
-                    <thead><tr><th>Xammal</th><th>Sex</th><th class="num">Lazım olan</th><th class="num">Real qalıq</th><th class="num">Rezerv</th><th class="num">Sərbəst</th><th class="num">Satınalmaya</th><th class="num">Son alış qiyməti</th><th class="num">Məbləğ</th></tr></thead>
+                    <thead><tr><th>Xammal</th><th>Sex</th><th>Prioritet</th><th class="num">Lazım olan</th><th class="num">Real qalıq</th><th class="num">Rezerv</th><th class="num">Sərbəst</th><th class="num">Satınalmaya</th><th class="num">Son alış qiyməti</th><th class="num">Məbləğ</th></tr></thead>
                     <tbody>
-                    <tr data-qty="7" data-total="12" data-name="MDF lövhə 16 mm" data-unit="ədəd" data-real="22" data-reserve="12" data-buy="2" data-sexes="Laminasiya:7;Yumşaq:5">
+                    <tr data-group="XM-001" data-sex="Laminasiya" data-qty="7" data-total="12" data-name="MDF lövhə 16 mm" data-unit="ədəd" data-real="22" data-reserve="12" data-buy="2" data-sexes="Laminasiya:7;Yumşaq:5">
                         <td>MDF lövhə 16 mm</td>
                         <td>Laminasiya sexi</td>
+                        <td><select class="prio-select" data-prio aria-label="Prioritet"><option selected>1</option><option>2</option></select></td>
                         <td class="num">7 ədəd</td>
                         <td class="num">22 ədəd</td>
                         <td class="num muted">12 ədəd</td>
                         <td class="num">10 ədəd</td>
-                        <td class="num"><span class="badge badge-green" title="Sərbəst qalıqdan 7 ədəd ayrılır">Anbardan 7</span></td>
+                        <td class="num"><span data-alloc></span></td>
                         <td class="num"><span data-price="38.00">38.00 AZN</span></td>
                         <td class="num" data-amount></td>
                     </tr>
-                    <tr data-qty="5">
+                    <tr data-group="XM-001" data-sex="Yumşaq" data-qty="5">
                         <td>MDF lövhə 16 mm</td>
                         <td>Yumşaq sexi</td>
+                        <td><select class="prio-select" data-prio aria-label="Prioritet"><option>1</option><option selected>2</option></select></td>
                         <td class="num">5 ədəd</td>
                         <td class="num">22 ədəd</td>
                         <td class="num muted">12 ədəd</td>
                         <td class="num">10 ədəd</td>
-                        <td class="num"><span class="badge badge-red" title="Sərbəst qalıqdan 3 ədəd, 2 ədəd satınalmadan">2 ədəd</span></td>
+                        <td class="num"><span data-alloc></span></td>
                         <td class="num"><span data-price="38.00">38.00 AZN</span></td>
                         <td class="num" data-amount></td>
                     </tr>
                     <tr data-qty="4" data-name="Dekorativ aksesuar (xüsusi)" data-unit="ədəd" data-real="0" data-reserve="0" data-buy="4" data-sexes="Yumşaq:4">
                         <td>Dekorativ aksesuar (xüsusi)</td>
                         <td>Yumşaq sexi</td>
+                        <td><span class="muted">—</span></td>
                         <td class="num">4 ədəd</td>
                         <td class="num">0 ədəd</td>
                         <td class="num muted">0 ədəd</td>
@@ -150,6 +153,7 @@
                     <tr data-qty="2" data-name="Metal ayaq dəsti" data-unit="dəst" data-real="6" data-reserve="5" data-buy="1" data-sexes="Çilingər:2">
                         <td>Metal ayaq dəsti</td>
                         <td>Çilingər sexi</td>
+                        <td><span class="muted">—</span></td>
                         <td class="num">2 dəst</td>
                         <td class="num">6 dəst</td>
                         <td class="num muted">5 dəst</td>
@@ -162,7 +166,7 @@
                 </table>
             </div>
             <div class="card-foot">
-                <p class="note"><strong data-buy-count>2 xammal</strong> satınalmaya getməlidir. Sərbəst = real qalıq − rezerv.</p>
+                <p class="note"><strong data-buy-count>2 xammal</strong> satınalmaya getməlidir. Sərbəst = real qalıq − rezerv. Sərbəst qalıq çatmayanda sexlər arasında prioritetə görə bölünür.</p>
                 <button class="btn btn-primary btn-small" type="button" data-open-purchase>Satınalmaya göndər</button>
             </div>
         </section>
@@ -261,22 +265,64 @@
                 const [name, qty] = x.split(':');
                 return `<span class="sex-chip">${name} sexi <b>${fmt(qty)} ${d.unit}</b></span>`;
             }).join('') + '</div>';
-            const buyCount = rows.filter(r => +r.dataset.buy > 0).length;
-            document.querySelector('[data-buy-count]').textContent = buyCount + ' xammal';
+            const all = [...document.querySelectorAll('#cost-lines tbody tr')];
+            const groups = {};
+            all.filter(r => r.dataset.group).forEach(r => (groups[r.dataset.group] ||= []).push(r));
+            const short = {};
 
-            tbody.innerHTML = rows.map((r, i) => {
-                const d = r.dataset, buy = +d.buy;
-                return `<tr${buy ? '' : ' class="is-muted"'}>
-                    <td>${d.name}${sexChips(d)}</td>
-                    <td class="num">${fmt(d.total || d.qty)} ${d.unit}</td>
-                    <td class="num">${fmt(d.real)} ${d.unit}</td>
-                    <td class="num">${fmt(d.reserve)} ${d.unit}</td>
-                    <td class="num">${buy ? `<strong>${fmt(buy)} ${d.unit}</strong>` : '<span class="badge badge-green">Anbarda var</span>'}</td>
-                    <td>${buy ? `<input type="date" name="needBy_${i}" required aria-label="Nə vaxt lazımdır: ${d.name}">` : '<span class="muted">—</span>'}</td>
-                </tr>`;
-            }).join('');
+            const allocate = () => {
+                Object.entries(groups).forEach(([key, list]) => {
+                    const head = list.find(r => r.dataset.name);
+                    let left = Math.max(0, +head.dataset.real - +head.dataset.reserve);
+                    let buy = 0;
+                    short[key] = [];
+                    [...list].sort((x, y) => +x.querySelector('[data-prio]').value - +y.querySelector('[data-prio]').value).forEach(r => {
+                        const qty = +r.dataset.qty, take = Math.min(qty, left), need = qty - take;
+                        left -= take;
+                        buy += need;
+                        const cell = r.querySelector('[data-alloc]');
+                        cell.className = 'badge ' + (need ? 'badge-red' : 'badge-green');
+                        cell.textContent = need ? `${fmt(need)} ${head.dataset.unit}` : `Anbardan ${fmt(take)}`;
+                        cell.title = need ? `Anbardan ${fmt(take)}, satınalmadan ${fmt(need)} ${head.dataset.unit}` : `Sərbəst qalıqdan ${fmt(take)} ${head.dataset.unit} ayrılır`;
+                        r.classList.toggle('is-short', !!need);
+                        if (need) short[key].push([r.dataset.sex, need]);
+                    });
+                    head.dataset.buy = buy;
+                });
+                const count = rows.filter(r => +r.dataset.buy > 0).length;
+                document.querySelector('[data-buy-count]').textContent = count + ' xammal';
+                return count;
+            };
 
-            openBtn.addEventListener('click', () => dialog.showModal());
+            const render = () => {
+                tbody.innerHTML = rows.map((r, i) => {
+                    const d = r.dataset, buy = +d.buy;
+                    const forWho = d.group && short[d.group]?.length
+                        ? '<div class="sex-split">' + short[d.group].map(([sx, n]) => `<span class="sex-chip">${sx} sexi üçün <b>${fmt(n)} ${d.unit}</b></span>`).join('') + '</div>' : '';
+                    return `<tr${buy ? '' : ' class="is-muted"'}>
+                        <td>${d.name}${sexChips(d)}</td>
+                        <td class="num">${fmt(d.total || d.qty)} ${d.unit}</td>
+                        <td class="num">${fmt(d.real)} ${d.unit}</td>
+                        <td class="num">${fmt(d.reserve)} ${d.unit}</td>
+                        <td class="num">${buy ? `<strong>${fmt(buy)} ${d.unit}</strong>${forWho}` : '<span class="badge badge-green">Anbarda var</span>'}</td>
+                        <td>${buy ? `<input type="date" name="needBy_${i}" required aria-label="Nə vaxt lazımdır: ${d.name}">` : '<span class="muted">—</span>'}</td>
+                    </tr>`;
+                }).join('');
+            };
+
+            document.getElementById('cost-lines').addEventListener('change', e => {
+                const sel = e.target.closest('[data-prio]');
+                if (!sel) return;
+                const list = groups[sel.closest('tr').dataset.group];
+                const other = list.map(r => r.querySelector('[data-prio]')).find(o => o !== sel && o.value === sel.value);
+                if (other) other.value = sel.dataset.prev;
+                list.forEach(r => { const p = r.querySelector('[data-prio]'); p.dataset.prev = p.value; });
+                allocate();
+            });
+            all.forEach(r => { const p = r.querySelector('[data-prio]'); if (p) p.dataset.prev = p.value; });
+            let buyCount = allocate();
+
+            openBtn.addEventListener('click', () => { buyCount = allocate(); render(); dialog.showModal(); });
             dialog.querySelectorAll('[data-close-purchase]').forEach(b => b.addEventListener('click', () => dialog.close()));
             form.addEventListener('submit', event => {
                 event.preventDefault();
