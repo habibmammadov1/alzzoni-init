@@ -336,6 +336,13 @@ input[type=checkbox], input[type=radio] { width: auto; padding: 0; accent-color:
 .table td.stacked .badge:first-child { margin-top: 0; }
 .answer-done { color: var(--ink); font-size: 13.5px; font-weight: 500; margin-right: 4px; }
 .review-filter { flex-wrap: wrap; }
+.report-filter { flex-wrap: wrap; }
+.report-tiles .status-tile { cursor: default; }
+.report-tiles .status-tile:hover { transform: none; box-shadow: var(--shadow); }
+.report-tiles .status-tile strong { font-size: 24px; }
+.table tfoot .report-total td { padding-top: 14px; padding-bottom: 14px; border-top: 1px solid var(--ink); color: var(--ink); font-weight: 600; background: var(--row-hover); }
+.eyebrow a { color: inherit; }
+.eyebrow a:hover { color: var(--ink); }
 .review-table td:nth-child(2) { min-width: 170px; }
 .review-table td:nth-child(7) { min-width: 200px; }
 .table td.stacked br + small { display: inline-block; margin-top: 4px; }
