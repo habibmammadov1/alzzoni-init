@@ -92,6 +92,7 @@
         <h1>Müştəri və menecer təsdiqi</h1>
         <p>SF-2026-0009 · Metal ayaqlı stol</p>
     </div>
+    <div class="head-actions"><a class="btn btn-small" href="approval-refused.html">İmtina olunan sifarişlər</a></div>
 </div>
     <div class="columns">
         <section class="card card-pad">
@@ -114,10 +115,6 @@
         <section class="card card-pad">
             <h2>Qiymət</h2>
             <table class="table calc">
-    <tr><td>Xammal maya dəyəri (1 ədəd)</td><td class="num">68.45 AZN</td></tr>
-    <tr><td>Əlavə xərc +25%</td><td class="num">17.11 AZN</td></tr>
-    <tr class="subtotal"><td>Cəmi xərc</td><td class="num">85.56 AZN</td></tr>
-    <tr><td>Gəlir +50%</td><td class="num">42.78 AZN</td></tr>
     <tr class="subtotal"><td>Satış qiyməti (1 ədəd)</td><td class="num">128.34 AZN</td></tr>
     <tr class="grand"><td>Sifariş cəmi (4 ədəd)</td><td class="num">513.36 AZN</td></tr>
 </table>
@@ -133,6 +130,52 @@
         </dl>
     </section>
 
+    <section class="card" id="purchase-plan">
+        <div class="card-head">
+            <h2>Satınalma planı</h2>
+            <a class="muted" href="purchasing-review.html">Bütün satınalma planları →</a>
+        </div>
+        <div class="table-wrap">
+            <table class="table">
+                <thead><tr><th>Xammal</th><th class="num">Lazım olan</th><th>Lazımdır</th><th>Satınalmanın cavabı</th><th>Gələcək</th><th>Qeyd</th></tr></thead>
+                <tbody>
+                <tr>
+                    <td>Laminat lövhə 18 mm</td>
+                    <td class="num">4 ədəd</td>
+                    <td class="nowrap muted">—</td>
+                    <td><span class="badge badge-green">Anbarda var</span></td>
+                    <td class="muted">—</td>
+                    <td class="muted">—</td>
+                </tr>
+                <tr>
+                    <td>Metal profil<br><small class="muted">Metal Təchizat MMC</small></td>
+                    <td class="num">8 m</td>
+                    <td class="nowrap">29.11.2026</td>
+                    <td><span class="badge badge-blue">Alınacaq</span></td>
+                    <td class="nowrap stacked">27.11.2026<span class="badge badge-green">Vaxtında</span></td>
+                    <td class="muted">Anbarda hazırdır</td>
+                </tr>
+                <tr>
+                    <td>Metal ayaq dəsti<br><small class="muted">Metal Təchizat MMC</small></td>
+                    <td class="num">4 dəst</td>
+                    <td class="nowrap">29.11.2026</td>
+                    <td><span class="badge badge-blue">Alınacaq</span></td>
+                    <td class="nowrap stacked">30.11.2026<span class="badge badge-red">1 gün gec</span></td>
+                    <td class="muted">Zavoddan gəlir, 1 gün gecikmə ola bilər</td>
+                </tr>
+                <tr>
+                    <td>Boya (poliuretan)</td>
+                    <td class="num">2 kq</td>
+                    <td class="nowrap">29.11.2026</td>
+                    <td><span class="badge badge-yellow">Cavab gözləyir</span></td>
+                    <td class="muted">—</td>
+                    <td class="muted">—</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
     <div class="columns">
         <form onsubmit="return false" class="card card-pad decision" action="#" method="post">
             <h2>Müştəri razıdır</h2>
@@ -145,7 +188,13 @@
         <form onsubmit="return false" class="card card-pad decision" action="#" method="post">
             <h2>Müştəri razı deyil</h2>
             <input type="hidden" name="approved" value="false">
-            <label>İmtina səbəbi <textarea name="reason" rows="3" required></textarea></label>
+            <label>İmtina səbəbi
+                <select name="reason" required>
+                    <option value="">Səbəb seçin</option>
+                    <option>Qiymət bahadır</option><option>Hazırlanma müddəti uyğun deyil</option><option>Müştəri başqa firma seçdi</option><option>Dizayn müştərini razı salmadı</option><option>Müştəri sifarişdən vaz keçdi</option><option>Digər</option>
+                </select>
+            </label>
+            <label>Qeyd <textarea name="note" rows="2" placeholder="İstəyə görə"></textarea></label>
             <button class="btn btn-danger" type="submit">Prosesi dayandır</button>
         </form>
     </div>
