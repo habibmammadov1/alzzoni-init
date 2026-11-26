@@ -120,7 +120,7 @@
         <span class="tool-meta"><span data-f-count></span><button type="button" class="link-btn" data-f-reset hidden>Təmizlə</button></span>
     </div>
 
-    <section class="card">
+    <section class="card order-scroll" data-order-scroll>
         <div class="order-list" data-order-list>
             <article class="order-row" data-source="alzzoni" data-date="2026-11-18" data-customer="Alzzoni (daxili)" data-status="İstehsalda">
                 <div class="or-main">
@@ -358,6 +358,18 @@
                 }
             });
             pops.forEach(p => p.addEventListener('toggle', () => { if (p.open) pops.forEach(o => o !== p && (o.open = false)); }));
+            const scroller = document.querySelector('[data-order-scroll]');
+            list.querySelectorAll('.row-menu').forEach(menu => menu.addEventListener('toggle', () => {
+                if (!menu.open) return;
+                const panel = menu.querySelector('.menu-panel');
+                const r = menu.querySelector('summary').getBoundingClientRect();
+                const h = panel.offsetHeight;
+                const below = innerHeight - r.bottom > h + 12;
+                Object.assign(panel.style, { position: 'fixed', right: 'auto',
+                    left: Math.max(8, r.right - panel.offsetWidth) + 'px',
+                    top: (below ? r.bottom + 6 : r.top - h - 6) + 'px' });
+            }));
+            scroller.addEventListener('scroll', () => list.querySelectorAll('.row-menu[open]').forEach(m => m.open = false), { passive: true });
             document.addEventListener('click', e => pops.forEach(p => { if (p.open && !p.contains(e.target)) p.open = false; }));
             document.addEventListener('keydown', e => { if (e.key === 'Escape') pops.forEach(p => p.open = false); });
             box.addEventListener('input', apply);
