@@ -128,24 +128,25 @@
             <label class="check"><input type="checkbox" name="specialCustomer" value="true"> Xüsusi müştəri (kənar)</label>
         </section>
 
-        <section class="products-card">
+        <section class="card products-card">
+            <div class="card-head"><h2>Məhsullar</h2></div>
             <div class="prod-list" data-products></div>
-            <button class="btn add-product" type="button" data-add-product>+ Məhsul əlavə et</button>
+            <button class="add-product" type="button" data-add-product>+ Məhsul əlavə et</button>
             <template data-product-template>
-                <article class="card card-pad prod-card" data-product>
-                    <div class="prod-card-head">
-                        <h2 data-product-title>Məhsul</h2>
+                <div class="prod-item" data-product>
+                    <div class="prod-item-head">
+                        <span class="prod-num" data-product-title>1</span>
                         <div class="segmented" role="radiogroup" aria-label="Məhsulun növü">
-                            <label><input type="radio" value="YENI" data-type checked> Yeni</label>
-                            <label><input type="radio" value="MOVCUD" data-type> Mövcud</label>
+                            <label><input type="radio" value="YENI" data-type checked> Yeni məhsul</label>
+                            <label><input type="radio" value="MOVCUD" data-type> Mövcud məhsul</label>
                         </div>
                         <button class="icon-btn" type="button" data-remove-product aria-label="Məhsulu sil" title="Sil">×</button>
                     </div>
                     <div class="prod-fields">
-                        <label data-when="new">Məhsul <input name="product" placeholder="məs. Künc divan"></label>
+                        <label data-when="new">Məhsul <input name="product" placeholder="Məhsulun adı"></label>
                         <label data-when="existing" hidden>Məhsul
                             <select name="recipeCode">
-                                <option value="">Seçin</option>
+                                <option value="">Resept seçin</option>
                                 <option value="HM-001">Dolab 3 qapılı</option>
                                 <option value="HM-002">Yumşaq divan</option>
                                 <option value="HM-003">Metal ayaqlı stol</option>
@@ -153,9 +154,9 @@
                         </label>
                         <label>Miqdar <input name="qty" type="number" min="1" value="1" required></label>
                         <label>İstənilən tarix <input name="requestedDate" type="date" required></label>
+                        <label class="prod-note">Qeyd <input name="note" placeholder="Ölçü, rəng və s. (istəyə görə)"></label>
                     </div>
-                    <label>Qeyd <textarea name="note" rows="2" placeholder="Ölçülər, rəng və s."></textarea></label>
-                </article>
+                </div>
             </template>
         </section>
 
@@ -226,7 +227,7 @@
                 card.querySelector('[name="recipeCode"]').required = !isNew;
             };
             const renumber = () => [...list.children].forEach((card, i, all) => {
-                card.querySelector('[data-product-title]').textContent = all.length > 1 ? 'Məhsul ' + (i + 1) : 'Məhsul';
+                card.querySelector('[data-product-title]').textContent = i + 1;
                 card.querySelector('[data-remove-product]').hidden = all.length === 1;
             });
             const add = () => {
