@@ -40,10 +40,10 @@
 
     const template = `
         <div class="mat-row">
-            <select data-mat aria-label="Xammal">
-                <option value="">Xammal seçin</option>
-                ${Object.entries(CATEGORIES).map(([k, c]) => `<optgroup label="${c.label}">${options(MATERIALS.filter(m => m.cat === k).map(m => [m.code, m.name]), '')}</optgroup>`).join('')}
-            </select>
+            <span class="mat-search">
+                <input type="search" list="material-list" data-mat-search placeholder="Xammal axtar…" autocomplete="off" aria-label="Xammal">
+                <input type="hidden" data-mat>
+            </span>
             <span class="mat-cat" data-cat-label>—</span>
             <input type="number" min="0" step="1" data-en placeholder="En" aria-label="En (mm)">
             <input type="number" min="0" step="1" data-uzun placeholder="Uzun" aria-label="Uzun (mm)">
@@ -110,6 +110,7 @@
         line.innerHTML = template;
         if (init.mat) {
             line.querySelector('[data-mat]').value = init.mat;
+            line.querySelector('[data-mat-search]').value = byCode[init.mat].name;
             line.querySelector('[data-en]').value = init.en ?? '';
             line.querySelector('[data-uzun]').value = init.uzun ?? '';
             line.querySelector('[data-say]').value = init.say ?? '';
@@ -167,7 +168,7 @@
             const line = makeLine();
             lines.append(line);
             refresh(card);
-            line.querySelector('[data-mat]').focus();
+            line.querySelector('[data-mat-search]').focus();
         });
 
         card.addEventListener('click', event => {
@@ -198,12 +199,24 @@
         });
 
         card.addEventListener('input', event => {
+            if (event.target.matches('[data-mat-search]')) {
+                const line = event.target.closest('[data-line]');
+                const q = event.target.value.trim().toLowerCase();
+                const m = MATERIALS.find(x => x.name.toLowerCase() === q);
+                line.querySelector('[data-mat]').value = m ? m.code : '';
+                event.target.classList.toggle('is-unknown', !!q && !m);
+                compute(line);
+                updateTotals();
+                return;
+            }
             const line = event.target.closest('[data-line]');
             if (!line || !event.target.matches('input[type=number]') || event.target.matches('[data-el-size]')) return;
             compute(line);
             updateTotals();
         });
     });
+
+    document.body.insertAdjacentHTML('beforeend', `<datalist id="material-list">${MATERIALS.map(m => `<option value="${m.name}" label="${CATEGORIES[m.cat].label} · ${m.code}"></option>`).join('')}</datalist>`);
 
     const tabs = [...document.querySelectorAll('[data-tab]')];
     tabs.forEach(tab => tab.addEventListener('click', () => {

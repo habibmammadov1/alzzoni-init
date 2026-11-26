@@ -535,6 +535,9 @@ small.muted { display: block; font-weight: 400; }
 .sex-panels { padding: 20px 26px 24px; }
 .sex-panels .sex-card[hidden] { display: none; }
 .sex-panels .sex-card h2 .sex-no { display: none; }
+.mat-search { position: relative; display: block; }
+.mat-row .mat-search input { padding-left: 32px; background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%23a1a1aa' stroke-width='2' stroke-linecap='round' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") no-repeat 11px center; }
+.mat-search input.is-unknown { border-color: var(--red); }
 .mat-cat { display: inline-flex; justify-content: center; padding: 6px 8px; border-radius: 8px; background: var(--row-hover); color: var(--faint); font-size: 12.5px; }
 .mat-cat.is-set { color: var(--text); background: var(--hover); }
 .mat-total td { padding: 9px 0; border-top: 1px solid var(--line); }
