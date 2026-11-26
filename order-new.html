@@ -117,7 +117,6 @@
                         <option value="4">Rauf Quliyev</option>
                     </select>
                 </label>
-                <label>İstənilən tarix <input name="requestedDate" type="date"></label>
             </div>
             <fieldset class="contact-picker" data-contact-picker>
                 <legend>Əlaqəli şəxslər</legend>
@@ -129,32 +128,39 @@
             <label class="check"><input type="checkbox" name="specialCustomer" value="true"> Xüsusi müştəri (kənar)</label>
         </section>
 
-        <section class="card card-pad">
-            <h2>Sifarişin növü</h2>
-            <div class="choice-grid">
-                <label class="choice">
-                    <input type="radio" name="type" required value="YENI" data-design="true" checked="checked">
-                    <strong>Yeni məhsul</strong>
-                    <span>Dizayner hazırlayır, material siyahısı dizayndan gəlir</span>
-                </label><label class="choice">
-                    <input type="radio" name="type" required value="MOVCUD" data-design="false">
-                    <strong>Mövcud məhsul</strong>
-                    <span>Hazır resept və texnoloji kart üzrə istehsal olunur</span>
-                </label>
+        <section class="card card-pad products-card">
+            <div class="card-title-row">
+                <h2>Məhsullar <span class="muted products-count" data-products-count></span></h2>
             </div>
-            <div class="form-grid">
-                <label data-when="design">Məhsulun adı <input name="product"></label>
-                <label data-when="recipe" hidden>Məhsul (resept)
-                    <select name="recipeCode">
-                        <option value="">Seçin</option>
-                        <option value="HM-001">HM-001 · Dolab 3 qapılı</option>
-                        <option value="HM-002">HM-002 · Yumşaq divan</option>
-                        <option value="HM-003">HM-003 · Metal ayaqlı stol</option>
-                    </select>
-                </label>
-                <label>Miqdar <input name="qty" type="number" min="1" value="1" required></label>
-            </div>
-            <label>Qeyd <textarea name="note" rows="2"></textarea></label>
+            <div class="product-list" data-products></div>
+            <button class="btn add-product" type="button" data-add-product>+ Məhsul əlavə et</button>
+            <template data-product-template>
+                <article class="product-card" data-product>
+                    <div class="product-card-head">
+                        <h3 data-product-title>Məhsul 1</h3>
+                        <button class="icon-btn" type="button" data-remove-product aria-label="Məhsulu sil" title="Məhsulu sil">×</button>
+                    </div>
+                    <div class="segmented" role="radiogroup" aria-label="Sifarişin növü">
+                        <label><input type="radio" value="YENI" data-type checked> Yeni məhsul</label>
+                        <label><input type="radio" value="MOVCUD" data-type> Mövcud məhsul</label>
+                    </div>
+                    <p class="note product-hint" data-hint>Dizayner hazırlayır, material siyahısı dizayndan gəlir.</p>
+                    <div class="product-grid">
+                        <label data-when="design">Məhsulun adı <input name="product" placeholder="məs. Künc divan"></label>
+                        <label data-when="recipe" hidden>Məhsul (resept)
+                            <select name="recipeCode">
+                                <option value="">Seçin</option>
+                                <option value="HM-001">HM-001 · Dolab 3 qapılı</option>
+                                <option value="HM-002">HM-002 · Yumşaq divan</option>
+                                <option value="HM-003">HM-003 · Metal ayaqlı stol</option>
+                            </select>
+                        </label>
+                        <label>Miqdar <input name="qty" type="number" min="1" value="1" required></label>
+                        <label>İstənilən tarix <input name="requestedDate" type="date" required></label>
+                    </div>
+                    <label>Qeyd <textarea name="note" rows="2" placeholder="Ölçülər, rəng və s."></textarea></label>
+                </article>
+            </template>
         </section>
 
         <div class="form-actions"><button class="btn btn-primary" type="submit">Sifarişi qeyd et</button></div>
@@ -212,16 +218,59 @@
     <script src="js/customers.js"></script>
 
     <script>
-        const typeInputs = document.querySelectorAll('input[name="type"][data-design]');
-        const syncType = () => {
-            const design = document.querySelector('input[name="type"][data-design]:checked').dataset.design === 'true';
-            document.querySelector('[data-when="design"]').hidden = !design;
-            document.querySelector('[data-when="recipe"]').hidden = design;
-            document.querySelector('input[name="product"]').required = design;
-            document.querySelector('select[name="recipeCode"]').required = !design;
-        };
-        typeInputs.forEach(input => input.addEventListener('change', syncType));
-        syncType();
+        (() => {
+            const list = document.querySelector('[data-products]');
+            const template = document.querySelector('[data-product-template]');
+            const count = document.querySelector('[data-products-count]');
+            let uid = 0;
+
+            const syncType = card => {
+                const design = card.querySelector('[data-type]:checked').value === 'YENI';
+                card.querySelector('[data-when="design"]').hidden = !design;
+                card.querySelector('[data-when="recipe"]').hidden = design;
+                card.querySelector('[name="product"]').required = design;
+                card.querySelector('[name="recipeCode"]').required = !design;
+                card.querySelector('[data-hint]').textContent = design
+                    ? 'Dizayner hazırlayır, material siyahısı dizayndan gəlir.'
+                    : 'Hazır resept və texnoloji kart üzrə istehsal olunur.';
+            };
+
+            const renumber = () => {
+                const cards = [...list.children];
+                cards.forEach((card, i) => {
+                    card.querySelector('[data-product-title]').textContent = 'Məhsul ' + (i + 1);
+                    card.querySelector('[data-remove-product]').hidden = cards.length === 1;
+                });
+                count.textContent = cards.length > 1 ? '· ' + cards.length : '';
+            };
+
+            const addProduct = () => {
+                const card = template.content.firstElementChild.cloneNode(true);
+                const name = 'type-' + (++uid);
+                card.querySelectorAll('[data-type]').forEach(r => r.name = name);
+                list.append(card);
+                syncType(card);
+                renumber();
+                return card;
+            };
+
+            list.addEventListener('change', e => {
+                if (e.target.matches('[data-type]')) syncType(e.target.closest('[data-product]'));
+            });
+            list.addEventListener('click', e => {
+                const btn = e.target.closest('[data-remove-product]');
+                if (!btn || list.children.length === 1) return;
+                btn.closest('[data-product]').remove();
+                renumber();
+            });
+            document.querySelector('[data-add-product]').addEventListener('click', () => {
+                const card = addProduct();
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                card.querySelector('input:not([type=radio])').focus({ preventScroll: true });
+            });
+
+            addProduct();
+        })();
     </script>
 </main>
     </div>
