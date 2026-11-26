@@ -115,8 +115,11 @@
             <label>Texniki məlumatlar <textarea name="technicalNotes" rows="2"></textarea></label>
         </section>
 
-        <p class="note design-hint">Hər sex üçün prosesləri işarələyin və xammalları seçin. Miqdar ölçülərə görə avtomatik hesablanır.</p>
-        <section class="card card-pad sex-card" data-sex="1">
+        <p class="note design-hint">Sexi tabdan seçin, proseslərini işarələyin və xammalları əlavə edin. Kateqoriya xammala görə avtomatik gəlir, miqdar ölçülərə görə hesablanır.</p>
+        <section class="card sex-tabs-card">
+            <div class="sex-tabs" role="tablist" aria-label="Sexlər"><button type="button" role="tab" data-tab="1" aria-selected="true" class="active"><span class="sex-no">Sex 1</span>Laminasiya<span class="tab-count" data-tab-count></span></button><button type="button" role="tab" data-tab="2" aria-selected="false"><span class="sex-no">Sex 2</span>Yumşaq<span class="tab-count" data-tab-count></span></button><button type="button" role="tab" data-tab="3" aria-selected="false"><span class="sex-no">Sex 3</span>Çilingər<span class="tab-count" data-tab-count></span></button><button type="button" role="tab" data-tab="4" aria-selected="false"><span class="sex-no">Sex 4</span>Boya<span class="tab-count" data-tab-count></span></button></div>
+            <div class="sex-panels">
+        <section class="sex-card" data-sex="1" role="tabpanel">
             <div class="card-title-row">
                 <h2><span class="sex-no">Sex 1</span>Laminasiya (korpus)</h2>
                 <button class="btn btn-small" type="button" data-add>+ Xammal</button>
@@ -134,7 +137,7 @@
             <p class="mat-empty" data-empty>Xammal seçilməyib</p>
         </section>
 
-        <section class="card card-pad sex-card" data-sex="2">
+        <section class="sex-card" data-sex="2" role="tabpanel" hidden>
             <div class="card-title-row">
                 <h2><span class="sex-no">Sex 2</span>Yumşaq</h2>
                 <button class="btn btn-small" type="button" data-add>+ Xammal</button>
@@ -148,7 +151,7 @@
             <p class="mat-empty" data-empty>Xammal seçilməyib</p>
         </section>
 
-        <section class="card card-pad sex-card" data-sex="3">
+        <section class="sex-card" data-sex="3" role="tabpanel" hidden>
             <div class="card-title-row">
                 <h2><span class="sex-no">Sex 3</span>Çilingər sexi</h2>
                 <button class="btn btn-small" type="button" data-add>+ Xammal</button>
@@ -162,7 +165,7 @@
             <p class="mat-empty" data-empty>Xammal seçilməyib</p>
         </section>
 
-        <section class="card card-pad sex-card" data-sex="4">
+        <section class="sex-card" data-sex="4" role="tabpanel" hidden>
             <div class="card-title-row">
                 <h2><span class="sex-no">Sex 4</span>Boya sexi</h2>
                 <button class="btn btn-small" type="button" data-add>+ Xammal</button>
@@ -173,6 +176,8 @@
             <div class="mat-lines" data-lines>
             </div>
             <p class="mat-empty" data-empty>Xammal seçilməyib</p>
+        </section>
+            </div>
         </section>
 
         <section class="card card-pad">

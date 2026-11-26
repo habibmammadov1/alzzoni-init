@@ -40,11 +40,11 @@
 
     const template = `
         <div class="mat-row">
-            <select data-cat aria-label="Kateqoriya">
-                <option value="">Kateqoriya</option>
-                ${Object.entries(CATEGORIES).map(([k, c]) => `<option value="${k}">${c.label}</option>`).join('')}
+            <select data-mat aria-label="Xammal">
+                <option value="">Xammal seçin</option>
+                ${Object.entries(CATEGORIES).map(([k, c]) => `<optgroup label="${c.label}">${options(MATERIALS.filter(m => m.cat === k).map(m => [m.code, m.name]), '')}</optgroup>`).join('')}
             </select>
-            <select data-mat disabled aria-label="Xammal"><option value="">Xammal</option></select>
+            <span class="mat-cat" data-cat-label>—</span>
             <input type="number" min="0" step="1" data-en placeholder="En" aria-label="En (mm)">
             <input type="number" min="0" step="1" data-uzun placeholder="Uzun" aria-label="Uzun (mm)">
             <input type="number" min="0" step="1" data-say placeholder="Say" aria-label="Say">
@@ -67,19 +67,13 @@
             <button class="icon-btn" type="button" data-remove-el aria-label="Elementi sil" title="Sil">×</button>
         </div>`;
 
-    function fillMaterials(line, cat, selected) {
-        const select = line.querySelector('[data-mat]');
-        const list = MATERIALS.filter(m => m.cat === cat);
-        select.disabled = !cat;
-        select.innerHTML = cat
-            ? '<option value="">Xammal seçin</option>' + options(list.map(m => [m.code, m.name]), selected)
-            : '<option value="">Xammal</option>';
-    }
-
     function compute(line) {
-        const cat = line.querySelector('[data-cat]').value;
         const material = byCode[line.querySelector('[data-mat]').value];
+        const cat = material ? material.cat : '';
         const c = CATEGORIES[cat];
+        const catLabel = line.querySelector('[data-cat-label]');
+        catLabel.textContent = c ? c.label : '—';
+        catLabel.classList.toggle('is-set', !!c);
         ['en', 'uzun', 'say'].forEach(name => {
             line.querySelector(`[data-${name}]`).classList.toggle('is-off', !!c && !c.fields.includes(name));
         });
@@ -114,9 +108,8 @@
         line.className = 'mat-line';
         line.dataset.line = '';
         line.innerHTML = template;
-        if (init.cat) {
-            line.querySelector('[data-cat]').value = init.cat;
-            fillMaterials(line, init.cat, init.mat);
+        if (init.mat) {
+            line.querySelector('[data-mat]').value = init.mat;
             line.querySelector('[data-en]').value = init.en ?? '';
             line.querySelector('[data-uzun]').value = init.uzun ?? '';
             line.querySelector('[data-say]').value = init.say ?? '';
@@ -132,6 +125,8 @@
         const has = lines.children.length > 0;
         card.querySelector('[data-empty]').hidden = has;
         card.querySelector('.mat-cols').hidden = !has;
+        const tab = document.querySelector(`[data-tab="${card.dataset.sex}"] [data-tab-count]`);
+        if (tab) tab.textContent = lines.children.length || '';
     }
 
     function updateTotals() {
@@ -161,7 +156,7 @@
         const lines = card.querySelector('[data-lines]');
         lines.insertAdjacentHTML('beforebegin', `
             <div class="mat-cols" aria-hidden="true">
-                <span>Kateqoriya</span><span>Xammal</span><span>En, mm</span><span>Uzun, mm</span><span>Say</span><span>İtki</span><span class="num">Lazım olan</span><span></span>
+                <span>Xammal</span><span>Kateqoriya</span><span>En, mm</span><span>Uzun, mm</span><span>Say</span><span>İtki</span><span class="num">Lazım olan</span><span></span>
             </div>`);
         lines.querySelectorAll('[data-init]').forEach(holder => {
             holder.replaceWith(makeLine(JSON.parse(holder.dataset.init)));
@@ -172,7 +167,7 @@
             const line = makeLine();
             lines.append(line);
             refresh(card);
-            line.querySelector('[data-cat]').focus();
+            line.querySelector('[data-mat]').focus();
         });
 
         card.addEventListener('click', event => {
@@ -198,7 +193,6 @@
         card.addEventListener('change', event => {
             const line = event.target.closest('[data-line]');
             if (!line || event.target.closest('[data-el]')) return;
-            if (event.target.matches('[data-cat]')) fillMaterials(line, event.target.value, '');
             compute(line);
             updateTotals();
         });
@@ -210,6 +204,16 @@
             updateTotals();
         });
     });
+
+    const tabs = [...document.querySelectorAll('[data-tab]')];
+    tabs.forEach(tab => tab.addEventListener('click', () => {
+        tabs.forEach(t => {
+            const on = t === tab;
+            t.classList.toggle('active', on);
+            t.setAttribute('aria-selected', on);
+            document.querySelector(`.sex-card[data-sex="${t.dataset.tab}"]`).hidden = !on;
+        });
+    }));
 
     updateTotals();
 })();
