@@ -106,49 +106,54 @@
 
     <form onsubmit="return false" class="stack" action="#" method="post">
         <section class="card">
-            <div class="card-head"><h2>Xammal maya dəyəri (1 ədəd məhsul)</h2></div>
+            <div class="card-head">
+                <h2>Xammal maya dəyəri və anbar qalığı</h2>
+                <span class="muted">1 ədəd məhsul üçün</span>
+            </div>
             <div class="table-wrap">
                 <table class="table" id="cost-lines">
-                    <thead><tr><th>Material</th><th>Növ</th><th class="num">Miqdar</th><th class="num">Son alış qiyməti</th><th class="num">Anbar qalığı</th><th class="num">Məbləğ</th></tr></thead>
+                    <thead><tr><th>Xammal</th><th class="num">Lazım olan</th><th class="num">Real qalıq</th><th class="num">Rezerv</th><th class="num">Sərbəst</th><th class="num">Satınalmaya</th><th class="num">Son alış qiyməti</th><th class="num">Məbləğ</th></tr></thead>
                     <tbody>
-                    <tr data-qty="5">
+                    <tr data-qty="5" data-name="MDF lövhə 16 mm" data-unit="ədəd" data-real="30" data-reserve="12" data-buy="0">
                         <td>MDF lövhə 16 mm</td>
-                        <td>Xammal</td>
                         <td class="num">5 ədəd</td>
-                        <td class="num">
-                            <span data-price="38.00">38.00 AZN</span>
-                            
-                        </td>
                         <td class="num">30 ədəd</td>
+                        <td class="num muted">12 ədəd</td>
+                        <td class="num">18 ədəd</td>
+                        <td class="num"><span class="badge badge-green">Anbarda var</span></td>
+                        <td class="num"><span data-price="38.00">38.00 AZN</span></td>
                         <td class="num" data-amount></td>
                     </tr>
-                    <tr data-qty="4">
+                    <tr data-qty="4" data-name="Dekorativ aksesuar (xüsusi)" data-unit="ədəd" data-real="0" data-reserve="0" data-buy="4">
                         <td>Dekorativ aksesuar (xüsusi)</td>
-                        <td>Xammal</td>
                         <td class="num">4 ədəd</td>
-                        <td class="num">
-                            
-                            <input class="input-price" type="number" min="0.01" step="0.01" required
-                                   name="price_XM-009" value="" placeholder="Əl ilə" aria-label="Qiymət: Dekorativ aksesuar (xüsusi)">
-                        </td>
                         <td class="num">0 ədəd</td>
+                        <td class="num muted">0 ədəd</td>
+                        <td class="num">0 ədəd</td>
+                        <td class="num"><span class="badge badge-red">4 ədəd</span></td>
+                        <td class="num"><input class="input-price" type="number" min="0.01" step="0.01" required name="price_XM-009" value="" placeholder="Əl ilə" aria-label="Qiymət: Dekorativ aksesuar (xüsusi)"></td>
                         <td class="num" data-amount></td>
                     </tr>
-                    <tr data-qty="2">
+                    <tr data-qty="2" data-name="Metal ayaq dəsti" data-unit="dəst" data-real="6" data-reserve="5" data-buy="1">
                         <td>Metal ayaq dəsti</td>
-                        <td>Yarımfabrikat</td>
                         <td class="num">2 dəst</td>
-                        <td class="num">
-                            <span data-price="23.00">23.00 AZN</span>
-                            
-                        </td>
-                        <td class="num">0 dəst</td>
+                        <td class="num">6 dəst</td>
+                        <td class="num muted">5 dəst</td>
+                        <td class="num">1 dəst</td>
+                        <td class="num"><span class="badge badge-red">1 dəst</span></td>
+                        <td class="num"><span data-price="23.00">23.00 AZN</span></td>
                         <td class="num" data-amount></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
+            <div class="card-foot">
+                <p class="note"><strong data-buy-count>2 xammal</strong> satınalmaya getməlidir. Sərbəst = real qalıq − rezerv.</p>
+                <button class="btn btn-primary btn-small" type="button" data-open-purchase>Satınalmaya göndər</button>
+            </div>
         </section>
+
+        <p class="flash flash-success inline-flash" role="status" data-purchase-sent hidden></p>
 
         <div class="columns">
             <section class="card card-pad">
@@ -206,6 +211,64 @@
         };
         document.querySelector('form.stack').addEventListener('input', recalc);
         recalc();
+    </script>
+    <dialog id="purchase-dialog" class="dialog dialog-wide" aria-labelledby="purchase-dialog-title">
+        <form class="stack" method="dialog" data-purchase-form>
+            <div class="dialog-head">
+                <div>
+                    <h2 id="purchase-dialog-title">Satınalmaya göndər</h2>
+                    <p class="note">SF-2026-0005 · Resepşn masası. Hər xammal üçün nə vaxta lazım olduğunu seçin.</p>
+                </div>
+                <button type="button" class="btn btn-ghost btn-small" data-close-purchase aria-label="Bağla">✕</button>
+            </div>
+            <div class="table-wrap">
+                <table class="table purchase-table">
+                    <thead><tr><th>Xammal</th><th class="num">Lazım olan</th><th class="num">Real qalıq</th><th class="num">Rezerv</th><th class="num">Alınmalı</th><th>Nə vaxt lazımdır</th></tr></thead>
+                    <tbody data-purchase-rows></tbody>
+                </table>
+            </div>
+            <label>Qeyd <textarea name="purchaseNote" rows="2" placeholder="Satınalma üçün əlavə qeyd (istəyə görə)"></textarea></label>
+            <div class="form-actions">
+                <button type="button" class="btn" data-close-purchase>Ləğv et</button>
+                <button class="btn btn-primary" type="submit">Göndər</button>
+            </div>
+        </form>
+    </dialog>
+    <script>
+        (() => {
+            const dialog = document.getElementById('purchase-dialog');
+            const form = dialog.querySelector('form');
+            const tbody = dialog.querySelector('[data-purchase-rows]');
+            const openBtn = document.querySelector('[data-open-purchase]');
+            const sent = document.querySelector('[data-purchase-sent]');
+            const rows = [...document.querySelectorAll('#cost-lines tbody tr')];
+            const fmt = v => String(v).replace('.', ',');
+            const buyCount = rows.filter(r => +r.dataset.buy > 0).length;
+            document.querySelector('[data-buy-count]').textContent = buyCount + ' xammal';
+
+            tbody.innerHTML = rows.map((r, i) => {
+                const d = r.dataset, buy = +d.buy;
+                return `<tr${buy ? '' : ' class="is-muted"'}>
+                    <td>${d.name}</td>
+                    <td class="num">${fmt(d.qty)} ${d.unit}</td>
+                    <td class="num">${fmt(d.real)} ${d.unit}</td>
+                    <td class="num">${fmt(d.reserve)} ${d.unit}</td>
+                    <td class="num">${buy ? `<strong>${fmt(buy)} ${d.unit}</strong>` : '<span class="badge badge-green">Anbarda var</span>'}</td>
+                    <td>${buy ? `<input type="date" name="needBy_${i}" required aria-label="Nə vaxt lazımdır: ${d.name}">` : '<span class="muted">—</span>'}</td>
+                </tr>`;
+            }).join('');
+
+            openBtn.addEventListener('click', () => dialog.showModal());
+            dialog.querySelectorAll('[data-close-purchase]').forEach(b => b.addEventListener('click', () => dialog.close()));
+            form.addEventListener('submit', event => {
+                event.preventDefault();
+                dialog.close();
+                sent.textContent = `${buyCount} xammal satınalmaya göndərildi. Satınalma mütəxəssisi cavab verəndə burada görünəcək.`;
+                sent.hidden = false;
+                openBtn.textContent = 'Göndərildi ✓';
+                openBtn.disabled = true;
+            });
+        })();
     </script>
 </main>
     </div>
