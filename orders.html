@@ -86,15 +86,49 @@
         <div><h1>Sifarişlər</h1><p>Bütün satış sifarişləri və cari statusları.</p></div>
         <a class="btn btn-primary" href="order-new.html">Yeni sifariş</a>
     </div>
-    <div class="filters">
-        <a href="orders.html" class="active">Hamısı</a>
-        <a href="orders-yeni.html">Yeni</a><a href="orders-dizayn.html">Dizayn mərhələsində</a><a href="orders-kalkulyasiya.html">Kalkulyasiya / Gözləyir</a><a href="orders-tesdiqlendi.html">Müştəri təsdiqlədi</a><a href="orders-xammal.html">Xammal təminatı</a><a href="orders-istehsalda.html">İstehsalda</a><a href="orders-tamamlandi.html">Tamamlandı</a><a href="orders-dayandirildi.html">Proses dayandırıldı</a>
+    <div class="segmented source-tabs" role="radiogroup" aria-label="Sifariş mənbəyi" data-source-tabs>
+        <label><input type="radio" name="source" value="" checked> Bütün sifarişlər</label>
+        <label><input type="radio" name="source" value="musteri"> Müştəri sifarişləri</label>
+        <label><input type="radio" name="source" value="alzzoni"> Alzzoni sifarişləri</label>
     </div>
     <section class="card">
+        <div class="list-tools" data-order-filters>
+            <input type="search" class="tool-search" placeholder="Sifariş №, müştəri, məhsul, menecer…" aria-label="Axtar" data-f="q">
+            <select aria-label="Status" data-f="status"><option value="">Bütün statuslar</option></select>
+            <select aria-label="Müştəri" data-f="customer"><option value="">Bütün müştərilər</option></select>
+            <span class="tool-dates">
+                <input type="date" aria-label="Tarixdən" title="Tarixdən" data-f="from">
+                <span aria-hidden="true">–</span>
+                <input type="date" aria-label="Tarixədək" title="Tarixədək" data-f="to">
+            </span>
+            <span class="tool-meta"><span data-f-count></span><button type="button" class="link-btn" data-f-reset hidden>Təmizlə</button></span>
+        </div>
         <div class="table-wrap">
-            <table class="table">
+            <table class="table" data-order-table>
                 <thead><tr><th>Sifariş</th><th>Tarix</th><th>Müştəri</th><th>Məhsul</th><th>Növ</th><th class="num">Miqdar</th><th>Menecer</th><th>Status</th><th></th></tr></thead>
                 <tbody>
+                <tr data-source="alzzoni">
+                    <td class="nowrap"><span title="Nümunə sətir">SF-2026-0011</span></td>
+                    <td>18.11.2026</td>
+                    <td>Alzzoni (daxili)</td>
+                    <td>Yumşaq divan</td>
+                    <td>Mövcud məhsul</td>
+                    <td class="num">6</td>
+                    <td>Nigar Həsənova</td>
+                    <td><span class="badge badge-purple">İstehsalda</span></td>
+                    <td class="actions"><div class="row-actions"><span class="btn btn-small is-disabled" title="Nümunə sətir">Bax</span></div></td>
+                </tr>
+                <tr data-source="alzzoni">
+                    <td class="nowrap"><span title="Nümunə sətir">SF-2026-0010</span></td>
+                    <td>16.11.2026</td>
+                    <td>Alzzoni (daxili)</td>
+                    <td>Dolab 3 qapılı</td>
+                    <td>Mövcud məhsul</td>
+                    <td class="num">10</td>
+                    <td>Rauf Quliyev</td>
+                    <td><span class="badge badge-blue">Xammal təminatı</span></td>
+                    <td class="actions"><div class="row-actions"><span class="btn btn-small is-disabled" title="Nümunə sətir">Bax</span></div></td>
+                </tr>
                 <tr>
                     <td class="nowrap"><a href="order-SF-2026-0009.html">SF-2026-0009</a></td>
                     <td>15.11.2026</td>
@@ -319,6 +353,60 @@
             </table>
         </div>
     </section>
+    <script>
+        (() => {
+            const box = document.querySelector('[data-order-filters]');
+            const rows = [...document.querySelectorAll('[data-order-table] tbody tr')];
+            const f = k => box.querySelector(`[data-f="${k}"]`);
+            const tabs = document.querySelector('[data-source-tabs]');
+            const source = () => tabs.querySelector('input:checked').value;
+            const count = box.querySelector('[data-f-count]');
+            const reset = box.querySelector('[data-f-reset]');
+            const tbody = document.querySelector('[data-order-table] tbody');
+            const empty = document.createElement('tr');
+            empty.innerHTML = '<td colspan="9" class="empty">Filtrə uyğun sifariş tapılmadı.</td>';
+            const toIso = t => t.split('.').reverse().join('-');
+            const data = rows.map(tr => {
+                const c = tr.children;
+                return { tr, source: tr.dataset.source || 'musteri', date: toIso(c[1].textContent.trim()), customer: c[2].textContent.trim(), status: c[7].textContent.trim(),
+                    text: [0, 2, 3, 4, 6].map(i => c[i].textContent).join(' ').toLocaleLowerCase('az') };
+            });
+            const fill = (sel, values) => [...new Set(values)].sort((a, b) => a.localeCompare(b, 'az'))
+                .forEach(v => sel.add(new Option(v, v)));
+            const statusOrder = ['Yeni', 'Dizayn mərhələsində', 'Kalkulyasiya / Gözləyir', 'Müştəri təsdiqlədi', 'Xammal təminatı', 'İstehsalda', 'Tamamlandı', 'Proses dayandırıldı'];
+            statusOrder.forEach(v => f('status').add(new Option(v, v)));
+            fill(f('customer'), data.map(d => d.customer));
+            const keys = ['q', 'status', 'customer', 'from', 'to'];
+            const params = new URLSearchParams(location.search);
+            keys.forEach(k => { if (params.has(k)) f(k).value = params.get(k); });
+            const src = tabs.querySelector(`input[value="${params.get('source') || ''}"]`);
+            if (src) src.checked = true;
+            const apply = () => {
+                const v = Object.fromEntries(keys.map(k => [k, f(k).value.trim()]));
+                const s = source();
+                const q = v.q.toLocaleLowerCase('az');
+                let shown = 0;
+                data.forEach(d => {
+                    const ok = (!s || d.source === s) && (!q || d.text.includes(q)) && (!v.status || d.status === v.status) &&
+                        (!v.customer || d.customer === v.customer) && (!v.from || d.date >= v.from) && (!v.to || d.date <= v.to);
+                    d.tr.hidden = !ok;
+                    if (ok) shown++;
+                });
+                const active = keys.some(k => v[k]);
+                const total = data.filter(d => !s || d.source === s).length;
+                count.textContent = active ? `${shown} / ${total} sifariş` : `${total} sifariş`;
+                reset.hidden = !active;
+                keys.forEach(k => f(k).classList.toggle('is-set', !!v[k]));
+                if (shown) empty.remove(); else tbody.append(empty);
+                const qs = new URLSearchParams(Object.entries({ source: s, ...v }).filter(([, x]) => x)).toString();
+                history.replaceState(null, '', qs ? '?' + qs : location.pathname);
+            };
+            box.addEventListener('input', apply);
+            tabs.addEventListener('change', apply);
+            reset.addEventListener('click', () => { keys.forEach(k => f(k).value = ''); apply(); f('q').focus(); });
+            apply();
+        })();
+    </script>
 </main>
     </div>
 </div>
