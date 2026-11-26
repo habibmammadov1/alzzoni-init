@@ -86,21 +86,38 @@
         <div><h1>Sifarişlər</h1><p>Bütün satış sifarişləri və cari statusları.</p></div>
         <a class="btn btn-primary" href="order-new.html">Yeni sifariş</a>
     </div>
-    <div class="segmented source-tabs" role="radiogroup" aria-label="Sifariş mənbəyi" data-source-tabs>
-        <label><input type="radio" name="source" value="" checked> Bütün sifarişlər</label>
-        <label><input type="radio" name="source" value="musteri"> Müştəri sifarişləri</label>
-        <label><input type="radio" name="source" value="alzzoni"> Alzzoni sifarişləri</label>
-    </div>
     <section class="card">
+        <div class="list-tabs" role="radiogroup" aria-label="Sifariş mənbəyi" data-source-tabs>
+            <label><input type="radio" name="source" value="" checked>Bütün sifarişlər</label>
+            <label><input type="radio" name="source" value="musteri">Müştəri sifarişləri</label>
+            <label><input type="radio" name="source" value="alzzoni">Alzzoni sifarişləri</label>
+        </div>
         <div class="list-tools" data-order-filters>
-            <input type="search" class="tool-search" placeholder="Sifariş №, müştəri, məhsul, menecer…" aria-label="Axtar" data-f="q">
-            <select aria-label="Status" data-f="status"><option value="">Bütün statuslar</option></select>
-            <select aria-label="Müştəri" data-f="customer"><option value="">Bütün müştərilər</option></select>
-            <span class="tool-dates">
-                <input type="date" aria-label="Tarixdən" title="Tarixdən" data-f="from">
-                <span aria-hidden="true">–</span>
-                <input type="date" aria-label="Tarixədək" title="Tarixədək" data-f="to">
-            </span>
+            <input type="search" class="tool-search" placeholder="Axtar…" aria-label="Sifariş, müştəri, məhsul və ya menecer axtar" data-f="q">
+            <div class="tool-pills">
+                <details class="pill-pop" data-pick="status">
+                    <summary class="pill" data-label="Status">Status</summary>
+                    <div class="pop-panel pop-list" data-options></div>
+                    <input type="hidden" data-f="status">
+                </details>
+                <details class="pill-pop" data-pick="customer">
+                    <summary class="pill" data-label="Müştəri">Müştəri</summary>
+                    <div class="pop-panel pop-list" data-options></div>
+                    <input type="hidden" data-f="customer">
+                </details>
+                <details class="pill-pop" data-date-pop>
+                    <summary class="pill" data-label="Tarix">Tarix</summary>
+                    <div class="pop-panel">
+                        <div class="pop-presets">
+                            <button type="button" data-preset="0">Bu gün</button>
+                            <button type="button" data-preset="7">Son 7 gün</button>
+                            <button type="button" data-preset="30">Son 30 gün</button>
+                        </div>
+                        <label>Başlanğıc <input type="date" data-f="from"></label>
+                        <label>Son <input type="date" data-f="to"></label>
+                    </div>
+                </details>
+            </div>
             <span class="tool-meta"><span data-f-count></span><button type="button" class="link-btn" data-f-reset hidden>Təmizlə</button></span>
         </div>
         <div class="table-wrap">
@@ -356,54 +373,101 @@
     <script>
         (() => {
             const box = document.querySelector('[data-order-filters]');
-            const rows = [...document.querySelectorAll('[data-order-table] tbody tr')];
-            const f = k => box.querySelector(`[data-f="${k}"]`);
             const tabs = document.querySelector('[data-source-tabs]');
-            const source = () => tabs.querySelector('input:checked').value;
+            const tbody = document.querySelector('[data-order-table] tbody');
             const count = box.querySelector('[data-f-count]');
             const reset = box.querySelector('[data-f-reset]');
-            const tbody = document.querySelector('[data-order-table] tbody');
-            const empty = document.createElement('tr');
-            empty.innerHTML = '<td colspan="9" class="empty">Filtrə uyğun sifariş tapılmadı.</td>';
+            const pops = [...box.querySelectorAll('details')];
+            const f = k => box.querySelector(`[data-f="${k}"]`);
+            const keys = ['q', 'status', 'customer', 'from', 'to'];
             const toIso = t => t.split('.').reverse().join('-');
-            const data = rows.map(tr => {
+            const short = iso => iso.split('-').reverse().slice(0, 2).join('.');
+            const data = [...tbody.rows].map(tr => {
                 const c = tr.children;
-                return { tr, source: tr.dataset.source || 'musteri', date: toIso(c[1].textContent.trim()), customer: c[2].textContent.trim(), status: c[7].textContent.trim(),
+                return { tr, source: tr.dataset.source || 'musteri', date: toIso(c[1].textContent.trim()),
+                    customer: c[2].textContent.trim(), status: c[7].textContent.trim(),
                     text: [0, 2, 3, 4, 6].map(i => c[i].textContent).join(' ').toLocaleLowerCase('az') };
             });
-            const fill = (sel, values) => [...new Set(values)].sort((a, b) => a.localeCompare(b, 'az'))
-                .forEach(v => sel.add(new Option(v, v)));
-            const statusOrder = ['Yeni', 'Dizayn mərhələsində', 'Kalkulyasiya / Gözləyir', 'Müştəri təsdiqlədi', 'Xammal təminatı', 'İstehsalda', 'Tamamlandı', 'Proses dayandırıldı'];
-            statusOrder.forEach(v => f('status').add(new Option(v, v)));
-            fill(f('customer'), data.map(d => d.customer));
-            const keys = ['q', 'status', 'customer', 'from', 'to'];
-            const params = new URLSearchParams(location.search);
-            keys.forEach(k => { if (params.has(k)) f(k).value = params.get(k); });
-            const src = tabs.querySelector(`input[value="${params.get('source') || ''}"]`);
-            if (src) src.checked = true;
+            const empty = document.createElement('tr');
+            empty.innerHTML = '<td colspan="9" class="empty">Filtrə uyğun sifariş tapılmadı.</td>';
+
+            const options = {
+                status: ['Yeni', 'Dizayn mərhələsində', 'Kalkulyasiya / Gözləyir', 'Müştəri təsdiqlədi', 'Xammal təminatı', 'İstehsalda', 'Tamamlandı', 'Proses dayandırıldı'],
+                customer: [...new Set(data.map(d => d.customer))].sort((a, b) => a.localeCompare(b, 'az'))
+            };
+            box.querySelectorAll('[data-pick]').forEach(pop => {
+                const key = pop.dataset.pick;
+                pop.querySelector('[data-options]').innerHTML = ['', ...options[key]].map(v =>
+                    `<button type="button" data-value="${v}">${v || 'Hamısı'}</button>`).join('');
+            });
+
+            const setLabel = (pop, text) => {
+                const sum = pop.querySelector('summary');
+                sum.textContent = text || sum.dataset.label;
+                sum.classList.toggle('is-set', !!text);
+            };
+            const syncLabels = v => {
+                box.querySelectorAll('[data-pick]').forEach(pop => {
+                    const val = v[pop.dataset.pick];
+                    setLabel(pop, val);
+                    pop.querySelectorAll('[data-value]').forEach(b => b.classList.toggle('is-selected', b.dataset.value === val));
+                });
+                const a = v.from, b = v.to;
+                setLabel(box.querySelector('[data-date-pop]'),
+                    a && b ? (a === b ? short(a) : `${short(a)} – ${short(b)}`) : a ? `${short(a)}-dən` : b ? `${short(b)}-dək` : '');
+            };
+
             const apply = () => {
                 const v = Object.fromEntries(keys.map(k => [k, f(k).value.trim()]));
-                const s = source();
+                const src = tabs.querySelector('input:checked').value;
                 const q = v.q.toLocaleLowerCase('az');
-                let shown = 0;
+                let shown = 0, total = 0;
                 data.forEach(d => {
-                    const ok = (!s || d.source === s) && (!q || d.text.includes(q)) && (!v.status || d.status === v.status) &&
+                    const inTab = !src || d.source === src;
+                    const ok = inTab && (!q || d.text.includes(q)) && (!v.status || d.status === v.status) &&
                         (!v.customer || d.customer === v.customer) && (!v.from || d.date >= v.from) && (!v.to || d.date <= v.to);
                     d.tr.hidden = !ok;
-                    if (ok) shown++;
+                    total += inTab; shown += ok;
                 });
                 const active = keys.some(k => v[k]);
-                const total = data.filter(d => !s || d.source === s).length;
-                count.textContent = active ? `${shown} / ${total} sifariş` : `${total} sifariş`;
+                count.textContent = active ? `${shown} / ${total}` : `${total} sifariş`;
                 reset.hidden = !active;
-                keys.forEach(k => f(k).classList.toggle('is-set', !!v[k]));
+                syncLabels(v);
                 if (shown) empty.remove(); else tbody.append(empty);
-                const qs = new URLSearchParams(Object.entries({ source: s, ...v }).filter(([, x]) => x)).toString();
+                const qs = new URLSearchParams(Object.entries({ source: src, ...v }).filter(([, x]) => x)).toString();
                 history.replaceState(null, '', qs ? '?' + qs : location.pathname);
             };
+
+            const params = new URLSearchParams(location.search);
+            keys.forEach(k => { if (params.has(k)) f(k).value = params.get(k); });
+            const tab = tabs.querySelector(`input[value="${params.get('source') || ''}"]`);
+            if (tab) tab.checked = true;
+
+            box.addEventListener('click', e => {
+                const opt = e.target.closest('[data-value]');
+                if (opt) {
+                    const pop = opt.closest('[data-pick]');
+                    f(pop.dataset.pick).value = opt.dataset.value;
+                    pop.open = false;
+                    apply();
+                }
+                const preset = e.target.closest('[data-preset]');
+                if (preset) {
+                    const iso = d => d.toLocaleDateString('sv');
+                    const to = new Date(), from = new Date();
+                    from.setDate(to.getDate() - Number(preset.dataset.preset));
+                    f('from').value = iso(from);
+                    f('to').value = iso(to);
+                    preset.closest('details').open = false;
+                    apply();
+                }
+            });
+            pops.forEach(p => p.addEventListener('toggle', () => { if (p.open) pops.forEach(o => o !== p && (o.open = false)); }));
+            document.addEventListener('click', e => pops.forEach(p => { if (p.open && !p.contains(e.target)) p.open = false; }));
+            document.addEventListener('keydown', e => { if (e.key === 'Escape') pops.forEach(p => p.open = false); });
             box.addEventListener('input', apply);
             tabs.addEventListener('change', apply);
-            reset.addEventListener('click', () => { keys.forEach(k => f(k).value = ''); apply(); f('q').focus(); });
+            reset.addEventListener('click', () => { keys.forEach(k => f(k).value = ''); apply(); });
             apply();
         })();
     </script>
