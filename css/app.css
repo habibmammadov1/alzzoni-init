@@ -183,7 +183,7 @@ h2 { font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
 /* Page */
 
 .shell { flex: 1; min-width: 0; background: radial-gradient(1200px 420px at 70% -120px, #ffffff, transparent 70%); }
-.content { max-width: 1180px; margin: 0 auto; padding: 40px 36px 64px; display: grid; gap: 24px; animation: rise .35s ease-out both; }
+.content { max-width: 1180px; margin: 0 auto; padding: 40px 36px 64px; display: grid; gap: 24px; animation: rise .35s ease-out backwards; }
 .error-page { max-width: 480px; margin-top: 15vh; text-align: center; justify-items: center; }
 
 @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
@@ -621,7 +621,7 @@ legend { padding: 0 0 8px; font-size: 13.5px; font-weight: 500; color: var(--ink
 .seg-tabs label:has(input:checked) { border-bottom-color: var(--ink); color: var(--ink); }
 .seg-tabs label:has(input:focus-visible) { outline: 2px solid var(--ink); outline-offset: 2px; }
 .seg-tabs input { position: absolute; opacity: 0; pointer-events: none; }
-.order-list { display: grid; container-type: inline-size; }
+.order-list { display: grid; }
 .order-row { display: grid; grid-template-columns: minmax(0, 1fr) 190px 84px 28px; align-items: center; gap: 20px; padding: 14px 20px; border-top: 1px solid var(--line); transition: background-color .15s; }
 .order-row:first-child { border-top: 0; }
 .order-row[hidden] { display: none; }
@@ -649,11 +649,12 @@ a.or-id:hover { color: var(--ink); text-decoration: underline; text-underline-of
 .menu-panel .is-disabled { color: var(--faint); cursor: default; }
 .menu-panel small { color: var(--faint); font-size: 11.5px; font-weight: 400; }
 .order-list .empty { margin: 0; }
+.card.order-scroll { max-height: max(380px, calc(100vh - 290px)); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #d4d4d8 transparent; }
 .mini-card { display: grid; gap: 4px; padding: 16px 20px; }
 .mini-card h2 { margin: 0; font-size: 14px; }
 .mini-card .order-list { margin: 6px -20px -16px; border-top: 1px solid var(--line); }
 .mini-empty { margin: 0; color: var(--faint); font-size: 13px; }
-@container (max-width: 640px) {
+@media (max-width: 1000px) {
     .order-row { grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; padding: 14px 16px; }
     .order-row { position: relative; }
     .or-main { grid-column: 1 / -1; grid-row: 1; padding-right: 28px; }
