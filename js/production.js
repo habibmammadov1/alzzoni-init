@@ -90,7 +90,35 @@
             </div>`;
     }
 
+    // Açılıb-bağlanan kartlar: başlıq qalır, cədvəl və qrafik aşağı açılır.
+    const setOpen = (card, open) => {
+        card.classList.toggle('is-open', open);
+        card.querySelector('.prod-toggle').setAttribute('aria-expanded', open);
+        card.querySelector('.prod-body').inert = !open;
+    };
     document.querySelectorAll('.prod-order').forEach(card => {
+        const head = card.querySelector('.prod-order-head');
+        card.classList.add('is-collapsible');
+        const body = document.createElement('div');
+        body.className = 'prod-body';
+        body.id = card.id + '-body';
+        const inner = document.createElement('div');
+        inner.className = 'prod-body-inner';
+        while (head.nextSibling) inner.append(head.nextSibling);
+        body.append(inner);
+        card.append(body);
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'prod-toggle';
+        btn.setAttribute('aria-controls', body.id);
+        btn.setAttribute('aria-label', 'Planı göstər');
+        btn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
+        head.append(btn);
+        head.addEventListener('click', e => {
+            if (e.target.closest('a')) return;
+            setOpen(card, !card.classList.contains('is-open'));
+        });
+        setOpen(card, location.hash === '#' + card.id);
         render(card);
         card.addEventListener('input', () => render(card));
         card.addEventListener('change', () => render(card));
