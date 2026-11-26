@@ -21,7 +21,7 @@ Sonra http://localhost:4321 ünvanını açın.
 | Kalkulyasiya | `costing-SF-2026-0005.html` |
 | Təsdiq | `approval.html`, `approval-SF-2026-0009.html` |
 | Xammal təminatı | `supply.html`, `supply-SF-2026-0004.html` |
-| Satınalma | `purchasing.html` |
+| Satınalma | `purchasing.html` (mütəxəssis: alırıq + tarix və ya imtina), `purchasing-review.html` (müdir: cavablara baxış) |
 | Anbar | `warehouse.html` |
 | İstehsal | `production.html`, `production-SF-2026-0002.html` |
 | Məlumatlar | `customers.html`, `customers-huquqi.html`, `customers-fiziki.html`, `customer-<id>.html`, `customer-new.html`, `recipes.html`, `recipe-<kod>.html`, `materials.html` |

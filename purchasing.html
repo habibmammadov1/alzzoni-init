@@ -86,104 +86,78 @@
         <div>
             <div class="eyebrow">Mərhələ 7</div>
             <h1>Satınalma</h1>
-            <p>Xammal təminatında çatışmayan materiallar buraya tələb kimi düşür. Təchizatçı seçilir, sifariş verilir, mal anbarda qəbul edilir.</p>
+            <p>Kalkulyasiyadan gələn hər xammala istehsaldan qabaq konkret cavab verin: ya hansı tarixə alınacağını yazın, ya da imtina edin.</p>
         </div>
     </div>
+    <nav class="page-tabs" aria-label="Satınalma ekranları"><a href="purchasing.html" class="active">Tələblər və cavab</a><a href="purchasing-review.html">Cavablara baxış (müdir)</a></nav>
 
     <section class="status-strip" aria-label="Satınalma statusları">
-        <a href="#requests" class="status-tile tile-yellow">
-            <strong>3</strong>
-            <span>Tələb daxil oldu</span>
-        </a><a href="#ordered" class="status-tile tile-blue">
-            <strong>1</strong>
-            <span>Təchizatçıya sifariş verildi</span>
-        </a><a href="#received" class="status-tile tile-green">
-            <strong>2</strong>
-            <span>Anbara mədaxil edildi</span>
-        </a>
+        <a href="#requests" class="status-tile tile-yellow"><strong>3</strong><span>Cavab gözləyir</span></a><a href="#ordered" class="status-tile tile-blue"><strong>2</strong><span>Alınacaq</span></a><a href="purchasing-review.html#refused" class="status-tile tile-red"><strong>1</strong><span>İmtina</span></a><a href="#received" class="status-tile tile-green"><strong>2</strong><span>Anbara mədaxil edildi</span></a>
     </section>
 
     <section class="card" id="requests">
         <div class="card-head">
-            <h2>Yeni tələblər</h2>
-            <span class="muted">Təchizatçını və gözlənilən tarixi yazıb sifariş verin</span>
+            <h2>Cavab gözləyən tələblər</h2>
+            <span class="muted">Hər tələbə "alırıq" və tarix, ya da imtina</span>
         </div>
         <div class="table-wrap">
             <table class="table">
-                <thead><tr><th>Nömrə</th><th>Sifariş</th><th>Material</th><th class="num">Çatışan miqdar</th><th class="num">Son alış qiyməti</th><th>Tələb tarixi</th><th></th></tr></thead>
+                <thead><tr><th>Nömrə</th><th>Sifariş</th><th>Xammal</th><th class="num">Miqdar</th><th>Nə vaxt lazımdır</th><th></th></tr></thead>
                 <tbody>
-                <tr>
+                <tr data-request="SA-2026-0004" data-item="Mebel parçası" data-qty="12 m" data-need="2026-12-05" data-need-label="05.12.2026">
                     <td class="nowrap">SA-2026-0004</td>
                     <td class="nowrap"><a href="order-SF-2026-0004.html">SF-2026-0004</a></td>
                     <td>Mebel parçası</td>
                     <td class="num">12 m</td>
-                    <td class="num">12,40 AZN</td>
-                    <td class="nowrap">17.11.2026</td>
-                    <td class="actions">
-                        <form class="inline-form" onsubmit="return false" action="#">
-                            <input name="supplier" list="suppliers" placeholder="Təchizatçı" required aria-label="Təchizatçı">
-                            <input name="expectedDate" type="date" value="2026-11-24" aria-label="Gözlənilən tarix">
-                            <button class="btn btn-small btn-primary">Sifariş ver</button>
-                        </form>
-                    </td>
+                    <td class="nowrap">05.12.2026</td>
+                    <td class="actions" data-answer-cell><button class="btn btn-small btn-primary" type="button" data-answer>Cavab ver</button></td>
                 </tr>
-                <tr>
+                <tr data-request="SA-2026-0005" data-item="Sünger 40 dns" data-qty="4 m²" data-need="2026-12-05" data-need-label="05.12.2026">
                     <td class="nowrap">SA-2026-0005</td>
                     <td class="nowrap"><a href="order-SF-2026-0004.html">SF-2026-0004</a></td>
                     <td>Sünger 40 dns</td>
                     <td class="num">4 m²</td>
-                    <td class="num">17,50 AZN</td>
-                    <td class="nowrap">17.11.2026</td>
-                    <td class="actions">
-                        <form class="inline-form" onsubmit="return false" action="#">
-                            <input name="supplier" list="suppliers" placeholder="Təchizatçı" required aria-label="Təchizatçı">
-                            <input name="expectedDate" type="date" value="2026-11-24" aria-label="Gözlənilən tarix">
-                            <button class="btn btn-small btn-primary">Sifariş ver</button>
-                        </form>
-                    </td>
+                    <td class="nowrap">05.12.2026</td>
+                    <td class="actions" data-answer-cell><button class="btn btn-small btn-primary" type="button" data-answer>Cavab ver</button></td>
                 </tr>
-                <tr>
+                <tr data-request="SA-2026-0006" data-item="Dekorativ aksesuar (xüsusi)" data-qty="4 ədəd" data-need="2026-12-08" data-need-label="08.12.2026">
                     <td class="nowrap">SA-2026-0006</td>
                     <td class="nowrap"><a href="order-SF-2026-0005.html">SF-2026-0005</a></td>
                     <td>Dekorativ aksesuar (xüsusi) <span class="badge badge-yellow">İlk alış</span></td>
                     <td class="num">4 ədəd</td>
-                    <td class="num">—</td>
-                    <td class="nowrap">18.11.2026</td>
-                    <td class="actions">
-                        <form class="inline-form" onsubmit="return false" action="#">
-                            <input name="supplier" list="suppliers" placeholder="Təchizatçı" required aria-label="Təchizatçı">
-                            <input name="expectedDate" type="date" value="2026-11-28" aria-label="Gözlənilən tarix">
-                            <button class="btn btn-small btn-primary">Sifariş ver</button>
-                        </form>
-                    </td>
+                    <td class="nowrap">08.12.2026</td>
+                    <td class="actions" data-answer-cell><button class="btn btn-small btn-primary" type="button" data-answer>Cavab ver</button></td>
                 </tr>
                 </tbody>
             </table>
         </div>
-        <datalist id="suppliers">
-            <option value="Metal Təchizat MMC"></option>
-            <option value="Laminat Plus MMC"></option>
-            <option value="Tekstil Dünyası MMC"></option>
-            <option value="Aksesuar Mərkəzi"></option>
-        </datalist>
     </section>
 
     <section class="card" id="ordered">
         <div class="card-head">
-            <h2>Təchizatçıdan gözlənilir</h2>
+            <h2>Alınacaq</h2>
             <span class="muted">Mal gələndə anbarda qaimə ilə qəbul edilir</span>
         </div>
         <div class="table-wrap">
             <table class="table">
-                <thead><tr><th>Nömrə</th><th>Sifariş</th><th>Material</th><th class="num">Miqdar</th><th>Təchizatçı</th><th>Gözlənilir</th><th></th></tr></thead>
+                <thead><tr><th>Nömrə</th><th>Sifariş</th><th>Xammal</th><th class="num">Miqdar</th><th>Lazımdır</th><th>Gələcək</th><th></th></tr></thead>
                 <tbody>
                 <tr>
                     <td class="nowrap">SA-2026-0001</td>
                     <td class="nowrap"><a href="order-SF-2026-0003.html">SF-2026-0003</a></td>
-                    <td>Metal ayaq dəsti</td>
+                    <td>Metal ayaq dəsti<br><small class="muted">Metal Təchizat MMC · Anbarda hazırdır, 2 günə çatdırılır</small></td>
                     <td class="num">10 dəst</td>
-                    <td>Metal Təchizat MMC</td>
-                    <td class="nowrap">18.11.2026 <span class="badge badge-yellow">Bu gün</span></td>
+                    <td class="nowrap">30.11.2026</td>
+                    <td class="nowrap stacked">28.11.2026<span class="badge badge-green">Vaxtında</span></td>
+                    <td class="actions"><a class="btn btn-small" href="warehouse.html">Anbarda qəbul et</a></td>
+                </tr>
+                <tr>
+                    <td class="nowrap">SA-2026-0007</td>
+                    <td class="nowrap"><a href="order-SF-2026-0003.html">SF-2026-0003</a></td>
+                    <td>Laminat lövhə 18 mm<br><small class="muted">Laminat Plus MMC · Rəng xüsusi sifarişlə gəlir</small></td>
+                    <td class="num">6 ədəd</td>
+                    <td class="nowrap">01.12.2026</td>
+                    <td class="nowrap stacked">04.12.2026<span class="badge badge-red">3 gün gec</span></td>
                     <td class="actions"><a class="btn btn-small" href="warehouse.html">Anbarda qəbul et</a></td>
                 </tr>
                 </tbody>
@@ -195,7 +169,7 @@
         <div class="card-head"><h2>Qəbul edilmiş mallar</h2></div>
         <div class="table-wrap">
             <table class="table">
-                <thead><tr><th>Nömrə</th><th>Sifariş</th><th>Material</th><th class="num">Miqdar</th><th>Təchizatçı</th><th>Qaimə №</th><th>Qəbul tarixi</th></tr></thead>
+                <thead><tr><th>Nömrə</th><th>Sifariş</th><th>Xammal</th><th class="num">Miqdar</th><th>Təchizatçı</th><th>Qaimə №</th><th>Qəbul tarixi</th></tr></thead>
                 <tbody>
                 <tr>
                     <td class="nowrap">SA-2026-0002</td>
@@ -219,6 +193,97 @@
             </table>
         </div>
     </section>
+
+    <dialog id="answer-dialog" class="dialog" aria-labelledby="answer-title">
+        <form class="stack" method="dialog" data-answer-form>
+            <div class="dialog-head">
+                <div>
+                    <h2 id="answer-title">Cavab ver</h2>
+                    <p class="note" data-answer-info></p>
+                </div>
+                <button type="button" class="btn btn-ghost btn-small" data-close-answer aria-label="Bağla">✕</button>
+            </div>
+            <div class="segmented" role="radiogroup" aria-label="Cavab">
+                <label><input type="radio" name="decision" value="buy" checked> Alırıq</label>
+                <label><input type="radio" name="decision" value="refuse"> İmtina</label>
+            </div>
+            <div class="form-grid" data-buy>
+                <label>Təchizatçı <input name="supplier" list="suppliers" placeholder="Təchizatçı" data-req></label>
+                <label>Nə vaxt gələcək <input name="arrival" type="date" data-req></label>
+            </div>
+            <p class="flash inline-flash flash-error" data-late hidden></p>
+            <label data-refuse hidden>İmtina səbəbi
+                <select name="reason">
+                    <option value="">Səbəb seçin</option>
+                    <option>Bazarda yoxdur</option>
+                    <option>Qiymət çox bahadır</option>
+                    <option>Təchizatçı müddəti uyğun deyil</option>
+                    <option>Minimum sifariş miqdarı çoxdur</option>
+                    <option>Digər</option>
+                </select>
+            </label>
+            <label>Qeyd <textarea name="note" rows="3" placeholder="Müdir və kalkulyasiya üçün qeyd"></textarea></label>
+            <div class="form-actions">
+                <button type="button" class="btn" data-close-answer>Ləğv et</button>
+                <button class="btn btn-primary" type="submit">Cavabı göndər</button>
+            </div>
+        </form>
+        <datalist id="suppliers">
+            <option value="Metal Təchizat MMC"></option>
+            <option value="Laminat Plus MMC"></option>
+            <option value="Tekstil Dünyası MMC"></option>
+            <option value="Aksesuar Mərkəzi"></option>
+        </datalist>
+    </dialog>
+    <script>
+        (() => {
+            const dialog = document.getElementById('answer-dialog');
+            const form = dialog.querySelector('form');
+            const info = dialog.querySelector('[data-answer-info]');
+            const late = dialog.querySelector('[data-late]');
+            const buyBox = dialog.querySelector('[data-buy]');
+            const refuseBox = dialog.querySelector('[data-refuse]');
+            let row = null;
+            const label = iso => iso.split('-').reverse().join('.');
+            const days = (a, b) => Math.round((new Date(a) - new Date(b)) / 86400000);
+
+            const sync = () => {
+                const buy = form.decision.value === 'buy';
+                buyBox.hidden = !buy;
+                refuseBox.hidden = buy;
+                buyBox.querySelectorAll('[data-req]').forEach(i => i.required = buy);
+                form.reason.required = !buy;
+                const d = buy && form.arrival.value && row ? days(form.arrival.value, row.dataset.need) : 0;
+                late.hidden = d <= 0;
+                late.textContent = `Lazım olan tarixdən ${d} gün gec gələcək. Müdir bunu görəcək.`;
+            };
+
+            document.addEventListener('click', e => {
+                const btn = e.target.closest('[data-answer]');
+                if (!btn) return;
+                row = btn.closest('tr');
+                form.reset();
+                info.textContent = `${row.dataset.request} · ${row.dataset.item} · ${row.dataset.qty} · lazımdır: ${row.dataset.needLabel}`;
+                sync();
+                dialog.showModal();
+            });
+            form.addEventListener('change', sync);
+            form.addEventListener('input', sync);
+            dialog.querySelectorAll('[data-close-answer]').forEach(b => b.addEventListener('click', () => dialog.close()));
+            form.addEventListener('submit', e => {
+                e.preventDefault();
+                const cell = row.querySelector('[data-answer-cell]');
+                if (form.decision.value === 'buy') {
+                    const d = days(form.arrival.value, row.dataset.need);
+                    const badge = d > 0 ? `<span class="badge badge-red">${d} gün gec</span>` : '<span class="badge badge-green">Vaxtında</span>';
+                    cell.innerHTML = `<span class="answer-done">Alınacaq · ${label(form.arrival.value)}</span> ${badge}`;
+                } else {
+                    cell.innerHTML = `<span class="badge badge-red">İmtina · ${form.reason.value}</span>`;
+                }
+                dialog.close();
+            });
+        })();
+    </script>
 </main>
     </div>
 </div>
