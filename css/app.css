@@ -642,6 +642,7 @@ legend { padding: 0 0 8px; font-size: 13.5px; font-weight: 500; color: var(--ink
 .or-customer { overflow: hidden; color: var(--ink); font-size: 14.5px; font-weight: 500; white-space: nowrap; text-overflow: ellipsis; }
 .or-sub { overflow: hidden; color: var(--faint); font-size: 12.5px; white-space: nowrap; text-overflow: ellipsis; }
 .or-id { color: var(--muted); font-weight: 500; font-variant-numeric: tabular-nums; }
+.or-part { padding: 1px 6px; border-radius: 999px; background: var(--hover); color: var(--muted); font-size: 11px; font-weight: 600; font-variant-numeric: tabular-nums; }
 a.or-id:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
 .or-status { display: inline-flex; align-items: center; gap: 8px; min-width: 0; font-size: 13px; font-weight: 500; white-space: nowrap; }
 .or-status::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
