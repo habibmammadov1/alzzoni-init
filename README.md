@@ -19,7 +19,7 @@ Sonra http://localhost:4321 ünvanını açın.
 | Sifariş | `order-<nömrə>.html`, redaktə: `order-<nömrə>-edit.html` |
 | Dizayn | `design-SF-2026-0006.html` |
 | Kalkulyasiya | `costing-SF-2026-0005.html` |
-| Təsdiq | `approval.html`, `approval-SF-2026-0009.html` |
+| Təsdiq | `approval.html`, `approval-SF-2026-0009.html` (satış qiyməti, satınalma planı), `approval-refused.html` (imtina olunan sifarişlər) |
 | Xammal təminatı | `supply.html`, `supply-SF-2026-0004.html` |
 | Satınalma | `purchasing.html` (mütəxəssis: alırıq + tarix və ya imtina), `purchasing-review.html` (müdir: cavablara baxış) |
 | Anbar | `warehouse.html` |
