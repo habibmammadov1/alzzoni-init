@@ -343,20 +343,26 @@ input[type=checkbox], input[type=radio] { width: auto; padding: 0; accent-color:
 .qty-unit span { position: absolute; top: 50%; right: 10px; transform: translateY(-50%); color: var(--faint); font-size: 12px; font-weight: 400; pointer-events: none; }
 .general-count { margin-right: auto; font-size: 13px; }
 .table tr.is-new td { background: var(--green-soft); }
-.products-card { display: grid; gap: 10px; }
-.pi-cols, .pi { display: grid; grid-template-columns: 132px minmax(0, 1fr) 84px 160px 28px; gap: 8px 10px; align-items: center; }
-.pi-cols { color: var(--faint); font-size: 12px; font-weight: 500; }
-.prod-list { display: grid; }
-.pi { padding: 10px 0; border-top: 1px solid var(--line); }
-.pi:first-child { border-top: 0; padding-top: 0; }
+.products-card { display: grid; gap: 14px; }
+.products-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.products-head h2 { margin: 0; }
+.products-count { color: var(--faint); font-size: 12.5px; }
+.prod-list { display: grid; gap: 12px; }
+.pi { display: grid; gap: 14px; padding: 14px 16px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
 .pi [hidden] { display: none; }
-.pi-note { grid-column: 2 / 5; }
+.pi-head { display: flex; align-items: center; gap: 12px; }
+.pi-num { min-width: 72px; font-size: 13.5px; font-weight: 600; }
+.pi-head .icon-btn { margin-left: auto; }
 .pi-type { display: inline-flex; padding: 3px; border-radius: 10px; background: var(--hover); }
-.pi-type label { flex: 1; padding: 5px 0; border-radius: 8px; color: var(--muted); font-size: 13px; font-weight: 500; text-align: center; cursor: pointer; transition: background-color .15s, color .15s; }
+.pi-type label { padding: 5px 12px; border-radius: 8px; color: var(--muted); font-size: 13px; font-weight: 500; text-align: center; white-space: nowrap; cursor: pointer; transition: background-color .15s, color .15s; }
 .pi-type input { position: absolute; opacity: 0; pointer-events: none; }
 .pi-type label:has(input:checked) { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgba(24, 24, 27, .12); }
 .pi-type label:has(input:focus-visible) { outline: 2px solid var(--ink); }
-.add-product { justify-self: start; font-size: 13.5px; }
+.pi-fields { display: grid; grid-template-columns: minmax(0, 1fr) 110px 170px; gap: 12px 14px; }
+.pi-note { grid-column: 1 / -1; }
+.pi-note textarea { resize: vertical; min-height: 58px; }
+.add-product { width: 100%; padding: 11px; border: 1px dashed #d4d4d8; border-radius: 12px; background: none; color: var(--muted); font: inherit; font-size: 13.5px; font-weight: 500; cursor: pointer; transition: border-color .15s, color .15s, background-color .15s; }
+.add-product:hover { border-color: var(--ink); color: var(--ink); background: var(--row-hover); }
 .answer-done { color: var(--ink); font-size: 13.5px; font-weight: 500; margin-right: 4px; }
 .review-filter { flex-wrap: wrap; }
 .report-filter { flex-wrap: wrap; }
@@ -725,10 +731,12 @@ legend { padding: 0 0 8px; font-size: 13.5px; font-weight: 500; color: var(--ink
     .sex-panels { padding: 16px; }
     .mat-row input.is-off { display: none; }
     .mat-extras { padding-left: 0; }
-    .pi-cols { display: none; }
-    .pi { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 28px; }
-    .pi > [name="product"], .pi > [name="recipeCode"], .pi-note { grid-column: 1 / -1; }
-    .pi-type { grid-column: 1 / 3; }
+    .pi { padding: 12px; }
+    .pi-head { flex-wrap: wrap; }
+    .pi-type { order: 3; width: 100%; }
+    .pi-type label { flex: 1; }
+    .pi-fields { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .pi-name { grid-column: 1 / -1; }
     .sex-order-body { grid-template-columns: minmax(0, 1fr); }
     .sex-order-body .table-wrap { border-right: 0; }
     .gantt { padding: 6px 16px 24px; }

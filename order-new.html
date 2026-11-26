@@ -129,27 +129,42 @@
         </section>
 
         <section class="card card-pad products-card">
-            <h2>Məhsullar</h2>
-            <div class="pi-cols" aria-hidden="true"><span>Növ</span><span>Məhsul</span><span>Miqdar</span><span>İstənilən tarix</span><span></span></div>
+            <div class="products-head">
+                <h2>Məhsullar</h2>
+                <span class="products-count" data-product-count></span>
+            </div>
             <div class="prod-list" data-products></div>
-            <button class="link-btn add-product" type="button" data-add-product>+ Məhsul əlavə et</button>
+            <button class="add-product" type="button" data-add-product>+ Məhsul əlavə et</button>
             <template data-product-template>
                 <div class="pi" data-product>
-                    <div class="pi-type" role="radiogroup" aria-label="Məhsulun növü">
-                        <label><input type="radio" value="YENI" data-type checked>Yeni</label>
-                        <label><input type="radio" value="MOVCUD" data-type>Mövcud</label>
+                    <div class="pi-head">
+                        <span class="pi-num" data-product-num></span>
+                        <div class="pi-type" role="radiogroup" aria-label="Məhsulun növü">
+                            <label><input type="radio" value="YENI" data-type checked>Yeni məhsul</label>
+                            <label><input type="radio" value="MOVCUD" data-type>Mövcud məhsul</label>
+                        </div>
+                        <button class="icon-btn" type="button" data-remove-product aria-label="Məhsulu sil" title="Sil">×</button>
                     </div>
-                    <input name="product" placeholder="Məhsulun adı" data-when="new" aria-label="Məhsul">
-                    <select name="recipeCode" data-when="existing" hidden aria-label="Məhsul">
-                        <option value="">Resept seçin</option>
-                        <option value="HM-001">Dolab 3 qapılı</option>
-                        <option value="HM-002">Yumşaq divan</option>
-                        <option value="HM-003">Metal ayaqlı stol</option>
-                    </select>
-                    <input name="qty" type="number" min="1" value="1" required aria-label="Miqdar">
-                    <input name="requestedDate" type="date" required aria-label="İstənilən tarix">
-                    <button class="icon-btn" type="button" data-remove-product aria-label="Məhsulu sil" title="Sil">×</button>
-                    <input class="pi-note" name="note" placeholder="Qeyd (istəyə görə)" aria-label="Qeyd">
+                    <div class="pi-fields">
+                        <label class="pi-name">Məhsul adı
+                            <input name="product" placeholder="Məs.: Kuxna dəsti, 2.4 m" data-when="new">
+                            <select name="recipeCode" data-when="existing" hidden>
+                                <option value="">Məhsul seçin</option>
+                                <option value="HM-001">Dolab 3 qapılı · HM-001</option>
+                                <option value="HM-002">Yumşaq divan · HM-002</option>
+                                <option value="HM-003">Metal ayaqlı stol · HM-003</option>
+                            </select>
+                        </label>
+                        <label>Miqdar
+                            <input name="qty" type="number" min="1" value="1" required>
+                        </label>
+                        <label>İstənilən tarix
+                            <input name="requestedDate" type="date" required>
+                        </label>
+                        <label class="pi-note">Qeyd
+                            <textarea name="note" rows="2" placeholder="Ölçü, rəng, material və ya digər istəklər (istəyə görə)"></textarea>
+                        </label>
+                    </div>
                 </div>
             </template>
         </section>
@@ -220,9 +235,15 @@
                 card.querySelector('[name="product"]').required = isNew;
                 card.querySelector('[name="recipeCode"]').required = !isNew;
             };
-            const renumber = () => [...list.children].forEach((card, i, all) => {
-                card.querySelector('[data-remove-product]').hidden = all.length === 1;
-            });
+            const count = document.querySelector('[data-product-count]');
+            const renumber = () => {
+                const all = [...list.children];
+                all.forEach((card, i) => {
+                    card.querySelector('[data-product-num]').textContent = 'Məhsul ' + (i + 1);
+                    card.querySelector('[data-remove-product]').hidden = all.length === 1;
+                });
+                count.textContent = all.length > 1 ? all.length + ' məhsul' : '';
+            };
             const add = () => {
                 const card = template.content.firstElementChild.cloneNode(true);
                 const name = 'type-' + (++uid);
