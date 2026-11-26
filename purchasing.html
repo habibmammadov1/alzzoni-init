@@ -104,7 +104,7 @@
             <table class="table">
                 <thead><tr><th>Nömrə</th><th>Sifariş</th><th>Xammal</th><th class="num">Miqdar</th><th>Nə vaxt lazımdır</th><th></th></tr></thead>
                 <tbody>
-                <tr data-request="SA-2026-0004" data-item="Mebel parçası" data-qty="12 m" data-need="2026-12-05" data-need-label="05.12.2026">
+                <tr data-request="SA-2026-0004" data-supplier="Tekstil Dünyası MMC" data-item="Mebel parçası" data-qty="12 m" data-need="2026-12-05" data-need-label="05.12.2026">
                     <td class="nowrap">SA-2026-0004</td>
                     <td class="nowrap"><a href="order-SF-2026-0004.html">SF-2026-0004</a></td>
                     <td>Mebel parçası</td>
@@ -112,7 +112,7 @@
                     <td class="nowrap">05.12.2026</td>
                     <td class="actions" data-answer-cell><button class="btn btn-small btn-primary" type="button" data-answer>Cavab ver</button></td>
                 </tr>
-                <tr data-request="SA-2026-0005" data-item="Sünger 40 dns" data-qty="4 m²" data-need="2026-12-05" data-need-label="05.12.2026">
+                <tr data-request="SA-2026-0005" data-supplier="Tekstil Dünyası MMC" data-item="Sünger 40 dns" data-qty="4 m²" data-need="2026-12-05" data-need-label="05.12.2026">
                     <td class="nowrap">SA-2026-0005</td>
                     <td class="nowrap"><a href="order-SF-2026-0004.html">SF-2026-0004</a></td>
                     <td>Sünger 40 dns</td>
@@ -120,7 +120,7 @@
                     <td class="nowrap">05.12.2026</td>
                     <td class="actions" data-answer-cell><button class="btn btn-small btn-primary" type="button" data-answer>Cavab ver</button></td>
                 </tr>
-                <tr data-request="SA-2026-0006" data-item="Dekorativ aksesuar (xüsusi)" data-qty="4 ədəd" data-need="2026-12-08" data-need-label="08.12.2026">
+                <tr data-request="SA-2026-0006" data-supplier="Aksesuar Mərkəzi" data-item="Dekorativ aksesuar (xüsusi)" data-qty="4 ədəd" data-need="2026-12-08" data-need-label="08.12.2026">
                     <td class="nowrap">SA-2026-0006</td>
                     <td class="nowrap"><a href="order-SF-2026-0005.html">SF-2026-0005</a></td>
                     <td>Dekorativ aksesuar (xüsusi) <span class="badge badge-yellow">İlk alış</span></td>
@@ -263,6 +263,7 @@
                 if (!btn) return;
                 row = btn.closest('tr');
                 form.reset();
+                form.supplier.value = row.dataset.supplier || '';
                 info.textContent = `${row.dataset.request} · ${row.dataset.item} · ${row.dataset.qty} · lazımdır: ${row.dataset.needLabel}`;
                 sync();
                 dialog.showModal();
