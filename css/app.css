@@ -375,6 +375,17 @@ input[type=checkbox], input[type=radio] { width: auto; padding: 0; accent-color:
 .prod-order-head { align-items: flex-start; }
 .prod-order-head p { margin: 4px 0 0; font-size: 13px; }
 .prod-order-head h2 a { color: inherit; }
+.prod-order.is-collapsible .prod-order-head { padding-bottom: 20px; cursor: pointer; user-select: none; transition: background-color .15s; }
+.prod-order.is-collapsible .prod-order-head:hover { background: var(--row-hover); }
+.prod-order-head > div:first-child { flex: 1; min-width: 0; }
+.prod-toggle { display: grid; flex: none; place-items: center; width: 32px; height: 32px; margin: -4px -8px 0 4px; padding: 0; border: 0; border-radius: 50%; background: none; color: var(--muted); cursor: pointer; transition: background-color .15s, color .15s; }
+.prod-toggle:hover { background: var(--hover); color: var(--ink); }
+.prod-toggle svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform .25s ease; }
+.prod-order.is-open .prod-toggle svg { transform: rotate(180deg); }
+.prod-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .25s ease; }
+.prod-order.is-open .prod-body { grid-template-rows: 1fr; }
+.prod-body-inner { min-height: 0; overflow: hidden; }
+.prod-order.is-open .prod-body-inner { border-top: 1px solid var(--line); }
 .prod-head-badges { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
 .prod-plan input, .prod-plan select { padding: 6px 10px; font-size: 13.5px; }
 .prod-plan td { padding-top: 9px; padding-bottom: 9px; }
