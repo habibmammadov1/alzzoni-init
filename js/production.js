@@ -11,7 +11,7 @@
         const rows = [...card.querySelectorAll('.prod-plan tbody tr')].map(tr => ({
             tr,
             sex: tr.dataset.sex,
-            name: tr.querySelector('td').textContent.trim().replace(/\s+/g, ' '),
+            name: `<span class="sex-no">Sex ${tr.dataset.sex}</span>${tr.dataset.short}`,
             state: tr.dataset.state,
             start: parse(tr.querySelector('[data-start]').value),
             end: parse(tr.querySelector('[data-end]').value),
@@ -47,7 +47,7 @@
         for (let i = 0; i < days; i++) {
             const t = min + i * DAY;
             const wd = new Date(t).getUTCDay();
-            scale += `<span class="g-day${wd === 0 || wd === 6 ? ' g-weekend' : ''}" style="left:${i / days * 100}%;width:${100 / days}%">${new Date(t).getUTCDate()}</span>`;
+            scale += `<span class="g-day${wd === 0 || wd === 6 ? ' g-weekend' : ''}${t === today ? ' g-is-today' : ''}${t === deadline ? ' g-is-deadline' : ''}" style="left:${i / days * 100}%;width:${100 / days}%">${new Date(t).getUTCDate()}</span>`;
         }
 
         const bars = rows.map(r => {
@@ -72,14 +72,21 @@
         const height = HEAD + rows.length * ROW;
         gantt.innerHTML = `
             <div class="g-grid" style="--rows:${rows.length}">
-                <div class="g-label g-corner">${label(min)} – ${label(max)}</div>
+                <div class="g-label g-corner">Qrafik</div>
                 <div class="g-track g-scale">${scale}</div>
                 ${bars}
                 <div class="g-layer" style="height:${height}px">
-                    <span class="g-line g-today" style="left:${x(today) + 50 / days}%"><em>Bu gün</em></span>
-                    <span class="g-line g-deadline" style="left:${x(deadline + DAY)}%"><em>Hazırlanma</em></span>
+                    <span class="g-line g-today" style="left:${x(today) + 50 / days}%"></span>
+                    <span class="g-line g-deadline" style="left:${x(deadline + DAY)}%"></span>
                     <svg class="g-links" width="100%" height="${height}" aria-hidden="true">${links}</svg>
                 </div>
+            </div>
+            <div class="g-legend">
+                <span><i class="g-key g-key-done"></i>Bitib</span>
+                <span><i class="g-key g-key-active"></i>Davam edir</span>
+                <span><i class="g-key g-key-planned"></i>Başlamayıb</span>
+                <span><i class="g-key-line g-key-today"></i>Bu gün · ${label(today)}</span>
+                <span><i class="g-key-line g-key-deadline"></i>Hazırlanma · ${label(deadline)}</span>
             </div>`;
     }
 
