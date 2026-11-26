@@ -83,154 +83,162 @@
         
         <main class="content">
     <div class="page-head">
-        <div><h1>Sifarişlər</h1><p>Bütün satış sifarişləri və cari statusları.</p></div>
+        <div><h1>Sifarişlər</h1><p>Satış və daxili sifarişlər.</p></div>
         <a class="btn btn-primary" href="order-new.html">Yeni sifariş</a>
     </div>
-    <section class="card">
-        <div class="list-tabs" role="radiogroup" aria-label="Sifariş mənbəyi" data-source-tabs>
-            <label><input type="radio" name="source" value="" checked>Bütün sifarişlər</label>
-            <label><input type="radio" name="source" value="musteri">Müştəri sifarişləri</label>
-            <label><input type="radio" name="source" value="alzzoni">Alzzoni sifarişləri</label>
-        </div>
-        <div class="list-tools" data-order-filters>
-            <input type="search" class="tool-search" placeholder="Axtar…" aria-label="Sifariş, müştəri, məhsul və ya menecer axtar" data-f="q">
-            <div class="tool-pills">
-                <details class="pill-pop" data-pick="status">
-                    <summary class="pill" data-label="Status">Status</summary>
-                    <div class="pop-panel pop-list" data-options></div>
-                    <input type="hidden" data-f="status">
-                </details>
-                <details class="pill-pop" data-pick="customer">
-                    <summary class="pill" data-label="Müştəri">Müştəri</summary>
-                    <div class="pop-panel pop-list" data-options></div>
-                    <input type="hidden" data-f="customer">
-                </details>
-                <details class="pill-pop" data-date-pop>
-                    <summary class="pill" data-label="Tarix">Tarix</summary>
-                    <div class="pop-panel">
-                        <div class="pop-presets">
-                            <button type="button" data-preset="0">Bu gün</button>
-                            <button type="button" data-preset="7">Son 7 gün</button>
-                            <button type="button" data-preset="30">Son 30 gün</button>
-                        </div>
-                        <label>Başlanğıc <input type="date" data-f="from"></label>
-                        <label>Son <input type="date" data-f="to"></label>
+    <div class="seg-tabs" role="radiogroup" aria-label="Sifariş mənbəyi" data-source-tabs>
+        <label><input type="radio" name="source" value="" checked>Hamısı <span>11</span></label>
+        <label><input type="radio" name="source" value="musteri">Müştəri sifarişləri <span>9</span></label>
+        <label><input type="radio" name="source" value="alzzoni">Alzzoni sifarişləri <span>2</span></label>
+    </div>
+    <div class="list-tools" data-order-filters>
+        <input type="search" class="tool-search" placeholder="Axtar…" aria-label="Sifariş, müştəri, məhsul və ya menecer axtar" data-f="q">
+        <div class="tool-pills">
+            <details class="pill-pop" data-pick="status">
+                <summary class="pill" data-label="Status">Status</summary>
+                <div class="pop-panel pop-list" data-options></div>
+                <input type="hidden" data-f="status">
+            </details>
+            <details class="pill-pop" data-pick="customer">
+                <summary class="pill" data-label="Müştəri">Müştəri</summary>
+                <div class="pop-panel pop-list" data-options></div>
+                <input type="hidden" data-f="customer">
+            </details>
+            <details class="pill-pop" data-date-pop>
+                <summary class="pill" data-label="Tarix">Tarix</summary>
+                <div class="pop-panel">
+                    <div class="pop-presets">
+                        <button type="button" data-preset="0">Bu gün</button>
+                        <button type="button" data-preset="7">Son 7 gün</button>
+                        <button type="button" data-preset="30">Son 30 gün</button>
                     </div>
-                </details>
-            </div>
-            <span class="tool-meta"><span data-f-count></span><button type="button" class="link-btn" data-f-reset hidden>Təmizlə</button></span>
+                    <label>Başlanğıc <input type="date" data-f="from"></label>
+                    <label>Son <input type="date" data-f="to"></label>
+                </div>
+            </details>
         </div>
+        <span class="tool-meta"><span data-f-count></span><button type="button" class="link-btn" data-f-reset hidden>Təmizlə</button></span>
+    </div>
+
+    <section class="card">
         <div class="order-list" data-order-list>
-            <div class="order-row order-head" aria-hidden="true"><span>Sifariş</span><span>Müştəri və məhsul</span><span>Menecer</span><span>Status</span><span></span></div>
             <article class="order-row" data-source="alzzoni" data-date="2026-11-18" data-customer="Alzzoni (daxili)" data-status="İstehsalda">
-                <div class="or-cell or-first"><span class="or-id">SF-2026-0011</span><span class="or-sub">18.11.2026</span></div>
-                <div class="or-cell or-main"><span class="or-customer">Alzzoni (daxili)</span><span class="or-sub">Yumşaq divan <span class="or-dot">·</span> 6 ədəd <span class="or-dot">·</span> Mövcud məhsul</span></div>
-                <div class="or-cell or-manager"><span class="or-avatar" aria-hidden="true">NH</span>Nigar Həsənova</div>
-                <div class="or-cell or-status"><span class="badge badge-purple">İstehsalda</span></div>
-                <div class="or-actions"><details class="row-menu"><summary class="icon-btn" aria-label="Əməliyyatlar" title="Əməliyyatlar">⋯</summary><div class="pop-panel menu-panel"><span class="is-disabled">Bax<small>Nümunə sətir</small></span></div></details></div>
+                <div class="or-main">
+                    <span class="or-customer">Alzzoni (daxili)</span>
+                    <span class="or-sub"><span class="or-id">SF-2026-0011</span> · Yumşaq divan × 6 · Mövcud məhsul · Nigar Həsənova</span>
+                </div>
+                <span class="or-status st-purple">İstehsalda</span>
+                <span class="or-date">18.11.2026</span>
+                <details class="row-menu"><summary class="icon-btn" aria-label="Əməliyyatlar" title="Əməliyyatlar">⋯</summary><div class="pop-panel menu-panel"><span class="is-disabled">Bax<small>Nümunə sətir</small></span></div></details>
             </article>
             <article class="order-row" data-source="alzzoni" data-date="2026-11-16" data-customer="Alzzoni (daxili)" data-status="Xammal təminatı">
-                <div class="or-cell or-first"><span class="or-id">SF-2026-0010</span><span class="or-sub">16.11.2026</span></div>
-                <div class="or-cell or-main"><span class="or-customer">Alzzoni (daxili)</span><span class="or-sub">Dolab 3 qapılı <span class="or-dot">·</span> 10 ədəd <span class="or-dot">·</span> Mövcud məhsul</span></div>
-                <div class="or-cell or-manager"><span class="or-avatar" aria-hidden="true">RQ</span>Rauf Quliyev</div>
-                <div class="or-cell or-status"><span class="badge badge-blue">Xammal təminatı</span></div>
-                <div class="or-actions"><details class="row-menu"><summary class="icon-btn" aria-label="Əməliyyatlar" title="Əməliyyatlar">⋯</summary><div class="pop-panel menu-panel"><span class="is-disabled">Bax<small>Nümunə sətir</small></span></div></details></div>
+                <div class="or-main">
+                    <span class="or-customer">Alzzoni (daxili)</span>
+                    <span class="or-sub"><span class="or-id">SF-2026-0010</span> · Dolab 3 qapılı × 10 · Mövcud məhsul · Rauf Quliyev</span>
+                </div>
+                <span class="or-status st-blue">Xammal təminatı</span>
+                <span class="or-date">16.11.2026</span>
+                <details class="row-menu"><summary class="icon-btn" aria-label="Əməliyyatlar" title="Əməliyyatlar">⋯</summary><div class="pop-panel menu-panel"><span class="is-disabled">Bax<small>Nümunə sətir</small></span></div></details>
             </article>
             <article class="order-row" data-source="musteri" data-date="2026-11-15" data-customer="Gənclik Kafe" data-status="Kalkulyasiya / Gözləyir" data-href="order-SF-2026-0009.html">
-                <div class="or-cell or-first"><a class="or-id" href="order-SF-2026-0009.html">SF-2026-0009</a><span class="or-sub">15.11.2026</span></div>
-                <div class="or-cell or-main"><span class="or-customer">Gənclik Kafe</span><span class="or-sub">Metal ayaqlı stol <span class="or-dot">·</span> 4 ədəd <span class="or-dot">·</span> Mövcud məhsul</span></div>
-                <div class="or-cell or-manager"><span class="or-avatar" aria-hidden="true">RQ</span>Rauf Quliyev</div>
-                <div class="or-cell or-status"><span class="badge badge-yellow">Kalkulyasiya / Gözləyir</span></div>
-                <div class="or-actions"><details class="row-menu"><summary class="icon-btn" aria-label="Əməliyyatlar" title="Əməliyyatlar">⋯</summary><div class="pop-panel menu-panel"><a href="order-SF-2026-0009.html">Bax</a><a href="order-SF-2026-0009-edit.html">Redaktə</a><span class="is-disabled">Dizayn<small>Mövcud məhsulda dizayn olmur</small></span><span class="is-disabled">Kalkulyasiya<small>Kalkulyasiya artıq aparılıb</small></span></div></details></div>
+                <div class="or-main">
+                    <span class="or-customer">Gənclik Kafe</span>
+                    <span class="or-sub"><a class="or-id" href="order-SF-2026-0009.html">SF-2026-0009</a> · Metal ayaqlı stol × 4 · Mövcud məhsul · Rauf Quliyev</span>
+                </div>
+                <span class="or-status st-yellow">Kalkulyasiya / Gözləyir</span>
+                <span class="or-date">15.11.2026</span>
+                <details class="row-menu"><summary class="icon-btn" aria-label="Əməliyyatlar" title="Əməliyyatlar">⋯</summary><div class="pop-panel menu-panel"><a href="order-SF-2026-0009.html">Bax</a><a href="order-SF-2026-0009-edit.html">Redaktə</a><span class="is-disabled">Dizayn<small>Mövcud məhsulda dizayn olmur</small></span><span class="is-disabled">Kalkulyasiya<small>Kalkulyasiya artıq aparılıb</small></span></div></details>
             </article>
             <article class="order-row" data-source="musteri" data-date="2026-11-15" data-customer="Tural Əhmədov" data-status="Proses dayandırıldı" data-href="order-SF-2026-0008.html">
-                <div class="or-cell or-first"><a class="or-id" href="order-SF-2026-0008.html">SF-2026-0008</a><span class="or-sub">15.11.2026</span></div>
-                <div class="or-cell or-main"><span class="or-customer">Tural Əhmədov</span><span class="or-sub">Kitab rəfi <span class="or-dot">·</span> 1 ədəd <span class="or-dot">·</span> Yeni məhsul</span></div>
-                <div class="or-cell or-manager"><span class="or-avatar" aria-hidden="true">RQ</span>Rauf Quliyev</div>
-                <div class="or-cell or-status"><span class="badge badge-red">Proses dayandırıldı</span></div>
-                <div class="or-actions"><details class="row-menu"><summary class="icon-btn" aria-label="Əməliyyatlar" title="Əməliyyatlar">⋯</summary><div class="pop-panel menu-panel"><a href="order-SF-2026-0008.html">Bax</a><span class="is-disabled">Redaktə<small>Tamamlanmış və ya dayandırılmış sifariş redaktə edilmir</small></span><span class="is-disabled">Dizayn<small>Sifariş dizayn mərhələsində deyil</small></span><span class="is-disabled">Kalkulyasiya<small>Kalkulyasiya artıq aparılıb</small></span></div></details></div>
+                <div class="or-main">
+                    <span class="or-customer">Tural Əhmədov</span>
+                    <span class="or-sub"><a class="or-id" href="order-SF-2026-0008.html">SF-2026-0008</a> · Kitab rəfi × 1 · Yeni məhsul · Rauf Quliyev</span>
+                </div>
+                <span class="or-status st-red">Proses dayandırıldı</span>
+                <span class="or-date">15.11.2026</span>
+                <details class="row-menu"><summary class="icon-btn" aria-label="Əməliyyatlar" title="Əməliyyatlar">⋯</summary><div class="pop-panel menu-panel"><a href="order-SF-2026-0008.html">Bax</a><span class="is-disabled">Redaktə<small>Tamamlanmış və ya dayandırılmış sifariş redaktə edilmir</small></span><span class="is-disabled">Dizayn<small>Sifariş dizayn mərhələsində deyil</small></span><span class="is-disabled">Kalkulyasiya<small>Kalkulyasiya artıq aparılıb</small></span></div></details>
             </article>
             <article class="order-row" data-source="musteri" data-date="2026-11-15" data-customer="Mənzil Plus MMC" data-status="Yeni" data-href="order-SF-2026-0007.html">
-                <div class="or-cell or-first"><a class="or-id" href="order-SF-2026-0007.html">SF-2026-0007</a><span class="or-sub">15.11.2026</span></div>
-                <div class="or-cell or-main"><span class="or-customer">Mənzil Plus MMC</span><span class="or-sub">Dolab 3 qapılı <span class="or-dot">·</span> 1 ədəd <span class="or-dot">·</span> Mövcud məhsul</span></div>
-                <div class="or-cell or-manager"><span class="or-avatar" aria-hidden="true">NH</span>Nigar Həsənova</div>
-                <div class="or-cell or-status"><span class="badge badge-blue">Yeni</span></div>
-                <div class="or-actions"><details class="row-menu"><summary class="icon-btn" aria-label="Əməliyyatlar" title="Əməliyyatlar">⋯</summary><div class="pop-panel menu-panel"><a href="order-SF-2026-0007.html">Bax</a><a href="order-SF-2026-0007-edit.html">Redaktə</a><span class="is-disabled">Dizayn<small>Mövcud məhsulda dizayn olmur</small></span><span class="is-disabled">Kalkulyasiya<small>Sifariş kalkulyasiya mərhələsində deyil</small></span></div></details></div>
+                <div class="or-main">
+                    <span class="or-customer">Mənzil Plus MMC</span>
+                    <span class="or-sub"><a class="or-id" href="order-SF-2026-0007.html">SF-2026-0007</a> · Dolab 3 qapılı × 1 · Mövcud məhsul · Nigar Həsənova</span>
+                </div>
+                <span class="or-status st-blue">Yeni</span>
+                <span class="or-date">15.11.2026</span>
+                <details class="row-menu"><summary class="icon-btn" aria-label="Əməliyyatlar" title="Əməliyyatlar">⋯</summary><div class="pop-panel menu-panel"><a href="order-SF-2026-0007.html">Bax</a><a href="order-SF-2026-0007-edit.html">Redaktə</a><span class="is-disabled">Dizayn<small>Mövcud məhsulda dizayn olmur</small></span><span class="is-disabled">Kalkulyasiya<small>Sifariş kalkulyasiya mərhələsində deyil</small></span></div></details>
             </article>
             <article class="order-row" data-source="musteri" data-date="2026-11-15" data-customer="Leyla Rzayeva" data-status="Dizayn mərhələsində" data-href="order-SF-2026-0006.html">
-                <div class="or-cell or-first"><a class="or-id" href="order-SF-2026-0006.html">SF-2026-0006</a><span class="or-sub">15.11.2026</span></div>
-                <div class="or-cell or-main"><span class="or-customer">Leyla Rzayeva</span><span class="or-sub">Güzgülü qarderob <span class="or-dot">·</span> 1 ədəd <span class="or-dot">·</span> Yeni məhsul</span></div>
-                <div class="or-cell or-manager"><span class="or-avatar" aria-hidden="true">RQ</span>Rauf Quliyev</div>
-                <div class="or-cell or-status"><span class="badge badge-purple">Dizayn mərhələsində</span></div>
-                <div class="or-actions"><a class="btn btn-small btn-primary" href="design-SF-2026-0006.html">Dizayn</a><details class="row-menu"><summary class="icon-btn" aria-label="Əməliyyatlar" title="Əməliyyatlar">⋯</summary><div class="pop-panel menu-panel"><a href="order-SF-2026-0006.html">Bax</a><a href="order-SF-2026-0006-edit.html">Redaktə</a><a href="design-SF-2026-0006.html">Dizayn</a><span class="is-disabled">Kalkulyasiya<small>Sifariş kalkulyasiya mərhələsində deyil</small></span></div></details></div>
+                <div class="or-main">
+                    <span class="or-customer">Leyla Rzayeva</span>
+                    <span class="or-sub"><a class="or-id" href="order-SF-2026-0006.html">SF-2026-0006</a> · Güzgülü qarderob × 1 · Yeni məhsul · Rauf Quliyev</span>
+                </div>
+                <span class="or-status st-purple">Dizayn mərhələsində</span>
+                <span class="or-date">15.11.2026</span>
+                <details class="row-menu"><summary class="icon-btn" aria-label="Əməliyyatlar" title="Əməliyyatlar">⋯</summary><div class="pop-panel menu-panel"><a class="is-next" href="design-SF-2026-0006.html">Dizayn<small>Növbəti addım</small></a><a href="order-SF-2026-0006.html">Bax</a><a href="order-SF-2026-0006-edit.html">Redaktə</a><span class="is-disabled">Kalkulyasiya<small>Sifariş kalkulyasiya mərhələsində deyil</small></span></div></details>
             </article>
             <article class="order-row" data-source="musteri" data-date="2026-11-15" data-customer="Atrium Dizayn MMC" data-status="Kalkulyasiya / Gözləyir" data-href="order-SF-2026-0005.html">
-                <div class="or-cell or-first"><a class="or-id" href="order-SF-2026-0005.html">SF-2026-0005</a><span class="or-sub">15.11.2026</span></div>
-                <div class="or-cell or-main"><span class="or-customer">Atrium Dizayn MMC</span><span class="or-sub">Resepşn masası <span class="or-dot">·</span> 1 ədəd <span class="or-dot">·</span> Yeni məhsul</span></div>
-                <div class="or-cell or-manager"><span class="or-avatar" aria-hidden="true">NH</span>Nigar Həsənova</div>
-                <div class="or-cell or-status"><span class="badge badge-yellow">Kalkulyasiya / Gözləyir</span></div>
-                <div class="or-actions"><a class="btn btn-small btn-primary" href="costing-SF-2026-0005.html">Kalkulyasiya</a><details class="row-menu"><summary class="icon-btn" aria-label="Əməliyyatlar" title="Əməliyyatlar">⋯</summary><div class="pop-panel menu-panel"><a href="order-SF-2026-0005.html">Bax</a><a href="order-SF-2026-0005-edit.html">Redaktə</a><span class="is-disabled">Dizayn<small>Sifariş dizayn mərhələsində deyil</small></span><a href="costing-SF-2026-0005.html">Kalkulyasiya</a></div></details></div>
+                <div class="or-main">
+                    <span class="or-customer">Atrium Dizayn MMC</span>
+                    <span class="or-sub"><a class="or-id" href="order-SF-2026-0005.html">SF-2026-0005</a> · Resepşn masası × 1 · Yeni məhsul · Nigar Həsənova</span>
+                </div>
+                <span class="or-status st-yellow">Kalkulyasiya / Gözləyir</span>
+                <span class="or-date">15.11.2026</span>
+                <details class="row-menu"><summary class="icon-btn" aria-label="Əməliyyatlar" title="Əməliyyatlar">⋯</summary><div class="pop-panel menu-panel"><a class="is-next" href="costing-SF-2026-0005.html">Kalkulyasiya<small>Növbəti addım</small></a><a href="order-SF-2026-0005.html">Bax</a><a href="order-SF-2026-0005-edit.html">Redaktə</a><span class="is-disabled">Dizayn<small>Sifariş dizayn mərhələsində deyil</small></span></div></details>
             </article>
             <article class="order-row" data-source="musteri" data-date="2026-11-15" data-customer="Ramil Məmmədov" data-status="Müştəri təsdiqlədi" data-href="order-SF-2026-0004.html">
-                <div class="or-cell or-first"><a class="or-id" href="order-SF-2026-0004.html">SF-2026-0004</a><span class="or-sub">15.11.2026</span></div>
-                <div class="or-cell or-main"><span class="or-customer">Ramil Məmmədov</span><span class="or-sub">Fərdi qonaq otağı dəsti <span class="or-dot">·</span> 1 ədəd <span class="or-dot">·</span> Yeni məhsul</span></div>
-                <div class="or-cell or-manager"><span class="or-avatar" aria-hidden="true">RQ</span>Rauf Quliyev</div>
-                <div class="or-cell or-status"><span class="badge badge-green">Müştəri təsdiqlədi</span></div>
-                <div class="or-actions"><details class="row-menu"><summary class="icon-btn" aria-label="Əməliyyatlar" title="Əməliyyatlar">⋯</summary><div class="pop-panel menu-panel"><a href="order-SF-2026-0004.html">Bax</a><a href="order-SF-2026-0004-edit.html">Redaktə</a><span class="is-disabled">Dizayn<small>Sifariş dizayn mərhələsində deyil</small></span><span class="is-disabled">Kalkulyasiya<small>Kalkulyasiya artıq aparılıb</small></span></div></details></div>
+                <div class="or-main">
+                    <span class="or-customer">Ramil Məmmədov</span>
+                    <span class="or-sub"><a class="or-id" href="order-SF-2026-0004.html">SF-2026-0004</a> · Fərdi qonaq otağı dəsti × 1 · Yeni məhsul · Rauf Quliyev</span>
+                </div>
+                <span class="or-status st-green">Müştəri təsdiqlədi</span>
+                <span class="or-date">15.11.2026</span>
+                <details class="row-menu"><summary class="icon-btn" aria-label="Əməliyyatlar" title="Əməliyyatlar">⋯</summary><div class="pop-panel menu-panel"><a href="order-SF-2026-0004.html">Bax</a><a href="order-SF-2026-0004-edit.html">Redaktə</a><span class="is-disabled">Dizayn<small>Sifariş dizayn mərhələsində deyil</small></span><span class="is-disabled">Kalkulyasiya<small>Kalkulyasiya artıq aparılıb</small></span></div></details>
             </article>
             <article class="order-row" data-source="musteri" data-date="2026-11-15" data-customer="Ofis Evi MMC" data-status="Xammal təminatı" data-href="order-SF-2026-0003.html">
-                <div class="or-cell or-first"><a class="or-id" href="order-SF-2026-0003.html">SF-2026-0003</a><span class="or-sub">15.11.2026</span></div>
-                <div class="or-cell or-main"><span class="or-customer">Ofis Evi MMC</span><span class="or-sub">Metal ayaqlı stol <span class="or-dot">·</span> 30 ədəd <span class="or-dot">·</span> Mövcud məhsul</span></div>
-                <div class="or-cell or-manager"><span class="or-avatar" aria-hidden="true">RQ</span>Rauf Quliyev</div>
-                <div class="or-cell or-status"><span class="badge badge-blue">Xammal təminatı</span></div>
-                <div class="or-actions"><details class="row-menu"><summary class="icon-btn" aria-label="Əməliyyatlar" title="Əməliyyatlar">⋯</summary><div class="pop-panel menu-panel"><a href="order-SF-2026-0003.html">Bax</a><a href="order-SF-2026-0003-edit.html">Redaktə</a><span class="is-disabled">Dizayn<small>Mövcud məhsulda dizayn olmur</small></span><span class="is-disabled">Kalkulyasiya<small>Kalkulyasiya artıq aparılıb</small></span></div></details></div>
+                <div class="or-main">
+                    <span class="or-customer">Ofis Evi MMC</span>
+                    <span class="or-sub"><a class="or-id" href="order-SF-2026-0003.html">SF-2026-0003</a> · Metal ayaqlı stol × 30 · Mövcud məhsul · Rauf Quliyev</span>
+                </div>
+                <span class="or-status st-blue">Xammal təminatı</span>
+                <span class="or-date">15.11.2026</span>
+                <details class="row-menu"><summary class="icon-btn" aria-label="Əməliyyatlar" title="Əməliyyatlar">⋯</summary><div class="pop-panel menu-panel"><a href="order-SF-2026-0003.html">Bax</a><a href="order-SF-2026-0003-edit.html">Redaktə</a><span class="is-disabled">Dizayn<small>Mövcud məhsulda dizayn olmur</small></span><span class="is-disabled">Kalkulyasiya<small>Kalkulyasiya artıq aparılıb</small></span></div></details>
             </article>
             <article class="order-row" data-source="musteri" data-date="2026-11-15" data-customer="Xəzər Otel" data-status="İstehsalda" data-href="order-SF-2026-0002.html">
-                <div class="or-cell or-first"><a class="or-id" href="order-SF-2026-0002.html">SF-2026-0002</a><span class="or-sub">15.11.2026</span></div>
-                <div class="or-cell or-main"><span class="or-customer">Xəzər Otel</span><span class="or-sub">Yumşaq divan <span class="or-dot">·</span> 2 ədəd <span class="or-dot">·</span> Mövcud məhsul</span></div>
-                <div class="or-cell or-manager"><span class="or-avatar" aria-hidden="true">NH</span>Nigar Həsənova</div>
-                <div class="or-cell or-status"><span class="badge badge-purple">İstehsalda</span></div>
-                <div class="or-actions"><details class="row-menu"><summary class="icon-btn" aria-label="Əməliyyatlar" title="Əməliyyatlar">⋯</summary><div class="pop-panel menu-panel"><a href="order-SF-2026-0002.html">Bax</a><a href="order-SF-2026-0002-edit.html">Redaktə</a><span class="is-disabled">Dizayn<small>Mövcud məhsulda dizayn olmur</small></span><span class="is-disabled">Kalkulyasiya<small>Kalkulyasiya artıq aparılıb</small></span></div></details></div>
+                <div class="or-main">
+                    <span class="or-customer">Xəzər Otel</span>
+                    <span class="or-sub"><a class="or-id" href="order-SF-2026-0002.html">SF-2026-0002</a> · Yumşaq divan × 2 · Mövcud məhsul · Nigar Həsənova</span>
+                </div>
+                <span class="or-status st-purple">İstehsalda</span>
+                <span class="or-date">15.11.2026</span>
+                <details class="row-menu"><summary class="icon-btn" aria-label="Əməliyyatlar" title="Əməliyyatlar">⋯</summary><div class="pop-panel menu-panel"><a href="order-SF-2026-0002.html">Bax</a><a href="order-SF-2026-0002-edit.html">Redaktə</a><span class="is-disabled">Dizayn<small>Mövcud məhsulda dizayn olmur</small></span><span class="is-disabled">Kalkulyasiya<small>Kalkulyasiya artıq aparılıb</small></span></div></details>
             </article>
             <article class="order-row" data-source="musteri" data-date="2026-11-15" data-customer="Bakı Mebel MMC" data-status="Tamamlandı" data-href="order-SF-2026-0001.html">
-                <div class="or-cell or-first"><a class="or-id" href="order-SF-2026-0001.html">SF-2026-0001</a><span class="or-sub">15.11.2026</span></div>
-                <div class="or-cell or-main"><span class="or-customer">Bakı Mebel MMC</span><span class="or-sub">Dolab 3 qapılı <span class="or-dot">·</span> 2 ədəd <span class="or-dot">·</span> Mövcud məhsul</span></div>
-                <div class="or-cell or-manager"><span class="or-avatar" aria-hidden="true">NH</span>Nigar Həsənova</div>
-                <div class="or-cell or-status"><span class="badge badge-green">Tamamlandı</span></div>
-                <div class="or-actions"><details class="row-menu"><summary class="icon-btn" aria-label="Əməliyyatlar" title="Əməliyyatlar">⋯</summary><div class="pop-panel menu-panel"><a href="order-SF-2026-0001.html">Bax</a><span class="is-disabled">Redaktə<small>Tamamlanmış və ya dayandırılmış sifariş redaktə edilmir</small></span><span class="is-disabled">Dizayn<small>Mövcud məhsulda dizayn olmur</small></span><span class="is-disabled">Kalkulyasiya<small>Kalkulyasiya artıq aparılıb</small></span></div></details></div>
+                <div class="or-main">
+                    <span class="or-customer">Bakı Mebel MMC</span>
+                    <span class="or-sub"><a class="or-id" href="order-SF-2026-0001.html">SF-2026-0001</a> · Dolab 3 qapılı × 2 · Mövcud məhsul · Nigar Həsənova</span>
+                </div>
+                <span class="or-status st-green">Tamamlandı</span>
+                <span class="or-date">15.11.2026</span>
+                <details class="row-menu"><summary class="icon-btn" aria-label="Əməliyyatlar" title="Əməliyyatlar">⋯</summary><div class="pop-panel menu-panel"><a href="order-SF-2026-0001.html">Bax</a><span class="is-disabled">Redaktə<small>Tamamlanmış və ya dayandırılmış sifariş redaktə edilmir</small></span><span class="is-disabled">Dizayn<small>Mövcud məhsulda dizayn olmur</small></span><span class="is-disabled">Kalkulyasiya<small>Kalkulyasiya artıq aparılıb</small></span></div></details>
             </article>
         </div>
     </section>
 
-    <section class="card" id="completion">
-        <div class="card-head"><h2>Təhvil gözləyir</h2></div>
-        <div class="table-wrap">
-            <table class="table">
-                <thead><tr><th>Sifariş</th><th>Müştəri</th><th>Məhsul</th><th class="num">Miqdar</th><th>İstehsal edilib</th><th>Anbar</th><th></th></tr></thead>
-                <tbody>
-                
-                <tr><td colspan="7" class="empty">Təhvil gözləyən məhsul yoxdur.</td></tr>
-                </tbody>
-            </table>
-        </div>
+    <section class="card mini-card" id="completion">
+        <h2>Təhvil gözləyir</h2>
+        <p class="mini-empty">Təhvil gözləyən məhsul yoxdur.</p>
     </section>
 
-    <section class="card">
-        <div class="card-head"><h2>Tamamlanmış sifarişlər</h2></div>
-        <div class="table-wrap">
-            <table class="table">
-                <thead><tr><th>Sifariş</th><th>Müştəri</th><th>Məhsul</th><th class="num">Cəmi</th><th>Təhvil tarixi</th></tr></thead>
-                <tbody>
-                <tr>
-                    <td><a href="order-SF-2026-0001.html">SF-2026-0001</a></td>
-                    <td>Bakı Mebel MMC</td>
-                    <td>Dolab 3 qapılı</td>
-                    <td class="num">867.40 AZN</td>
-                    <td>15.11.2026</td>
-                </tr>
-                
-                </tbody>
-            </table>
+    <section class="card mini-card">
+        <h2>Tamamlanmış sifarişlər</h2>
+        <div class="order-list">
+            <article class="order-row is-static">
+                <div class="or-main">
+                    <span class="or-customer">Bakı Mebel MMC</span>
+                    <span class="or-sub"><a class="or-id" href="order-SF-2026-0001.html">SF-2026-0001</a> · Dolab 3 qapılı · Təhvil: 15.11.2026</span>
+                </div>
+                <span class="or-sum">867.40 AZN</span>
+            </article>
         </div>
     </section>
     <script>
@@ -317,7 +325,7 @@
                     total += inTab; shown += ok;
                 });
                 const active = keys.some(k => v[k]);
-                count.textContent = active ? `${shown} / ${total}` : `${total} sifariş`;
+                count.textContent = active ? `${shown} nəticə` : '';
                 reset.hidden = !active;
                 syncLabels(v);
                 if (shown) empty.remove(); else list.append(empty);
